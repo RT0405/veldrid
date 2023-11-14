@@ -6,8 +6,8 @@ namespace Veldrid.Sdl2
     public static unsafe partial class Sdl2Native
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetWindowWMInfo_t(SDL_Window Sdl2Window, SDL_SysWMinfo* info);
-        private static readonly SDL_GetWindowWMInfo_t s_getWindowWMInfo = LoadFunction<SDL_GetWindowWMInfo_t>("SDL_GetWindowWMInfo");
+        public delegate int SDL_GetWindowWMInfo_t(SDL_Window Sdl2Window, SDL_SysWMinfo* info);
+        public static readonly SDL_GetWindowWMInfo_t s_getWindowWMInfo = LoadFunction<SDL_GetWindowWMInfo_t>("SDL_GetWindowWMInfo");
         public static int SDL_GetWMWindowInfo(SDL_Window Sdl2Window, SDL_SysWMinfo* info) => s_getWindowWMInfo(Sdl2Window, info);
     }
 
@@ -21,7 +21,7 @@ namespace Veldrid.Sdl2
     public unsafe struct WindowInfo
     {
         public const int WindowInfoSizeInBytes = 100;
-        private fixed byte bytes[WindowInfoSizeInBytes];
+        public fixed byte bytes[WindowInfoSizeInBytes];
     }
 
     public struct Win32WindowInfo

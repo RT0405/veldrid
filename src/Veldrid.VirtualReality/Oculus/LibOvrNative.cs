@@ -7,16 +7,16 @@ using NativeLibraryLoader;
 
 namespace Veldrid.VirtualReality.Oculus
 {
-    internal static unsafe class LibOvrNative
+    public static unsafe class LibOvrNative
     {
-        private const string LibName32 = "LibOVRRT32_1.dll";
-        private const string LibName64 = "LibOVRRT64_1.dll";
+        public const string LibName32 = "LibOVRRT32_1.dll";
+        public const string LibName64 = "LibOVRRT64_1.dll";
 
-        private static readonly NativeLibrary s_libovrrt = LoadLibAndFunctions();
+        public static readonly NativeLibrary s_libovrrt = LoadLibAndFunctions();
 
-        internal static bool LibOvrLoadedSuccessfully() => s_libovrrt != null;
+        public static bool LibOvrLoadedSuccessfully() => s_libovrrt != null;
 
-        private static NativeLibrary LoadLibAndFunctions()
+        public static NativeLibrary LoadLibAndFunctions()
         {
             string libName = Environment.Is64BitProcess ? LibName64 : LibName32;
             try
@@ -73,63 +73,63 @@ namespace Veldrid.VirtualReality.Oculus
             }
         }
 
-        private delegate ovrResult ovr_Initialize_t(ovrInitParams* @params);
-        private static ovr_Initialize_t p_ovr_Initialize;
+        public delegate ovrResult ovr_Initialize_t(ovrInitParams* @params);
+        public static ovr_Initialize_t p_ovr_Initialize;
         public static ovrResult ovr_Initialize(ovrInitParams* @params) => p_ovr_Initialize(@params);
 
-        private delegate void ovr_Shutdown_t();
-        private static ovr_Shutdown_t p_ovr_Shutdown;
+        public delegate void ovr_Shutdown_t();
+        public static ovr_Shutdown_t p_ovr_Shutdown;
         public static void ovr_Shutdown() => p_ovr_Shutdown();
 
-        private delegate void ovr_GetLastErrorInfo_t(out ovrErrorInfo errorInfo);
-        private static ovr_GetLastErrorInfo_t p_ovr_GetLastErrorInfo;
+        public delegate void ovr_GetLastErrorInfo_t(out ovrErrorInfo errorInfo);
+        public static ovr_GetLastErrorInfo_t p_ovr_GetLastErrorInfo;
         public static void ovr_GetLastErrorInfo(out ovrErrorInfo errorInfo) => p_ovr_GetLastErrorInfo(out errorInfo);
 
-        private delegate ovrResult ovr_Create_t(ovrSession* pSession, ovrGraphicsLuid* pLuid);
-        private static ovr_Create_t p_ovr_Create;
+        public delegate ovrResult ovr_Create_t(ovrSession* pSession, ovrGraphicsLuid* pLuid);
+        public static ovr_Create_t p_ovr_Create;
         public static ovrResult ovr_Create(ovrSession* pSession, ovrGraphicsLuid* pLuid) => p_ovr_Create(pSession, pLuid);
 
-        private delegate void ovr_Destroy_t(ovrSession session);
-        private static ovr_Destroy_t p_ovr_Destroy;
+        public delegate void ovr_Destroy_t(ovrSession session);
+        public static ovr_Destroy_t p_ovr_Destroy;
         public static void ovr_Destroy(ovrSession session) => p_ovr_Destroy(session);
 
-        private delegate ovrHmdDesc ovr_GetHmdDesc_t(ovrSession session);
-        private static ovr_GetHmdDesc_t p_ovr_GetHmdDesc;
+        public delegate ovrHmdDesc ovr_GetHmdDesc_t(ovrSession session);
+        public static ovr_GetHmdDesc_t p_ovr_GetHmdDesc;
         public static ovrHmdDesc ovr_GetHmdDesc(ovrSession session) => p_ovr_GetHmdDesc(session);
 
-        private delegate uint ovr_GetTrackerCount_t(ovrSession session);
-        private static ovr_GetTrackerCount_t p_ovr_GetTrackerCount;
+        public delegate uint ovr_GetTrackerCount_t(ovrSession session);
+        public static ovr_GetTrackerCount_t p_ovr_GetTrackerCount;
         public static uint ovr_GetTrackerCount(ovrSession session) => p_ovr_GetTrackerCount(session);
 
-        private delegate ovrSizei ovr_GetFovTextureSize_t(ovrSession session, ovrEyeType eye, ovrFovPort fov, float pixelsPerDisplayPixel);
-        private static ovr_GetFovTextureSize_t p_ovr_GetFovTextureSize;
+        public delegate ovrSizei ovr_GetFovTextureSize_t(ovrSession session, ovrEyeType eye, ovrFovPort fov, float pixelsPerDisplayPixel);
+        public static ovr_GetFovTextureSize_t p_ovr_GetFovTextureSize;
         public static ovrSizei ovr_GetFovTextureSize(ovrSession session, ovrEyeType eye, ovrFovPort fov, float pixelsPerDisplayPixel)
             => p_ovr_GetFovTextureSize(session, eye, fov, pixelsPerDisplayPixel);
 
-        private delegate ovrResult ovr_CreateTextureSwapChainDX_t(
+        public delegate ovrResult ovr_CreateTextureSwapChainDX_t(
             ovrSession session,
             IntPtr d3dPtr,
             ovrTextureSwapChainDesc* desc,
             ovrTextureSwapChain* outTextureSet);
-        private static ovr_CreateTextureSwapChainDX_t p_ovr_CreateTextureSwapChainDX;
+        public static ovr_CreateTextureSwapChainDX_t p_ovr_CreateTextureSwapChainDX;
         public static ovrResult ovr_CreateTextureSwapChainDX(
             ovrSession session,
             IntPtr d3dPtr,
             ovrTextureSwapChainDesc* desc,
             ovrTextureSwapChain* outTextureSet) => p_ovr_CreateTextureSwapChainDX(session, d3dPtr, desc, outTextureSet);
 
-        private delegate ovrResult ovr_GetTextureSwapChainLength_t(ovrSession session, ovrTextureSwapChain chain, int* length);
-        private static ovr_GetTextureSwapChainLength_t p_ovr_GetTextureSwapChainLength;
+        public delegate ovrResult ovr_GetTextureSwapChainLength_t(ovrSession session, ovrTextureSwapChain chain, int* length);
+        public static ovr_GetTextureSwapChainLength_t p_ovr_GetTextureSwapChainLength;
         public static ovrResult ovr_GetTextureSwapChainLength(ovrSession session, ovrTextureSwapChain chain, int* length)
             => p_ovr_GetTextureSwapChainLength(session, chain, length);
 
-        private delegate ovrResult ovr_GetTextureSwapChainBufferDX_t(
+        public delegate ovrResult ovr_GetTextureSwapChainBufferDX_t(
             ovrSession session,
             ovrTextureSwapChain chain,
             int index,
             Guid iid,
             IntPtr* ppObject);
-        private static ovr_GetTextureSwapChainBufferDX_t p_ovr_GetTextureSwapChainBufferDX;
+        public static ovr_GetTextureSwapChainBufferDX_t p_ovr_GetTextureSwapChainBufferDX;
         public static ovrResult ovr_GetTextureSwapChainBufferDX(
             ovrSession session,
             ovrTextureSwapChain chain,
@@ -137,80 +137,80 @@ namespace Veldrid.VirtualReality.Oculus
             Guid iid,
             IntPtr* ppObject) => p_ovr_GetTextureSwapChainBufferDX(session, chain, index, iid, ppObject);
 
-        private delegate ovrResult ovr_GetTextureSwapChainCurrentIndex_t(ovrSession session, ovrTextureSwapChain chain, int* currentIndex);
-        private static ovr_GetTextureSwapChainCurrentIndex_t p_ovr_GetTextureSwapChainCurrentIndex;
+        public delegate ovrResult ovr_GetTextureSwapChainCurrentIndex_t(ovrSession session, ovrTextureSwapChain chain, int* currentIndex);
+        public static ovr_GetTextureSwapChainCurrentIndex_t p_ovr_GetTextureSwapChainCurrentIndex;
         public static ovrResult ovr_GetTextureSwapChainCurrentIndex(ovrSession session, ovrTextureSwapChain chain, int* currentIndex)
             => p_ovr_GetTextureSwapChainCurrentIndex(session, chain, currentIndex);
 
-        private delegate void ovr_DestroyTextureSwapChain_t(ovrSession session, ovrTextureSwapChain chain);
-        private static ovr_DestroyTextureSwapChain_t p_ovr_DestroyTextureSwapChain;
+        public delegate void ovr_DestroyTextureSwapChain_t(ovrSession session, ovrTextureSwapChain chain);
+        public static ovr_DestroyTextureSwapChain_t p_ovr_DestroyTextureSwapChain;
         public static void ovr_DestroyTextureSwapChain(ovrSession session, ovrTextureSwapChain chain)
             => p_ovr_DestroyTextureSwapChain(session, chain);
 
-        private delegate ovrResult ovr_CommitTextureSwapChain_t(ovrSession session, ovrTextureSwapChain chain);
-        private static ovr_CommitTextureSwapChain_t p_ovr_CommitTextureSwapChain;
+        public delegate ovrResult ovr_CommitTextureSwapChain_t(ovrSession session, ovrTextureSwapChain chain);
+        public static ovr_CommitTextureSwapChain_t p_ovr_CommitTextureSwapChain;
         public static ovrResult ovr_CommitTextureSwapChain(ovrSession session, ovrTextureSwapChain chain) => p_ovr_CommitTextureSwapChain(session, chain);
 
-        private delegate ovrEyeRenderDesc ovr_GetRenderDesc2_t(ovrSession session, ovrEyeType eyeType, ovrFovPort fov);
-        private static ovr_GetRenderDesc2_t p_ovr_GetRenderDesc2;
+        public delegate ovrEyeRenderDesc ovr_GetRenderDesc2_t(ovrSession session, ovrEyeType eyeType, ovrFovPort fov);
+        public static ovr_GetRenderDesc2_t p_ovr_GetRenderDesc2;
         public static ovrEyeRenderDesc ovr_GetRenderDesc2(ovrSession session, ovrEyeType eyeType, ovrFovPort fov)
             => p_ovr_GetRenderDesc2(session, eyeType, fov);
 
-        private delegate void ovr_CalcEyePoses_t(ovrPosef headPose, Vector3* hmdToEyeOffset, ovrPosef* outEyePoses);
-        private static ovr_CalcEyePoses_t p_ovr_CalcEyePoses;
+        public delegate void ovr_CalcEyePoses_t(ovrPosef headPose, Vector3* hmdToEyeOffset, ovrPosef* outEyePoses);
+        public static ovr_CalcEyePoses_t p_ovr_CalcEyePoses;
         public static void ovr_CalcEyePoses(ovrPosef headPose, Vector3* hmdToEyeOffset, ovrPosef* outEyePoses)
             => p_ovr_CalcEyePoses(headPose, hmdToEyeOffset, outEyePoses);
 
-        private delegate double ovr_GetPredictedDisplayTime_t(ovrSession session, long frameIndex);
-        private static ovr_GetPredictedDisplayTime_t p_ovr_GetPredictedDisplayTime;
+        public delegate double ovr_GetPredictedDisplayTime_t(ovrSession session, long frameIndex);
+        public static ovr_GetPredictedDisplayTime_t p_ovr_GetPredictedDisplayTime;
         public static double ovr_GetPredictedDisplayTime(ovrSession session, long frameIndex)
             => p_ovr_GetPredictedDisplayTime(session, frameIndex);
 
-        private delegate ovrTrackingState ovr_GetTrackingState_t(ovrSession session, double absTime, ovrBool latencyMarker);
-        private static ovr_GetTrackingState_t p_ovr_GetTrackingState;
+        public delegate ovrTrackingState ovr_GetTrackingState_t(ovrSession session, double absTime, ovrBool latencyMarker);
+        public static ovr_GetTrackingState_t p_ovr_GetTrackingState;
         public static ovrTrackingState ovr_GetTrackingState(ovrSession session, double absTime, ovrBool latencyMarker)
             => p_ovr_GetTrackingState(session, absTime, latencyMarker);
 
-        private delegate ovrResult ovr_CreateMirrorTextureWithOptionsDX_t(
+        public delegate ovrResult ovr_CreateMirrorTextureWithOptionsDX_t(
             ovrSession session,
             IntPtr d3dPtr,
             ovrMirrorTextureDesc* desc,
             ovrMirrorTexture* outMirrorTexture);
-        private static ovr_CreateMirrorTextureWithOptionsDX_t p_ovr_CreateMirrorTextureWithOptionsDX;
+        public static ovr_CreateMirrorTextureWithOptionsDX_t p_ovr_CreateMirrorTextureWithOptionsDX;
         public static ovrResult ovr_CreateMirrorTextureWithOptionsDX(
             ovrSession session,
             IntPtr d3dPtr,
             ovrMirrorTextureDesc* desc,
             ovrMirrorTexture* outMirrorTexture) => p_ovr_CreateMirrorTextureWithOptionsDX(session, d3dPtr, desc, outMirrorTexture);
 
-        private delegate ovrResult ovr_SetTrackingOriginType_t(ovrSession session, ovrTrackingOrigin origin);
-        private static ovr_SetTrackingOriginType_t p_ovr_SetTrackingOriginType;
+        public delegate ovrResult ovr_SetTrackingOriginType_t(ovrSession session, ovrTrackingOrigin origin);
+        public static ovr_SetTrackingOriginType_t p_ovr_SetTrackingOriginType;
         public static ovrResult ovr_SetTrackingOriginType(ovrSession session, ovrTrackingOrigin origin)
             => p_ovr_SetTrackingOriginType(session, origin);
 
-        private delegate ovrResult ovr_GetSessionStatus_t(ovrSession session, ovrSessionStatus* sessionStatus);
-        private static ovr_GetSessionStatus_t p_ovr_GetSessionStatus;
+        public delegate ovrResult ovr_GetSessionStatus_t(ovrSession session, ovrSessionStatus* sessionStatus);
+        public static ovr_GetSessionStatus_t p_ovr_GetSessionStatus;
         public static ovrResult ovr_GetSessionStatus(ovrSession session, ovrSessionStatus* sessionStatus)
             => p_ovr_GetSessionStatus(session, sessionStatus);
 
-        private delegate ovrResult ovr_RecenterTrackingOrigin_t(ovrSession session);
-        private static ovr_RecenterTrackingOrigin_t p_ovr_RecenterTrackingOrigin;
+        public delegate ovrResult ovr_RecenterTrackingOrigin_t(ovrSession session);
+        public static ovr_RecenterTrackingOrigin_t p_ovr_RecenterTrackingOrigin;
         public static ovrResult ovr_RecenterTrackingOrigin(ovrSession session)
             => p_ovr_RecenterTrackingOrigin(session);
 
-        private delegate ovrTimewarpProjectionDesc ovrTimewarpProjectionDesc_FromProjection_t(Matrix4x4 Projection, ovrProjectionModifier projectionModFlags);
-        private static ovrTimewarpProjectionDesc_FromProjection_t p_ovrTimewarpProjectionDesc_FromProjection;
+        public delegate ovrTimewarpProjectionDesc ovrTimewarpProjectionDesc_FromProjection_t(Matrix4x4 Projection, ovrProjectionModifier projectionModFlags);
+        public static ovrTimewarpProjectionDesc_FromProjection_t p_ovrTimewarpProjectionDesc_FromProjection;
         public static ovrTimewarpProjectionDesc ovrTimewarpProjectionDesc_FromProjection(Matrix4x4 Projection, ovrProjectionModifier projectionModFlags)
             => p_ovrTimewarpProjectionDesc_FromProjection(Projection, projectionModFlags);
 
-        private delegate void ovr_GetEyePoses_t(
+        public delegate void ovr_GetEyePoses_t(
             ovrSession session,
             long frameIndex,
             ovrBool latencyMarker,
             EyePair_Vector3* hmdToEyeOffset,
             out EyePair_ovrPosef outEyePoses,
             double* outSensorSampleTime);
-        private static ovr_GetEyePoses_t p_ovr_GetEyePoses;
+        public static ovr_GetEyePoses_t p_ovr_GetEyePoses;
         public static void ovr_GetEyePoses(
             ovrSession session,
             long frameIndex,
@@ -219,13 +219,13 @@ namespace Veldrid.VirtualReality.Oculus
             out EyePair_ovrPosef outEyePoses,
             double* outSensorSampleTime) => p_ovr_GetEyePoses(session, frameIndex, latencyMarker, hmdToEyeOffset, out outEyePoses, outSensorSampleTime);
 
-        private delegate ovrResult ovr_SubmitFrame_t(
+        public delegate ovrResult ovr_SubmitFrame_t(
             ovrSession session,
             long frameIndex,
             void* viewScaleDesc,
             ovrLayerHeader** layerPtrList,
             uint layerCount);
-        private static ovr_SubmitFrame_t p_ovr_SubmitFrame;
+        public static ovr_SubmitFrame_t p_ovr_SubmitFrame;
         public static ovrResult ovr_SubmitFrame(
             ovrSession session,
             long frameIndex,
@@ -233,94 +233,94 @@ namespace Veldrid.VirtualReality.Oculus
             ovrLayerHeader** layerPtrList,
             uint layerCount) => p_ovr_SubmitFrame(session, frameIndex, viewScaleDesc, layerPtrList, layerCount);
 
-        private delegate ovrResult ovr_GetMirrorTextureBufferDX_t(ovrSession session, ovrMirrorTexture mirror, Guid iid, IntPtr* ppObject);
-        private static ovr_GetMirrorTextureBufferDX_t p_ovr_GetMirrorTextureBufferDX;
+        public delegate ovrResult ovr_GetMirrorTextureBufferDX_t(ovrSession session, ovrMirrorTexture mirror, Guid iid, IntPtr* ppObject);
+        public static ovr_GetMirrorTextureBufferDX_t p_ovr_GetMirrorTextureBufferDX;
         public static ovrResult ovr_GetMirrorTextureBufferDX(ovrSession session, ovrMirrorTexture mirror, Guid iid, IntPtr* ppObject)
             => p_ovr_GetMirrorTextureBufferDX(session, mirror, iid, ppObject);
 
-        private delegate Matrix4x4 ovrMatrix4f_Projection_t(ovrFovPort fov, float znear, float zfar, ovrProjectionModifier projectionModFlags);
-        private static ovrMatrix4f_Projection_t p_ovrMatrix4f_Projection;
+        public delegate Matrix4x4 ovrMatrix4f_Projection_t(ovrFovPort fov, float znear, float zfar, ovrProjectionModifier projectionModFlags);
+        public static ovrMatrix4f_Projection_t p_ovrMatrix4f_Projection;
         public static Matrix4x4 ovrMatrix4f_Projection(ovrFovPort fov, float znear, float zfar, ovrProjectionModifier projectionModFlags)
             => p_ovrMatrix4f_Projection(fov, znear, zfar, projectionModFlags);
 
-        private delegate double ovr_GetTimeInSeconds_t();
-        private static ovr_GetTimeInSeconds_t p_ovr_GetTimeInSeconds;
+        public delegate double ovr_GetTimeInSeconds_t();
+        public static ovr_GetTimeInSeconds_t p_ovr_GetTimeInSeconds;
         public static double ovr_GetTimeInSeconds() => p_ovr_GetTimeInSeconds();
 
-        private delegate ovrResult ovr_CreateTextureSwapChainGL_t(
+        public delegate ovrResult ovr_CreateTextureSwapChainGL_t(
             ovrSession session,
             ovrTextureSwapChainDesc* desc,
             ovrTextureSwapChain* out_TextureSwapChain);
-        private static ovr_CreateTextureSwapChainGL_t p_ovr_CreateTextureSwapChainGL;
+        public static ovr_CreateTextureSwapChainGL_t p_ovr_CreateTextureSwapChainGL;
         public static ovrResult ovr_CreateTextureSwapChainGL(
             ovrSession session,
             ovrTextureSwapChainDesc* desc,
             ovrTextureSwapChain* out_TextureSwapChain) => p_ovr_CreateTextureSwapChainGL(session, desc, out_TextureSwapChain);
 
-        private delegate ovrResult ovr_GetTextureSwapChainBufferGL_t(
+        public delegate ovrResult ovr_GetTextureSwapChainBufferGL_t(
             ovrSession session,
             ovrTextureSwapChain chain,
             int index, uint* out_TexId);
-        private static ovr_GetTextureSwapChainBufferGL_t p_ovr_GetTextureSwapChainBufferGL;
+        public static ovr_GetTextureSwapChainBufferGL_t p_ovr_GetTextureSwapChainBufferGL;
         public static ovrResult ovr_GetTextureSwapChainBufferGL(
             ovrSession session,
             ovrTextureSwapChain chain,
             int index,
             uint* out_TexId) => p_ovr_GetTextureSwapChainBufferGL(session, chain, index, out_TexId);
 
-        private delegate ovrResult ovr_CreateMirrorTextureWithOptionsGL_t(
+        public delegate ovrResult ovr_CreateMirrorTextureWithOptionsGL_t(
             ovrSession session,
             ovrMirrorTextureDesc* desc,
             ovrMirrorTexture* out_MirrorTexture);
-        private static ovr_CreateMirrorTextureWithOptionsGL_t p_ovr_CreateMirrorTextureWithOptionsGL;
+        public static ovr_CreateMirrorTextureWithOptionsGL_t p_ovr_CreateMirrorTextureWithOptionsGL;
         public static ovrResult ovr_CreateMirrorTextureWithOptionsGL(
             ovrSession session,
             ovrMirrorTextureDesc* desc,
             ovrMirrorTexture* out_MirrorTexture) => p_ovr_CreateMirrorTextureWithOptionsGL(session, desc, out_MirrorTexture);
 
-        private delegate ovrResult ovr_GetMirrorTextureBufferGL_t(
+        public delegate ovrResult ovr_GetMirrorTextureBufferGL_t(
             ovrSession session,
             ovrMirrorTexture mirrorTexture,
             uint* out_TexId);
-        private static ovr_GetMirrorTextureBufferGL_t p_ovr_GetMirrorTextureBufferGL;
+        public static ovr_GetMirrorTextureBufferGL_t p_ovr_GetMirrorTextureBufferGL;
         public static ovrResult ovr_GetMirrorTextureBufferGL(
             ovrSession session,
             ovrMirrorTexture mirrorTexture,
             uint* out_TexId) => p_ovr_GetMirrorTextureBufferGL(session, mirrorTexture, out_TexId);
 
-        private delegate ovrResult ovr_GetInstanceExtensionsVk_t(ovrGraphicsLuid luid, byte* extensionNames, uint* inoutExtensionNamesSize);
-        private static ovr_GetInstanceExtensionsVk_t p_ovr_GetInstanceExtensionsVk;
+        public delegate ovrResult ovr_GetInstanceExtensionsVk_t(ovrGraphicsLuid luid, byte* extensionNames, uint* inoutExtensionNamesSize);
+        public static ovr_GetInstanceExtensionsVk_t p_ovr_GetInstanceExtensionsVk;
         public static ovrResult ovr_GetInstanceExtensionsVk(ovrGraphicsLuid luid, byte* extensionNames, uint* inoutExtensionNamesSize)
             => p_ovr_GetInstanceExtensionsVk(luid, extensionNames, inoutExtensionNamesSize);
 
-        private delegate ovrResult ovr_GetDeviceExtensionsVk_t(ovrGraphicsLuid luid, byte* extensionNames, uint* inoutExtensionNamesSize);
-        private static ovr_GetDeviceExtensionsVk_t p_ovr_GetDeviceExtensionsVk;
+        public delegate ovrResult ovr_GetDeviceExtensionsVk_t(ovrGraphicsLuid luid, byte* extensionNames, uint* inoutExtensionNamesSize);
+        public static ovr_GetDeviceExtensionsVk_t p_ovr_GetDeviceExtensionsVk;
         public static ovrResult ovr_GetDeviceExtensionsVk(ovrGraphicsLuid luid, byte* extensionNames, uint* inoutExtensionNamesSize)
             => p_ovr_GetDeviceExtensionsVk(luid, extensionNames, inoutExtensionNamesSize);
 
-        private delegate ovrResult ovr_GetSessionPhysicalDeviceVk_t(
+        public delegate ovrResult ovr_GetSessionPhysicalDeviceVk_t(
             ovrSession session,
             ovrGraphicsLuid luid,
             IntPtr instance,
             IntPtr* out_physicalDevice);
-        private static ovr_GetSessionPhysicalDeviceVk_t p_ovr_GetSessionPhysicalDeviceVk;
+        public static ovr_GetSessionPhysicalDeviceVk_t p_ovr_GetSessionPhysicalDeviceVk;
         public static ovrResult ovr_GetSessionPhysicalDeviceVk(
             ovrSession session,
             ovrGraphicsLuid luid,
             IntPtr instance,
             IntPtr* out_physicalDevice) => p_ovr_GetSessionPhysicalDeviceVk(session, luid, instance, out_physicalDevice);
 
-        private delegate ovrResult ovr_SetSynchonizationQueueVk_t(ovrSession session, IntPtr queue);
-        private static ovr_SetSynchonizationQueueVk_t p_ovr_SetSynchonizationQueueVk;
+        public delegate ovrResult ovr_SetSynchonizationQueueVk_t(ovrSession session, IntPtr queue);
+        public static ovr_SetSynchonizationQueueVk_t p_ovr_SetSynchonizationQueueVk;
         public static ovrResult ovr_SetSynchonizationQueueVk(ovrSession session, IntPtr queue)
             => p_ovr_SetSynchonizationQueueVk(session, queue);
 
-        private delegate ovrResult ovr_CreateTextureSwapChainVk_t(
+        public delegate ovrResult ovr_CreateTextureSwapChainVk_t(
             ovrSession session,
             IntPtr device,
             ovrTextureSwapChainDesc* desc,
             ovrTextureSwapChain* out_TextureSwapChain);
-        private static ovr_CreateTextureSwapChainVk_t p_ovr_CreateTextureSwapChainVk;
+        public static ovr_CreateTextureSwapChainVk_t p_ovr_CreateTextureSwapChainVk;
         public static ovrResult ovr_CreateTextureSwapChainVk(
             ovrSession session,
             IntPtr device,
@@ -328,48 +328,48 @@ namespace Veldrid.VirtualReality.Oculus
             ovrTextureSwapChain* out_TextureSwapChain)
             => p_ovr_CreateTextureSwapChainVk(session, device, desc, out_TextureSwapChain);
 
-        private delegate ovrResult ovr_GetTextureSwapChainBufferVk_t(
+        public delegate ovrResult ovr_GetTextureSwapChainBufferVk_t(
             ovrSession session,
             ovrTextureSwapChain chain,
             int index,
             ulong* out_Image);
-        private static ovr_GetTextureSwapChainBufferVk_t p_ovr_GetTextureSwapChainBufferVk;
+        public static ovr_GetTextureSwapChainBufferVk_t p_ovr_GetTextureSwapChainBufferVk;
         public static ovrResult ovr_GetTextureSwapChainBufferVk(
             ovrSession session,
             ovrTextureSwapChain chain,
             int index,
             ulong* out_Image) => p_ovr_GetTextureSwapChainBufferVk(session, chain, index, out_Image);
 
-        private delegate ovrResult ovr_CreateMirrorTextureWithOptionsVk_t(
+        public delegate ovrResult ovr_CreateMirrorTextureWithOptionsVk_t(
             ovrSession session,
             IntPtr device,
             ovrMirrorTextureDesc* desc,
             ovrMirrorTexture* out_MirrorTexture);
-        private static ovr_CreateMirrorTextureWithOptionsVk_t p_ovr_CreateMirrorTextureWithOptionsVk;
+        public static ovr_CreateMirrorTextureWithOptionsVk_t p_ovr_CreateMirrorTextureWithOptionsVk;
         public static ovrResult ovr_CreateMirrorTextureWithOptionsVk(
             ovrSession session,
             IntPtr device,
             ovrMirrorTextureDesc* desc,
             ovrMirrorTexture* out_MirrorTexture) => p_ovr_CreateMirrorTextureWithOptionsVk(session, device, desc, out_MirrorTexture);
 
-        private delegate ovrResult ovr_GetMirrorTextureBufferVk_t(
+        public delegate ovrResult ovr_GetMirrorTextureBufferVk_t(
             ovrSession session,
             ovrMirrorTexture mirrorTexture,
             ulong* out_Image);
-        private static ovr_GetMirrorTextureBufferVk_t p_ovr_GetMirrorTextureBufferVk;
+        public static ovr_GetMirrorTextureBufferVk_t p_ovr_GetMirrorTextureBufferVk;
         public static ovrResult ovr_GetMirrorTextureBufferVk(
             ovrSession session,
             ovrMirrorTexture mirrorTexture,
             ulong* out_Image) => p_ovr_GetMirrorTextureBufferVk(session, mirrorTexture, out_Image);
 
-        private delegate void ovr_DestroyMirrorTexture_t(ovrSession session, ovrMirrorTexture mirrorTexture);
-        private static ovr_DestroyMirrorTexture_t p_ovr_DestroyMirrorTexture;
+        public delegate void ovr_DestroyMirrorTexture_t(ovrSession session, ovrMirrorTexture mirrorTexture);
+        public static ovr_DestroyMirrorTexture_t p_ovr_DestroyMirrorTexture;
         public static void ovr_DestroyMirrorTexture(ovrSession session, ovrMirrorTexture mirrorTexture)
             => p_ovr_DestroyMirrorTexture(session, mirrorTexture);
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrInitParams
+    public struct ovrInitParams
     {
         public ovrInitFlags Flags;
         public uint RequestedMinorVersion;
@@ -379,14 +379,14 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrErrorInfo
+    public struct ovrErrorInfo
     {
         public ovrResult Result;
         public FixedString512 ErrorString;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct FixedString24
+    public unsafe struct FixedString24
     {
         public fixed byte Data[24];
 
@@ -400,7 +400,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct FixedString64
+    public unsafe struct FixedString64
     {
         public fixed byte Data[64];
 
@@ -414,7 +414,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct FixedString128
+    public unsafe struct FixedString128
     {
         public fixed byte Data[128];
 
@@ -428,7 +428,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct FixedString512
+    public unsafe struct FixedString512
     {
         public fixed byte Data[512];
 
@@ -442,22 +442,22 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct ovrGraphicsLuid
+    public unsafe struct ovrGraphicsLuid
     {
         public fixed byte Reserved[8];
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrSession
+    public struct ovrSession
     {
         public readonly IntPtr NativePtr;
         public bool IsNull => NativePtr == IntPtr.Zero;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct ovrHmdDesc
+    public unsafe struct ovrHmdDesc
     {
-        private IntPtr _padHack0;
+        public IntPtr _padHack0;
         /// <summary>
         /// The type of HMD.
         /// </summary>
@@ -531,7 +531,7 @@ namespace Veldrid.VirtualReality.Oculus
         /// Resolution of the full HMD screen (both eyes) in pixels.
         /// </summary>
         public ovrSizei Resolution;
-        private IntPtr _padHack1;
+        public IntPtr _padHack1;
         /// <summary>
         /// Refresh rate of the display in cycles per second.
         /// </summary>
@@ -547,7 +547,7 @@ namespace Veldrid.VirtualReality.Oculus
         }
     }
 
-    internal enum ovrHmdType
+    public enum ovrHmdType
     {
         None = 0,
         DK1 = 3,
@@ -570,7 +570,7 @@ namespace Veldrid.VirtualReality.Oculus
     /// </summary>
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrFovPort
+    public struct ovrFovPort
     {
         /// <summary>
         /// Tangent of the angle between the viewing vector and top edge of the FOV.
@@ -591,14 +591,14 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrSizei
+    public struct ovrSizei
     {
         public int w;
         public int h;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrTextureSwapChainDesc
+    public struct ovrTextureSwapChainDesc
     {
         /// <summary>
         /// Must be 2D
@@ -625,7 +625,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [Flags]
-    internal enum ovrTextureMiscFlags
+    public enum ovrTextureMiscFlags
     {
         None,
 
@@ -658,7 +658,7 @@ namespace Veldrid.VirtualReality.Oculus
         AutoGenerateMips = 0x0008,
     }
 
-    internal enum ovrTextureBindFlags
+    public enum ovrTextureBindFlags
     {
         None,
 
@@ -680,7 +680,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrBool
+    public struct ovrBool
     {
         public readonly byte Value;
         public static implicit operator bool(ovrBool b8) => b8.Value != 0;
@@ -699,7 +699,7 @@ namespace Veldrid.VirtualReality.Oculus
         public override string ToString() => string.Format("{0} [{1}]", (bool)this, Value);
     }
 
-    internal enum ovrTextureType
+    public enum ovrTextureType
     {
         /// <summary>
         /// 2D textures.
@@ -715,7 +715,7 @@ namespace Veldrid.VirtualReality.Oculus
         TextureCube,
     }
 
-    internal enum ovrTextureFormat
+    public enum ovrTextureFormat
     {
         UNKNOWN = 0,
         /// <summary>
@@ -771,7 +771,7 @@ namespace Veldrid.VirtualReality.Oculus
         BC7_UNORM_SRGB = 24,
     }
 
-    internal enum ovrEyeType
+    public enum ovrEyeType
     {
         /// <summary>
         /// left eye, from the viewer's perspective.
@@ -784,21 +784,21 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrTextureSwapChain
+    public struct ovrTextureSwapChain
     {
         public readonly IntPtr NativePtr;
         public bool IsNull => NativePtr == IntPtr.Zero;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrMirrorTexture
+    public struct ovrMirrorTexture
     {
         public readonly IntPtr NativePtr;
         public bool IsNull => NativePtr == IntPtr.Zero;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrEyeRenderDesc
+    public struct ovrEyeRenderDesc
     {
         /// <summary>
         /// The eye index to which this instance corresponds.
@@ -823,28 +823,28 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrRecti
+    public struct ovrRecti
     {
         public ovrVector2i Pos;
         public ovrSizei Size;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrVector2i
+    public struct ovrVector2i
     {
         public int X;
         public int Y;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrPosef
+    public struct ovrPosef
     {
         public Quaternion Orientation;
         public Vector3 Position;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct ovrTrackingState
+    public unsafe struct ovrTrackingState
     {
         /// <summary>
         /// Predicted head pose (and derivatives) at the requested absolute time.
@@ -893,7 +893,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [Flags]
-    internal enum ovrStatusBits
+    public enum ovrStatusBits
     {
         /// <summary>
         /// Orientation is currently tracked (connected & in use).
@@ -906,7 +906,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrPoseStatef
+    public struct ovrPoseStatef
     {
         /// <summary>
         /// Position and orientation.
@@ -935,7 +935,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrMirrorTextureDesc
+    public struct ovrMirrorTextureDesc
     {
         public ovrTextureFormat Format;
         public int Width;
@@ -945,7 +945,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [Flags]
-    internal enum ovrMirrorOptions
+    public enum ovrMirrorOptions
     {
         /// <summary>
         /// By default the mirror texture will be:
@@ -992,7 +992,7 @@ namespace Veldrid.VirtualReality.Oculus
         ForceSymmetricFov = 0x0040,
     }
 
-    internal enum ovrTrackingOrigin
+    public enum ovrTrackingOrigin
     {
         /// <summary>
         /// Tracking system origin reported at eye (HMD) height
@@ -1023,7 +1023,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrSessionStatus
+    public struct ovrSessionStatus
     {
         /// <summary>
         /// True if the process has VR focus and thus is visible in the HMD.
@@ -1080,7 +1080,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrLayerEyeFovDepth
+    public struct ovrLayerEyeFovDepth
     {
         /// <summary>
         /// Header.Type must be EyeFovDepth.
@@ -1133,7 +1133,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrLayerHeader
+    public struct ovrLayerHeader
     {
         public ovrLayerType Type;
         public ovrLayerFlags Flags;
@@ -1141,7 +1141,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [Flags]
-    internal enum ovrLayerFlags
+    public enum ovrLayerFlags
     {
         None = 0,
 
@@ -1171,7 +1171,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    internal struct EyePair_Vector3
+    public struct EyePair_Vector3
     {
         public Vector3 Left;
         public Vector3 Right;
@@ -1200,7 +1200,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    internal struct EyePair_ovrPosef
+    public struct EyePair_ovrPosef
     {
         public ovrPosef Left;
         public ovrPosef Right;
@@ -1229,7 +1229,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    internal struct EyePair_ovrFovPort
+    public struct EyePair_ovrFovPort
     {
         public ovrFovPort Left;
         public ovrFovPort Right;
@@ -1252,7 +1252,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    internal struct EyePair_ovrTextureSwapChain
+    public struct EyePair_ovrTextureSwapChain
     {
         public ovrTextureSwapChain Left;
         public ovrTextureSwapChain Right;
@@ -1275,7 +1275,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    internal struct EyePair_ovrRecti
+    public struct EyePair_ovrRecti
     {
         public ovrRecti Left;
         public ovrRecti Right;
@@ -1298,7 +1298,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrTimewarpProjectionDesc
+    public struct ovrTimewarpProjectionDesc
     {
         /// <summary>
         /// Projection matrix element [2][2].
@@ -1314,7 +1314,7 @@ namespace Veldrid.VirtualReality.Oculus
         public float Projection32;
     }
 
-    internal enum ovrLayerType
+    public enum ovrLayerType
     {
         /// <summary>
         /// Layer is disabled.
@@ -1358,7 +1358,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [Flags]
-    internal enum ovrProjectionModifier
+    public enum ovrProjectionModifier
     {
         /// <summary>
         /// Use for generating a default projection matrix that is:
@@ -1399,7 +1399,7 @@ namespace Veldrid.VirtualReality.Oculus
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ovrViewScaleDesc
+    public struct ovrViewScaleDesc
     {
         /// <summary>
         /// Transform of each eye from the HMD center, in meters.

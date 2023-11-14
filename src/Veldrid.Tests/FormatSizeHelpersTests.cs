@@ -8,7 +8,7 @@ namespace Veldrid.Tests
 {
     public class FormatSizeHelpersTests : IDisposable
     {
-        private TraceListener[] _traceListeners;
+        public TraceListener[] _traceListeners;
 
         public FormatSizeHelpersTests()
         {
@@ -34,7 +34,7 @@ namespace Veldrid.Tests
             }
         }
 
-        private static HashSet<PixelFormat> CompressedPixelFormats = new HashSet<PixelFormat>() {
+        public static HashSet<PixelFormat> CompressedPixelFormats = new HashSet<PixelFormat>() {
             PixelFormat.BC1_Rgba_UNorm,
             PixelFormat.BC1_Rgba_UNorm_SRgb,
             PixelFormat.BC1_Rgb_UNorm,
@@ -59,7 +59,7 @@ namespace Veldrid.Tests
             PixelFormat.ETC2_R8_G8_B8_A8_UNorm,
             PixelFormat.ETC2_R8_G8_B8_UNorm,
         };
-        private static IEnumerable<PixelFormat> UncompressedPixelFormats
+        public static IEnumerable<PixelFormat> UncompressedPixelFormats
             = System.Enum.GetValues(typeof(PixelFormat)).Cast<PixelFormat>()
                 .Where(format => !CompressedPixelFormats.Contains(format));
         public static IEnumerable<object[]> CompressedPixelFormatMemberData => CompressedPixelFormats.Select(format => new object[] { format });

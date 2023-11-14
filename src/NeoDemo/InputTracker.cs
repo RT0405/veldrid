@@ -8,15 +8,15 @@ namespace Veldrid.NeoDemo
 {
     public static class InputTracker
     {
-        private static HashSet<Key> _currentlyPressedKeys = new HashSet<Key>();
-        private static HashSet<Key> _newKeysThisFrame = new HashSet<Key>();
+        public static HashSet<Key> _currentlyPressedKeys = new HashSet<Key>();
+        public static HashSet<Key> _newKeysThisFrame = new HashSet<Key>();
 
-        private static HashSet<MouseButton> _currentlyPressedMouseButtons = new HashSet<MouseButton>();
-        private static HashSet<MouseButton> _newMouseButtonsThisFrame = new HashSet<MouseButton>();
+        public static HashSet<MouseButton> _currentlyPressedMouseButtons = new HashSet<MouseButton>();
+        public static HashSet<MouseButton> _newMouseButtonsThisFrame = new HashSet<MouseButton>();
 
         public static Vector2 MousePosition;
         public static Vector2 MouseDelta;
-        public static InputSnapshot FrameSnapshot { get; private set; }
+        public static InputSnapshot FrameSnapshot { get; set; }
 
         public static bool GetKey(Key key)
         {
@@ -72,13 +72,13 @@ namespace Veldrid.NeoDemo
             }
         }
 
-        private static void MouseUp(MouseButton mouseButton)
+        public static void MouseUp(MouseButton mouseButton)
         {
             _currentlyPressedMouseButtons.Remove(mouseButton);
             _newMouseButtonsThisFrame.Remove(mouseButton);
         }
 
-        private static void MouseDown(MouseButton mouseButton)
+        public static void MouseDown(MouseButton mouseButton)
         {
             if (_currentlyPressedMouseButtons.Add(mouseButton))
             {
@@ -86,13 +86,13 @@ namespace Veldrid.NeoDemo
             }
         }
 
-        private static void KeyUp(Key key)
+        public static void KeyUp(Key key)
         {
             _currentlyPressedKeys.Remove(key);
             _newKeysThisFrame.Remove(key);
         }
 
-        private static void KeyDown(Key key)
+        public static void KeyDown(Key key)
         {
             if (_currentlyPressedKeys.Add(key))
             {

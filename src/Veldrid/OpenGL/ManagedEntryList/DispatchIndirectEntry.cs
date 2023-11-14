@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class DispatchIndirectEntry : OpenGLCommandEntry
+    public class DispatchIndirectEntry : OpenGLCommandEntry
     {
         public DeviceBuffer IndirectBuffer;
         public uint Offset;

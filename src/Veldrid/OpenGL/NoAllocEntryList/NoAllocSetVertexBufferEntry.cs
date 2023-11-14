@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocSetVertexBufferEntry
+    public struct NoAllocSetVertexBufferEntry
     {
         public readonly uint Index;
         public readonly Tracked<DeviceBuffer> Buffer;

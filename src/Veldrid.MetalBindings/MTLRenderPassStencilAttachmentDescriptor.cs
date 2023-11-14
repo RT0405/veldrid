@@ -37,7 +37,7 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, Selectors.setSlice, value);
         }
 
-        private static readonly Selector sel_clearStencil = "clearStencil";
-        private static readonly Selector sel_setClearStencil = "setClearStencil:";
+        public static readonly Selector sel_clearStencil = "clearStencil";
+        public static readonly Selector sel_setClearStencil = "setClearStencil:";
     }
 }

@@ -6,27 +6,27 @@ using static Veldrid.VirtualReality.Oculus.LibOvrNative;
 
 namespace Veldrid.VirtualReality.Oculus
 {
-    internal unsafe class OculusContext : VRContext
+    public unsafe class OculusContext : VRContext
     {
-        private readonly ovrSession _session;
-        private readonly ovrGraphicsLuid _luid;
-        private readonly OculusMirrorTexture _mirrorTexture;
-        private readonly VRContextOptions _options;
-        private GraphicsDevice _gd;
-        private ovrHmdDesc _hmdDesc;
-        private string _deviceName;
-        private ovrRecti[] _eyeRenderViewport;
-        private OculusSwapchain[] _eyeSwapchains;
-        private int _frameIndex;
-        private ovrTimewarpProjectionDesc _posTimewarpProjectionDesc;
-        private double _sensorSampleTime;
-        private EyePair_ovrPosef _eyeRenderPoses;
-        private Quaternion[] _rotations = new Quaternion[2];
-        private Vector3[] _positions = new Vector3[2];
-        private Matrix4x4[] _projections = new Matrix4x4[2];
+        public readonly ovrSession _session;
+        public readonly ovrGraphicsLuid _luid;
+        public readonly OculusMirrorTexture _mirrorTexture;
+        public readonly VRContextOptions _options;
+        public GraphicsDevice _gd;
+        public ovrHmdDesc _hmdDesc;
+        public string _deviceName;
+        public ovrRecti[] _eyeRenderViewport;
+        public OculusSwapchain[] _eyeSwapchains;
+        public int _frameIndex;
+        public ovrTimewarpProjectionDesc _posTimewarpProjectionDesc;
+        public double _sensorSampleTime;
+        public EyePair_ovrPosef _eyeRenderPoses;
+        public Quaternion[] _rotations = new Quaternion[2];
+        public Vector3[] _positions = new Vector3[2];
+        public Matrix4x4[] _projections = new Matrix4x4[2];
 
-        private static Lazy<bool> s_isSupported = new Lazy<bool>(CheckSupport);
-        private static bool CheckSupport()
+        public static Lazy<bool> s_isSupported = new Lazy<bool>(CheckSupport);
+        public static bool CheckSupport()
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Veldrid.VirtualReality.Oculus
             }
         }
 
-        internal static bool IsSupported() => s_isSupported.Value;
+        public static bool IsSupported() => s_isSupported.Value;
 
         public override string DeviceName => _deviceName;
 
@@ -66,8 +66,8 @@ namespace Veldrid.VirtualReality.Oculus
 
         public override Framebuffer RightEyeFramebuffer => _eyeSwapchains[1].GetFramebuffer();
 
-        internal GraphicsDevice GraphicsDevice => _gd;
-        internal ovrSession Session => _session;
+        public GraphicsDevice GraphicsDevice => _gd;
+        public ovrSession Session => _session;
 
         public OculusContext(VRContextOptions options)
         {
@@ -291,7 +291,7 @@ namespace Veldrid.VirtualReality.Oculus
             return (instance, device);
         }
 
-        private static string[] GetStringArray(byte[] utf8Data)
+        public static string[] GetStringArray(byte[] utf8Data)
         {
             List<string> ret = new List<string>();
             int start = 0;
@@ -310,11 +310,11 @@ namespace Veldrid.VirtualReality.Oculus
         }
     }
 
-    internal unsafe class OculusSwapchain
+    public unsafe class OculusSwapchain
     {
-        private static readonly Guid s_d3d11Tex2DGuid = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
+        public static readonly Guid s_d3d11Tex2DGuid = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
 
-        private readonly ovrSession _session;
+        public readonly ovrSession _session;
         public readonly ovrTextureSwapChain ColorChain;
         public readonly ovrTextureSwapChain DepthChain;
         public readonly Framebuffer[] Framebuffers;
@@ -369,7 +369,7 @@ namespace Veldrid.VirtualReality.Oculus
             CommandList = gd.ResourceFactory.CreateCommandList();
         }
 
-        private (ovrTextureSwapChain, Texture[]) CreateSwapchain(
+        public (ovrTextureSwapChain, Texture[]) CreateSwapchain(
             ovrSession session,
             GraphicsDevice gd,
             ovrTextureSwapChainDesc desc)
@@ -390,7 +390,7 @@ namespace Veldrid.VirtualReality.Oculus
             }
         }
 
-        private (ovrTextureSwapChain, Texture[]) CreateSwapchainVk(ovrSession session, GraphicsDevice gd, ovrTextureSwapChainDesc desc)
+        public (ovrTextureSwapChain, Texture[]) CreateSwapchainVk(ovrSession session, GraphicsDevice gd, ovrTextureSwapChainDesc desc)
         {
             ovrTextureSwapChain otsc;
             Texture[] textures;
@@ -416,7 +416,7 @@ namespace Veldrid.VirtualReality.Oculus
             return (otsc, textures);
         }
 
-        private static (ovrTextureSwapChain, Texture[]) CreateSwapchainD3D11(
+        public static (ovrTextureSwapChain, Texture[]) CreateSwapchainD3D11(
             ovrSession session,
             GraphicsDevice gd,
             ovrTextureSwapChainDesc desc)
@@ -445,7 +445,7 @@ namespace Veldrid.VirtualReality.Oculus
             return (otsc, textures);
         }
 
-        private static (ovrTextureSwapChain, Texture[]) CreateSwapchainGL(
+        public static (ovrTextureSwapChain, Texture[]) CreateSwapchainGL(
             ovrSession session,
             GraphicsDevice gd,
             ovrTextureSwapChainDesc desc)
@@ -516,7 +516,7 @@ namespace Veldrid.VirtualReality.Oculus
 
         public OutputDescription GetOutputDescription() => Framebuffers[0].OutputDescription;
 
-        public CommandList CommandList { get; private set; }
+        public CommandList CommandList { get; set; }
 
         public void Commit()
         {

@@ -4,9 +4,9 @@ using Vortice.Mathematics;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11Sampler : Sampler
+    public class D3D11Sampler : Sampler
     {
-        private string _name;
+        public string _name;
 
         public ID3D11SamplerState DeviceSampler { get; }
 
@@ -30,7 +30,7 @@ namespace Veldrid.D3D11
             DeviceSampler = device.CreateSamplerState(samplerStateDesc);
         }
 
-        private static Color4 ToRawColor4(SamplerBorderColor borderColor)
+        public static Color4 ToRawColor4(SamplerBorderColor borderColor)
         {
             switch (borderColor)
             {

@@ -6,18 +6,18 @@ using System.Diagnostics;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe class OpenGLTexture : Texture, OpenGLDeferredResource
+    public unsafe class OpenGLTexture : Texture, OpenGLDeferredResource
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private uint _texture;
-        private uint[] _framebuffers;
-        private uint[] _pbos;
-        private uint[] _pboSizes;
-        private bool _disposeRequested;
-        private bool _disposed;
+        public readonly OpenGLGraphicsDevice _gd;
+        public uint _texture;
+        public uint[] _framebuffers;
+        public uint[] _pbos;
+        public uint[] _pboSizes;
+        public bool _disposeRequested;
+        public bool _disposed;
 
-        private string _name;
-        private bool _nameChanged;
+        public string _name;
+        public bool _nameChanged;
         
         public override string Name { get => _name; set { _name = value; _nameChanged = true; } }
 
@@ -174,9 +174,9 @@ namespace Veldrid.OpenGL
         public GLPixelFormat GLPixelFormat { get; }
         public GLPixelType GLPixelType { get; }
         public PixelInternalFormat GLInternalFormat { get; }
-        public TextureTarget TextureTarget { get; internal set; }
+        public TextureTarget TextureTarget { get; set; }
 
-        public bool Created { get; private set; }
+        public bool Created { get; set; }
 
         public void EnsureResourcesCreated()
         {
@@ -194,7 +194,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void CreateGLResources()
+        public void CreateGLResources()
         {
             bool dsa = _gd.Extensions.ARB_DirectStateAccess;
             if (dsa)

@@ -9,7 +9,7 @@ namespace Veldrid.ImageSharp
     /// <summary>
     /// Contains helper methods for dealing with mipmaps.
     /// </summary>
-    internal static class MipmapHelper
+    public static class MipmapHelper
     {
         /// <summary>
         /// Computes the number of mipmap levels in a texture.
@@ -33,7 +33,7 @@ namespace Veldrid.ImageSharp
             return Math.Max(1, ret);
         }
 
-        internal static Image<Rgba32>[] GenerateMipmaps(Image<Rgba32> baseImage) 
+        public static Image<Rgba32>[] GenerateMipmaps(Image<Rgba32> baseImage) 
         {
             int mipLevelCount = MipmapHelper.ComputeMipLevels(baseImage.Width, baseImage.Height);
             Image<Rgba32>[] mipLevels = new Image<Rgba32>[mipLevelCount];

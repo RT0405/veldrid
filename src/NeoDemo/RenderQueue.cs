@@ -8,10 +8,10 @@ namespace Veldrid.NeoDemo
 {
     public class RenderQueue : IEnumerable<Renderable>
     {
-        private const int DefaultCapacity = 250;
+        public const int DefaultCapacity = 250;
 
-        private readonly List<RenderItemIndex> _indices = new List<RenderItemIndex>(DefaultCapacity);
-        private readonly List<Renderable> _renderables = new List<Renderable>(DefaultCapacity);
+        public readonly List<RenderItemIndex> _indices = new List<RenderItemIndex>(DefaultCapacity);
+        public readonly List<Renderable> _renderables = new List<Renderable>(DefaultCapacity);
 
         public int Count => _renderables.Count;
 
@@ -91,10 +91,10 @@ namespace Veldrid.NeoDemo
 
         public struct Enumerator : IEnumerator<Renderable>
         {
-            private readonly List<RenderItemIndex> _indices;
-            private readonly List<Renderable> _Renderables;
-            private int _nextItemIndex;
-            private Renderable _currentItem;
+            public readonly List<RenderItemIndex> _indices;
+            public readonly List<Renderable> _Renderables;
+            public int _nextItemIndex;
+            public Renderable _currentItem;
 
             public Enumerator(List<RenderItemIndex> indices, List<Renderable> Renderables)
             {

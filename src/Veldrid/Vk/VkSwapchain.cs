@@ -7,22 +7,22 @@ using System.Runtime.InteropServices;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkSwapchain : Swapchain
+    public unsafe class VkSwapchain : Swapchain
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly VkSurfaceKHR _surface;
-        private VkSwapchainKHR _deviceSwapchain;
-        private readonly VkSwapchainFramebuffer _framebuffer;
-        private Vulkan.VkFence _imageAvailableFence;
-        private readonly uint _presentQueueIndex;
-        private readonly VkQueue _presentQueue;
-        private bool _syncToVBlank;
-        private readonly SwapchainSource _swapchainSource;
-        private readonly bool _colorSrgb;
-        private bool? _newSyncToVBlank;
-        private uint _currentImageIndex;
-        private string _name;
-        private bool _disposed;
+        public readonly VkGraphicsDevice _gd;
+        public readonly VkSurfaceKHR _surface;
+        public VkSwapchainKHR _deviceSwapchain;
+        public readonly VkSwapchainFramebuffer _framebuffer;
+        public Vulkan.VkFence _imageAvailableFence;
+        public readonly uint _presentQueueIndex;
+        public readonly VkQueue _presentQueue;
+        public bool _syncToVBlank;
+        public readonly SwapchainSource _swapchainSource;
+        public readonly bool _colorSrgb;
+        public bool? _newSyncToVBlank;
+        public uint _currentImageIndex;
+        public string _name;
+        public bool _disposed;
 
         public override string Name { get => _name; set { _name = value; _gd.SetResourceName(this, value); } }
         public override Framebuffer Framebuffer => _framebuffer;
@@ -123,7 +123,7 @@ namespace Veldrid.Vk
             return true;
         }
 
-        private void RecreateAndReacquire(uint width, uint height)
+        public void RecreateAndReacquire(uint width, uint height)
         {
             if (CreateSwapchain(width, height))
             {
@@ -135,7 +135,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private bool CreateSwapchain(uint width, uint height)
+        public bool CreateSwapchain(uint width, uint height)
         {
             // Obtain the surface capabilities first -- this will indicate whether the surface has been lost.
             VkResult result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_gd.PhysicalDevice, _surface, out VkSurfaceCapabilitiesKHR surfaceCapabilities);
@@ -268,7 +268,7 @@ namespace Veldrid.Vk
             return true;
         }
 
-        private bool GetPresentQueueIndex(out uint queueFamilyIndex)
+        public bool GetPresentQueueIndex(out uint queueFamilyIndex)
         {
             uint graphicsQueueIndex = _gd.GraphicsQueueIndex;
             uint presentQueueIndex = _gd.PresentQueueIndex;
@@ -288,7 +288,7 @@ namespace Veldrid.Vk
             return false;
         }
 
-        private bool QueueSupportsPresent(uint queueFamilyIndex, VkSurfaceKHR surface)
+        public bool QueueSupportsPresent(uint queueFamilyIndex, VkSurfaceKHR surface)
         {
             VkResult result = vkGetPhysicalDeviceSurfaceSupportKHR(
                 _gd.PhysicalDevice,
@@ -304,7 +304,7 @@ namespace Veldrid.Vk
             RefCount.Decrement();
         }
 
-        private void DisposeCore()
+        public void DisposeCore()
         {
             vkDestroyFence(_gd.Device, _imageAvailableFence, null);
             _framebuffer.Dispose();

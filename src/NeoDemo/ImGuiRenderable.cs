@@ -7,9 +7,9 @@ namespace Veldrid.NeoDemo
 {
     public class ImGuiRenderable : Renderable, IUpdateable
     {
-        private ImGuiRenderer _imguiRenderer;
-        private int _width;
-        private int _height;
+        public ImGuiRenderer _imguiRenderer;
+        public int _width;
+        public int _height;
 
         public ImGuiRenderable(int width, int height)
         {

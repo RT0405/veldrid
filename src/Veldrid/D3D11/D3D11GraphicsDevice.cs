@@ -14,28 +14,28 @@ using Vortice.DXGI.Debug;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11GraphicsDevice : GraphicsDevice
+    public class D3D11GraphicsDevice : GraphicsDevice
     {
-        private readonly IDXGIAdapter _dxgiAdapter;
-        private readonly ID3D11Device _device;
-        private readonly string _deviceName;
-        private readonly string _vendorName;
-        private readonly GraphicsApiVersion _apiVersion;
-        private readonly int _deviceId;
-        private readonly ID3D11DeviceContext _immediateContext;
-        private readonly D3D11ResourceFactory _d3d11ResourceFactory;
-        private readonly D3D11Swapchain _mainSwapchain;
-        private readonly bool _supportsConcurrentResources;
-        private readonly bool _supportsCommandLists;
-        private readonly object _immediateContextLock = new object();
-        private readonly BackendInfoD3D11 _d3d11Info;
+        public readonly IDXGIAdapter _dxgiAdapter;
+        public readonly ID3D11Device _device;
+        public readonly string _deviceName;
+        public readonly string _vendorName;
+        public readonly GraphicsApiVersion _apiVersion;
+        public readonly int _deviceId;
+        public readonly ID3D11DeviceContext _immediateContext;
+        public readonly D3D11ResourceFactory _d3d11ResourceFactory;
+        public readonly D3D11Swapchain _mainSwapchain;
+        public readonly bool _supportsConcurrentResources;
+        public readonly bool _supportsCommandLists;
+        public readonly object _immediateContextLock = new object();
+        public readonly BackendInfoD3D11 _d3d11Info;
 
-        private readonly object _mappedResourceLock = new object();
-        private readonly Dictionary<MappedResourceCacheKey, MappedResourceInfo> _mappedResources
+        public readonly object _mappedResourceLock = new object();
+        public readonly Dictionary<MappedResourceCacheKey, MappedResourceInfo> _mappedResources
             = new Dictionary<MappedResourceCacheKey, MappedResourceInfo>();
 
-        private readonly object _stagingResourcesLock = new object();
-        private readonly List<D3D11Buffer> _availableStagingBuffers = new List<D3D11Buffer>();
+        public readonly object _stagingResourcesLock = new object();
+        public readonly List<D3D11Buffer> _availableStagingBuffers = new List<D3D11Buffer>();
 
         public override string DeviceName => _deviceName;
 
@@ -202,7 +202,7 @@ namespace Veldrid.D3D11
             PostDeviceCreated();
         }
 
-        private static D3D11DeviceOptions MergeOptions(D3D11DeviceOptions d3D11DeviceOptions, GraphicsDeviceOptions options)
+        public static D3D11DeviceOptions MergeOptions(D3D11DeviceOptions d3D11DeviceOptions, GraphicsDeviceOptions options)
         {
             if (options.Debug)
             {
@@ -266,7 +266,7 @@ namespace Veldrid.D3D11
             return TextureSampleCount.Count1;
         }
 
-        private bool CheckFormatMultisample(Format format, int sampleCount)
+        public bool CheckFormatMultisample(Format format, int sampleCount)
         {
             return _device.CheckMultisampleQualityLevels(format, sampleCount) != 0;
         }
@@ -491,7 +491,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private D3D11Buffer GetFreeStagingBuffer(uint sizeInBytes)
+        public D3D11Buffer GetFreeStagingBuffer(uint sizeInBytes)
         {
             lock (_stagingResourcesLock)
             {
@@ -611,10 +611,10 @@ namespace Veldrid.D3D11
             return result;
         }
 
-        private readonly object _resetEventsLock = new object();
-        private readonly List<ManualResetEvent[]> _resetEvents = new List<ManualResetEvent[]>();
+        public readonly object _resetEventsLock = new object();
+        public readonly List<ManualResetEvent[]> _resetEvents = new List<ManualResetEvent[]>();
 
-        private ManualResetEvent[] GetResetEventArray(int length)
+        public ManualResetEvent[] GetResetEventArray(int length)
         {
             lock (_resetEventsLock)
             {
@@ -633,7 +633,7 @@ namespace Veldrid.D3D11
             return newArray;
         }
 
-        private void ReturnResetEventArray(ManualResetEvent[] array)
+        public void ReturnResetEventArray(ManualResetEvent[] array)
         {
             lock (_resetEventsLock)
             {
@@ -646,9 +646,9 @@ namespace Veldrid.D3D11
             Util.AssertSubtype<Fence, D3D11Fence>(fence).Reset();
         }
 
-        internal override uint GetUniformBufferMinOffsetAlignmentCore() => 256u;
+        public override uint GetUniformBufferMinOffsetAlignmentCore() => 256u;
 
-        internal override uint GetStructuredBufferMinOffsetAlignmentCore() => 16;
+        public override uint GetStructuredBufferMinOffsetAlignmentCore() => 16;
 
         protected override void PlatformDispose()
         {

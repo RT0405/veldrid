@@ -7,16 +7,16 @@ using System.Diagnostics;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkFramebuffer : VkFramebufferBase
+    public unsafe class VkFramebuffer : VkFramebufferBase
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly Vulkan.VkFramebuffer _deviceFramebuffer;
-        private readonly VkRenderPass _renderPassNoClearLoad;
-        private readonly VkRenderPass _renderPassNoClear;
-        private readonly VkRenderPass _renderPassClear;
-        private readonly List<VkImageView> _attachmentViews = new List<VkImageView>();
-        private bool _destroyed;
-        private string _name;
+        public readonly VkGraphicsDevice _gd;
+        public readonly Vulkan.VkFramebuffer _deviceFramebuffer;
+        public readonly VkRenderPass _renderPassNoClearLoad;
+        public readonly VkRenderPass _renderPassNoClear;
+        public readonly VkRenderPass _renderPassClear;
+        public readonly List<VkImageView> _attachmentViews = new List<VkImageView>();
+        public bool _destroyed;
+        public string _name;
 
         public override Vulkan.VkFramebuffer CurrentFramebuffer => _deviceFramebuffer;
         public override VkRenderPass RenderPassNoClear_Init => _renderPassNoClear;

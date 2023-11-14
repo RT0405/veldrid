@@ -11,6 +11,6 @@ namespace Veldrid.MetalBindings
 
         public Bool8 IsKindOfClass(IntPtr @class) => bool8_objc_msgSend(NativePtr, sel_isKindOfClass, @class);
 
-        private static readonly Selector sel_isKindOfClass = "isKindOfClass:";
+        public static readonly Selector sel_isKindOfClass = "isKindOfClass:";
     }
 }

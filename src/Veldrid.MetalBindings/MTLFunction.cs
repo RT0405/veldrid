@@ -10,6 +10,6 @@ namespace Veldrid.MetalBindings
 
         public NSDictionary functionConstantsDictionary => objc_msgSend<NSDictionary>(NativePtr, sel_functionConstantsDictionary);
 
-        private static readonly Selector sel_functionConstantsDictionary = "functionConstantsDictionary";
+        public static readonly Selector sel_functionConstantsDictionary = "functionConstantsDictionary";
     }
 }

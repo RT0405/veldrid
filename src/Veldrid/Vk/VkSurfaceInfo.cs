@@ -11,7 +11,7 @@ namespace Veldrid.Vk
     /// </summary>
     public abstract class VkSurfaceSource
     {
-        internal VkSurfaceSource() { }
+        public VkSurfaceSource() { }
 
         /// <summary>
         /// Creates a new VkSurfaceKHR attached to this source.
@@ -35,13 +35,13 @@ namespace Veldrid.Vk
         /// <returns>A new VkSurfaceSource.</returns>
         public unsafe static VkSurfaceSource CreateXlib(Display* display, Window window) => new XlibVkSurfaceInfo(display, window);
 
-        internal abstract SwapchainSource GetSurfaceSource();
+        public abstract SwapchainSource GetSurfaceSource();
     }
 
-    internal class Win32VkSurfaceInfo : VkSurfaceSource
+    public class Win32VkSurfaceInfo : VkSurfaceSource
     {
-        private readonly IntPtr _hinstance;
-        private readonly IntPtr _hwnd;
+        public readonly IntPtr _hinstance;
+        public readonly IntPtr _hwnd;
 
         public Win32VkSurfaceInfo(IntPtr hinstance, IntPtr hwnd)
         {
@@ -54,16 +54,16 @@ namespace Veldrid.Vk
             return VkSurfaceUtil.CreateSurface(null, instance, GetSurfaceSource());
         }
 
-        internal override SwapchainSource GetSurfaceSource()
+        public override SwapchainSource GetSurfaceSource()
         {
             return new Win32SwapchainSource(_hwnd, _hinstance);
         }
     }
 
-    internal class XlibVkSurfaceInfo : VkSurfaceSource
+    public class XlibVkSurfaceInfo : VkSurfaceSource
     {
-        private readonly unsafe Display* _display;
-        private readonly Window _window;
+        public readonly unsafe Display* _display;
+        public readonly Window _window;
 
         public unsafe XlibVkSurfaceInfo(Display* display, Window window)
         {
@@ -76,7 +76,7 @@ namespace Veldrid.Vk
             return VkSurfaceUtil.CreateSurface(null, instance, GetSurfaceSource());
         }
 
-        internal unsafe override SwapchainSource GetSurfaceSource()
+        public unsafe override SwapchainSource GetSurfaceSource()
         {
             return new XlibSwapchainSource((IntPtr)_display, _window.Value);
         }

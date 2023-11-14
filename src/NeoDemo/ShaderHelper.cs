@@ -32,7 +32,7 @@ namespace Veldrid.NeoDemo
             return (vs, fs);
         }
 
-        private static CrossCompileOptions GetOptions(GraphicsDevice gd)
+        public static CrossCompileOptions GetOptions(GraphicsDevice gd)
         {
             SpecializationConstant[] specializations = GetSpecializations(gd);
 
@@ -80,7 +80,7 @@ namespace Veldrid.NeoDemo
             return File.ReadAllBytes(path);
         }
 
-        private static string GetBytecodeExtension(GraphicsBackend backend)
+        public static string GetBytecodeExtension(GraphicsBackend backend)
         {
             switch (backend)
             {
@@ -92,7 +92,7 @@ namespace Veldrid.NeoDemo
             }
         }
 
-        private static string GetSourceExtension(GraphicsBackend backend)
+        public static string GetSourceExtension(GraphicsBackend backend)
         {
             switch (backend)
             {

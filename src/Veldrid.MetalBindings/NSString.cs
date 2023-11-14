@@ -27,8 +27,8 @@ namespace Veldrid.MetalBindings
             return MTLUtil.GetUtf8String(utf8Ptr);
         }
 
-        private static readonly ObjCClass s_class = new ObjCClass(nameof(NSString));
-        private static readonly Selector sel_initWithCharacters = "initWithCharacters:length:";
-        private static readonly Selector sel_utf8String = "UTF8String";
+        public static readonly ObjCClass s_class = new ObjCClass(nameof(NSString));
+        public static readonly Selector sel_initWithCharacters = "initWithCharacters:length:";
+        public static readonly Selector sel_utf8String = "UTF8String";
     }
 }

@@ -6,20 +6,20 @@ using System;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkTexture : Texture
+    public unsafe class VkTexture : Texture
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly VkImage _optimalImage;
-        private readonly VkMemoryBlock _memoryBlock;
-        private readonly Vulkan.VkBuffer _stagingBuffer;
-        private PixelFormat _format; // Static for regular images -- may change for shared staging images
-        private readonly uint _actualImageArrayLayers;
-        private bool _destroyed;
+        public readonly VkGraphicsDevice _gd;
+        public readonly VkImage _optimalImage;
+        public readonly VkMemoryBlock _memoryBlock;
+        public readonly Vulkan.VkBuffer _stagingBuffer;
+        public PixelFormat _format; // Static for regular images -- may change for shared staging images
+        public readonly uint _actualImageArrayLayers;
+        public bool _destroyed;
 
         // Immutable except for shared staging Textures.
-        private uint _width;
-        private uint _height;
-        private uint _depth;
+        public uint _width;
+        public uint _height;
+        public uint _depth;
 
         public override uint Width => _width;
 
@@ -49,14 +49,14 @@ namespace Veldrid.Vk
         public VkFormat VkFormat { get; }
         public VkSampleCountFlags VkSampleCount { get; }
 
-        private VkImageLayout[] _imageLayouts;
-        private bool _isSwapchainTexture;
-        private string _name;
+        public VkImageLayout[] _imageLayouts;
+        public bool _isSwapchainTexture;
+        public string _name;
 
         public ResourceRefCount RefCount { get; }
         public bool IsSwapchainTexture => _isSwapchainTexture;
 
-        internal VkTexture(VkGraphicsDevice gd, ref TextureDescription description)
+        public VkTexture(VkGraphicsDevice gd, ref TextureDescription description)
         {
             _gd = gd;
             _width = description.Width;
@@ -213,7 +213,7 @@ namespace Veldrid.Vk
         }
 
         // Used to construct Swapchain textures.
-        internal VkTexture(
+        public VkTexture(
             VkGraphicsDevice gd,
             uint width,
             uint height,
@@ -245,7 +245,7 @@ namespace Veldrid.Vk
             RefCount = new ResourceRefCount(DisposeCore);
         }
 
-        private void ClearIfRenderTarget()
+        public void ClearIfRenderTarget()
         {
             // If the image is going to be used as a render target, we need to clear the data before its first use.
             if ((Usage & TextureUsage.RenderTarget) != 0)
@@ -258,7 +258,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void TransitionIfSampled()
+        public void TransitionIfSampled()
         {
             if ((Usage & TextureUsage.Sampled) != 0)
             {
@@ -266,7 +266,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal VkSubresourceLayout GetSubresourceLayout(uint subresource)
+        public VkSubresourceLayout GetSubresourceLayout(uint subresource)
         {
             bool staging = _stagingBuffer.Handle != 0;
             Util.GetMipLevelAndArrayLayer(this, subresource, out uint mipLevel, out uint arrayLayer);
@@ -305,7 +305,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal void TransitionImageLayout(
+        public void TransitionImageLayout(
             VkCommandBuffer cb,
             uint baseMipLevel,
             uint levelCount,
@@ -365,7 +365,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal void TransitionImageLayoutNonmatching(
+        public void TransitionImageLayoutNonmatching(
             VkCommandBuffer cb,
             uint baseMipLevel,
             uint levelCount,
@@ -415,7 +415,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal VkImageLayout GetImageLayout(uint mipLevel, uint arrayLayer)
+        public VkImageLayout GetImageLayout(uint mipLevel, uint arrayLayer)
         {
             return _imageLayouts[CalculateSubresource(mipLevel, arrayLayer)];
         }
@@ -430,7 +430,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal void SetStagingDimensions(uint width, uint height, uint depth, PixelFormat format)
+        public void SetStagingDimensions(uint width, uint height, uint depth, PixelFormat format)
         {
             Debug.Assert(_stagingBuffer != Vulkan.VkBuffer.Null);
             Debug.Assert(Usage == TextureUsage.Staging);
@@ -445,7 +445,7 @@ namespace Veldrid.Vk
             RefCount.Decrement();
         }
 
-        private void RefCountedDispose()
+        public void RefCountedDispose()
         {
             if (!_destroyed)
             {
@@ -470,7 +470,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal void SetImageLayout(uint mipLevel, uint arrayLayer, VkImageLayout layout)
+        public void SetImageLayout(uint mipLevel, uint arrayLayer, VkImageLayout layout)
         {
             _imageLayouts[CalculateSubresource(mipLevel, arrayLayer)] = layout;
         }

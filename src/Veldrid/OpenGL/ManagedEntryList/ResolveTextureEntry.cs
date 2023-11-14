@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class ResolveTextureEntry : OpenGLCommandEntry
+    public class ResolveTextureEntry : OpenGLCommandEntry
     {
         public Texture Source;
         public Texture Destination;

@@ -5,10 +5,10 @@ using static Vulkan.VulkanNative;
 
 namespace Veldrid.Vk
 {
-    internal unsafe static class VulkanUtil
+    public unsafe static class VulkanUtil
     {
-        private static Lazy<bool> s_isVulkanLoaded = new Lazy<bool>(TryLoadVulkan);
-        private static readonly Lazy<string[]> s_instanceExtensions = new Lazy<string[]>(EnumerateInstanceExtensions);
+        public static Lazy<bool> s_isVulkanLoaded = new Lazy<bool>(TryLoadVulkan);
+        public static readonly Lazy<string[]> s_instanceExtensions = new Lazy<string[]>(EnumerateInstanceExtensions);
 
         [Conditional("DEBUG")]
         public static void CheckResult(VkResult result)
@@ -63,7 +63,7 @@ namespace Veldrid.Vk
 
         public static string[] GetInstanceExtensions() => s_instanceExtensions.Value;
 
-        private static string[] EnumerateInstanceExtensions()
+        public static string[] EnumerateInstanceExtensions()
         {
             if (!IsVulkanLoaded())
             {
@@ -98,7 +98,7 @@ namespace Veldrid.Vk
         }
 
         public static bool IsVulkanLoaded() => s_isVulkanLoaded.Value;
-        private static bool TryLoadVulkan()
+        public static bool TryLoadVulkan()
         {
             try
             {
@@ -314,7 +314,7 @@ namespace Veldrid.Vk
         }
     }
 
-    internal unsafe static class VkPhysicalDeviceMemoryPropertiesEx
+    public unsafe static class VkPhysicalDeviceMemoryPropertiesEx
     {
         public static VkMemoryType GetMemoryType(this VkPhysicalDeviceMemoryProperties memoryProperties, uint index)
         {

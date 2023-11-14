@@ -8,20 +8,20 @@ using SharpGen.Runtime;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11Swapchain : Swapchain
+    public class D3D11Swapchain : Swapchain
     {
-        private readonly D3D11GraphicsDevice _gd;
-        private readonly PixelFormat? _depthFormat;
-        private readonly IDXGISwapChain _dxgiSwapChain;
-        private bool _vsync;
-        private int _syncInterval;
-        private D3D11Framebuffer _framebuffer;
-        private D3D11Texture _depthTexture;
-        private float _pixelScale = 1f;
-        private bool _disposed;
+        public readonly D3D11GraphicsDevice _gd;
+        public readonly PixelFormat? _depthFormat;
+        public readonly IDXGISwapChain _dxgiSwapChain;
+        public bool _vsync;
+        public int _syncInterval;
+        public D3D11Framebuffer _framebuffer;
+        public D3D11Texture _depthTexture;
+        public float _pixelScale = 1f;
+        public bool _disposed;
 
-        private readonly object _referencedCLsLock = new object();
-        private HashSet<D3D11CommandList> _referencedCLs = new HashSet<D3D11CommandList>();
+        public readonly object _referencedCLsLock = new object();
+        public HashSet<D3D11CommandList> _referencedCLs = new HashSet<D3D11CommandList>();
 
         public override Framebuffer Framebuffer => _framebuffer;
 
@@ -62,7 +62,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private readonly Format _colorFormat;
+        public readonly Format _colorFormat;
 
         public IDXGISwapChain DxgiSwapChain => _dxgiSwapChain;
 

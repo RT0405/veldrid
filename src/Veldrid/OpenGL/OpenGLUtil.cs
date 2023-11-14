@@ -6,13 +6,13 @@ using static Veldrid.OpenGLBinding.OpenGLNative;
 
 namespace Veldrid.OpenGL
 {
-    internal static class OpenGLUtil
+    public static class OpenGLUtil
     {
-        private static int? MaxLabelLength;
+        public static int? MaxLabelLength;
 
         [Conditional("DEBUG")]
         [DebuggerNonUserCode]
-        internal static void CheckLastError()
+        public static void CheckLastError()
         {
             uint error = glGetError();
             if (error != 0)
@@ -26,7 +26,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static unsafe void SetObjectLabel(ObjectLabelIdentifier identifier, uint target, string name)
+        public static unsafe void SetObjectLabel(ObjectLabelIdentifier identifier, uint target, string name)
         {
             if (HasGlObjectLabel)
             {
@@ -58,7 +58,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static TextureTarget GetTextureTarget(OpenGLTexture glTex, uint arrayLayer)
+        public static TextureTarget GetTextureTarget(OpenGLTexture glTex, uint arrayLayer)
         {
             if ((glTex.Usage & TextureUsage.Cubemap) == TextureUsage.Cubemap)
             {

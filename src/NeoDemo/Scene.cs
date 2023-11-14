@@ -14,18 +14,18 @@ namespace Veldrid.NeoDemo
 {
     public class Scene
     {
-        private readonly Octree<CullRenderable> _octree
+        public readonly Octree<CullRenderable> _octree
             = new Octree<CullRenderable>(new BoundingBox(Vector3.One * -50, Vector3.One * 50), 2);
 
-        private readonly List<Renderable> _freeRenderables = new List<Renderable>();
-        private readonly List<IUpdateable> _updateables = new List<IUpdateable>();
+        public readonly List<Renderable> _freeRenderables = new List<Renderable>();
+        public readonly List<IUpdateable> _updateables = new List<IUpdateable>();
 
-        private readonly ConcurrentDictionary<RenderPasses, Func<CullRenderable, bool>> _filters
+        public readonly ConcurrentDictionary<RenderPasses, Func<CullRenderable, bool>> _filters
             = new ConcurrentDictionary<RenderPasses, Func<CullRenderable, bool>>(new RenderPassesComparer());
 
-        internal MirrorMesh MirrorMesh { get; set; } = new MirrorMesh();
+        public MirrorMesh MirrorMesh { get; set; } = new MirrorMesh();
 
-        private readonly Camera _camera;
+        public readonly Camera _camera;
 
         public Camera Camera => _camera;
 
@@ -75,7 +75,7 @@ namespace Veldrid.NeoDemo
             }
         }
 
-        private readonly Task[] _tasks = new Task[4];
+        public readonly Task[] _tasks = new Task[4];
 
         public void RenderAllStages(GraphicsDevice gd, CommandList cl, SceneContext sc)
         {
@@ -89,7 +89,7 @@ namespace Veldrid.NeoDemo
             }
         }
 
-        private void RenderAllSingleThread(GraphicsDevice gd, CommandList cl, SceneContext sc)
+        public void RenderAllSingleThread(GraphicsDevice gd, CommandList cl, SceneContext sc)
         {
             float depthClear = gd.IsDepthRangeZeroToOne ? 0f : 1f;
             Matrix4x4 cameraProj = Camera.ProjectionMatrix;
@@ -241,7 +241,7 @@ namespace Veldrid.NeoDemo
             gd.SubmitCommands(cl);
         }
 
-        private void RenderAllMultiThreaded(GraphicsDevice gd, CommandList cl, SceneContext sc)
+        public void RenderAllMultiThreaded(GraphicsDevice gd, CommandList cl, SceneContext sc)
         {
             float depthClear = gd.IsDepthRangeZeroToOne ? 0f : 1f;
             Matrix4x4 cameraProj = Camera.ProjectionMatrix;
@@ -403,7 +403,7 @@ namespace Veldrid.NeoDemo
             gd.SubmitCommands(cl);
         }
 
-        private Matrix4x4 UpdateDirectionalLightMatrices(
+        public Matrix4x4 UpdateDirectionalLightMatrices(
             GraphicsDevice gd,
             SceneContext sc,
             float near,
@@ -543,12 +543,12 @@ namespace Veldrid.NeoDemo
             }
         }
 
-        private readonly HashSet<Renderable> _allPerFrameRenderablesSet = new HashSet<Renderable>();
-        private readonly RenderQueue[] _renderQueues = Enumerable.Range(0, 4).Select(i => new RenderQueue()).ToArray();
-        private readonly List<CullRenderable>[] _cullableStage = Enumerable.Range(0, 4).Select(i => new List<CullRenderable>()).ToArray();
-        private readonly List<Renderable>[] _renderableStage = Enumerable.Range(0, 4).Select(i => new List<Renderable>()).ToArray();
+        public readonly HashSet<Renderable> _allPerFrameRenderablesSet = new HashSet<Renderable>();
+        public readonly RenderQueue[] _renderQueues = Enumerable.Range(0, 4).Select(i => new RenderQueue()).ToArray();
+        public readonly List<CullRenderable>[] _cullableStage = Enumerable.Range(0, 4).Select(i => new List<CullRenderable>()).ToArray();
+        public readonly List<Renderable>[] _renderableStage = Enumerable.Range(0, 4).Select(i => new List<Renderable>()).ToArray();
 
-        private void CollectVisibleObjects(
+        public void CollectVisibleObjects(
             ref BoundingFrustum frustum,
             RenderPasses renderPass,
             List<CullRenderable> renderables)
@@ -556,7 +556,7 @@ namespace Veldrid.NeoDemo
             _octree.GetContainedObjects(frustum, renderables, GetFilter(renderPass));
         }
 
-        private void CollectFreeObjects(RenderPasses renderPass, List<Renderable> renderables)
+        public void CollectFreeObjects(RenderPasses renderPass, List<Renderable> renderables)
         {
             foreach (Renderable r in _freeRenderables)
             {
@@ -567,22 +567,22 @@ namespace Veldrid.NeoDemo
             }
         }
 
-        private static Func<RenderPasses, Func<CullRenderable, bool>> s_createFilterFunc = rp => CreateFilter(rp);
-        private CommandList _resourceUpdateCL;
+        public static Func<RenderPasses, Func<CullRenderable, bool>> s_createFilterFunc = rp => CreateFilter(rp);
+        public CommandList _resourceUpdateCL;
 
-        private Func<CullRenderable, bool> GetFilter(RenderPasses passes)
+        public Func<CullRenderable, bool> GetFilter(RenderPasses passes)
         {
             return _filters.GetOrAdd(passes, s_createFilterFunc);
         }
 
-        private static Func<CullRenderable, bool> CreateFilter(RenderPasses rp)
+        public static Func<CullRenderable, bool> CreateFilter(RenderPasses rp)
         {
             // This cannot be inlined into GetFilter -- a Roslyn bug causes copious allocations.
             // https://github.com/dotnet/roslyn/issues/22589
             return cr => (cr.RenderPasses & rp) == rp;
         }
 
-        internal void DestroyAllDeviceObjects()
+        public void DestroyAllDeviceObjects()
         {
             _cullableStage[0].Clear();
             _octree.GetAllContainedObjects(_cullableStage[0]);
@@ -598,7 +598,7 @@ namespace Veldrid.NeoDemo
             _resourceUpdateCL.Dispose();
         }
 
-        internal void CreateAllDeviceObjects(GraphicsDevice gd, CommandList cl, SceneContext sc)
+        public void CreateAllDeviceObjects(GraphicsDevice gd, CommandList cl, SceneContext sc)
         {
             _cullableStage[0].Clear();
             _octree.GetAllContainedObjects(_cullableStage[0]);
@@ -615,7 +615,7 @@ namespace Veldrid.NeoDemo
             _resourceUpdateCL.Name = "Scene Resource Update Command List";
         }
 
-        private class RenderPassesComparer : IEqualityComparer<RenderPasses>
+        public class RenderPassesComparer : IEqualityComparer<RenderPasses>
         {
             public bool Equals(RenderPasses x, RenderPasses y) => x == y;
             public int GetHashCode(RenderPasses obj) => ((byte)obj).GetHashCode();

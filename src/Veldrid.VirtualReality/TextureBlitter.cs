@@ -5,15 +5,15 @@ using Veldrid.SPIRV;
 
 namespace Veldrid.VirtualReality
 {
-    internal class TextureBlitter : IDisposable
+    public class TextureBlitter : IDisposable
     {
-        private readonly GraphicsDevice _gd;
-        private readonly ResourceLayout _rl;
-        private readonly ResourceLayout _sampleRegionLayout;
-        private readonly Pipeline _pipeline;
-        private readonly DeviceBuffer _sampleRegionUB;
-        private readonly ResourceSet _sampleRegionSet;
-        private Vector4 _lastMinMaxUV;
+        public readonly GraphicsDevice _gd;
+        public readonly ResourceLayout _rl;
+        public readonly ResourceLayout _sampleRegionLayout;
+        public readonly Pipeline _pipeline;
+        public readonly DeviceBuffer _sampleRegionUB;
+        public readonly ResourceSet _sampleRegionSet;
+        public Vector4 _lastMinMaxUV;
 
         public ResourceLayout ResourceLayout => _rl;
 
@@ -86,7 +86,7 @@ namespace Veldrid.VirtualReality
             _sampleRegionLayout.Dispose();
         }
 
-        private const string vertexGlsl =
+        public const string vertexGlsl =
 @"
 #version 450
 #extension GL_KHR_vulkan_glsl : enable
@@ -107,7 +107,7 @@ void main()
     fsin_UV = QuadInfos[gl_VertexIndex].zw;
 }
 ";
-        private const string fragmentGlsl =
+        public const string fragmentGlsl =
 @"
 #version 450
 

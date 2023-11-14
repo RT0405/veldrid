@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.Vk
 {
-    internal static class CommonStrings
+    public static class CommonStrings
     {
         public static FixedUtf8String VK_KHR_SURFACE_EXTENSION_NAME { get; } = "VK_KHR_surface";
         public static FixedUtf8String VK_KHR_WIN32_SURFACE_EXTENSION_NAME { get; } = "VK_KHR_win32_surface";

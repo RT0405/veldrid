@@ -3,7 +3,7 @@
     // Fixed-size "array" types, useful for constructing inputs
     // to some Vulkan functions without allocating and pinning a real array.
 
-    internal struct FixedArray2<T> where T : struct
+    public struct FixedArray2<T> where T : struct
     {
         public T First;
         public T Second;
@@ -13,7 +13,7 @@
         public uint Count => 2;
     }
 
-    internal struct FixedArray3<T> where T : struct
+    public struct FixedArray3<T> where T : struct
     {
         public T First;
         public T Second;
@@ -24,7 +24,7 @@
         public uint Count => 3;
     }
 
-    internal struct FixedArray4<T> where T : struct
+    public struct FixedArray4<T> where T : struct
     {
         public T First;
         public T Second;
@@ -36,7 +36,7 @@
         public uint Count => 4;
     }
 
-    internal struct FixedArray5<T> where T : struct
+    public struct FixedArray5<T> where T : struct
     {
         public T First;
         public T Second;
@@ -49,7 +49,7 @@
         public uint Count => 5;
     }
 
-    internal struct FixedArray6<T> where T : struct
+    public struct FixedArray6<T> where T : struct
     {
         public T First;
         public T Second;

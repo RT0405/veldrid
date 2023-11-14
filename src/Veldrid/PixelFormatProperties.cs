@@ -28,7 +28,7 @@
         /// </summary>
         public readonly uint MaxArrayLayers;
 
-        private readonly uint _sampleCounts;
+        public readonly uint _sampleCounts;
 
         /// <summary>
         /// Gets a value indicating whether or not the given <see cref="TextureSampleCount"/> is supported.
@@ -41,7 +41,7 @@
             return (_sampleCounts & (1 << bit)) != 0;
         }
 
-        internal PixelFormatProperties(
+        public PixelFormatProperties(
             uint maxWidth,
             uint maxHeight,
             uint maxDepth,

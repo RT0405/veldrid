@@ -5,13 +5,13 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLShader : Shader
+    public class MTLShader : Shader
     {
-        private readonly MTLGraphicsDevice _device;
-        private bool _disposed;
+        public readonly MTLGraphicsDevice _device;
+        public bool _disposed;
 
-        public MTLLibrary Library { get; private set; }
-        public MTLFunction Function { get; private set; }
+        public MTLLibrary Library { get; set; }
+        public MTLFunction Function { get; set; }
         public override string Name { get; set; }
         public bool HasFunctionConstants { get; }
         public override bool IsDisposed => _disposed;

@@ -3,11 +3,11 @@ using System;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11ResourceFactory : ResourceFactory, IDisposable
+    public class D3D11ResourceFactory : ResourceFactory, IDisposable
     {
-        private readonly D3D11GraphicsDevice _gd;
-        private readonly ID3D11Device _device;
-        private readonly D3D11ResourceCache _cache;
+        public readonly D3D11GraphicsDevice _gd;
+        public readonly ID3D11Device _device;
+        public readonly D3D11ResourceCache _cache;
 
         public override GraphicsBackend BackendType => GraphicsBackend.Direct3D11;
 

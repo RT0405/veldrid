@@ -16,9 +16,9 @@ namespace Veldrid.Utilities
     /// <typeparam name="T">The type stored in the octree.</typeparam>
     public class Octree<T>
     {
-        private OctreeNode<T> _currentRoot;
+        public OctreeNode<T> _currentRoot;
 
-        private List<OctreeItem<T>> _pendingMoveStage = new List<OctreeItem<T>>();
+        public List<OctreeItem<T>> _pendingMoveStage = new List<OctreeItem<T>>();
 
         public Octree(BoundingBox boundingBox, int maxChildren)
         {
@@ -145,17 +145,17 @@ namespace Veldrid.Utilities
     [DebuggerDisplay("{DebuggerDisplayString,nq}")]
     public class OctreeNode<T>
     {
-        private readonly List<OctreeItem<T>> _items = new List<OctreeItem<T>>();
-        private readonly OctreeNodeCache _nodeCache;
-        private OctreeNode<T>[] _children = Array.Empty<OctreeNode<T>>();
-        private BoundingBox _bounds;
+        public readonly List<OctreeItem<T>> _items = new List<OctreeItem<T>>();
+        public readonly OctreeNodeCache _nodeCache;
+        public OctreeNode<T>[] _children = Array.Empty<OctreeNode<T>>();
+        public BoundingBox _bounds;
 
         public BoundingBox Bounds { get { return _bounds; } set { _bounds = value; } }
-        public int MaxChildren { get; private set; }
-        public OctreeNode<T>[] Children { get => _children; private set => _children = value; }
-        public OctreeNode<T> Parent { get; private set; }
+        public int MaxChildren { get; set; }
+        public OctreeNode<T>[] Children { get => _children; set => _children = value; }
+        public OctreeNode<T> Parent { get; set; }
 
-        private const int NumChildNodes = 8;
+        public const int NumChildNodes = 8;
 
         public static OctreeNode<T> CreateNewTree(ref BoundingBox bounds, int maxChildren)
         {
@@ -190,7 +190,7 @@ namespace Veldrid.Utilities
             return CoreAddRootItem(octreeItem);
         }
 
-        private OctreeNode<T> CoreAddRootItem(OctreeItem<T> octreeItem)
+        public OctreeNode<T> CoreAddRootItem(OctreeItem<T> octreeItem)
         {
             OctreeNode<T> root = this;
             bool result = CoreAddItem(octreeItem);
@@ -274,7 +274,7 @@ namespace Veldrid.Utilities
             octreeItem.Bounds = newBounds;
         }
 
-        private OctreeNode<T> GetRootNode()
+        public OctreeNode<T> GetRootNode()
         {
             if (Parent == null)
             {
@@ -306,7 +306,7 @@ namespace Veldrid.Utilities
             _nodeCache.AddOctreeItem(octreeItem);
         }
 
-        private void ConsiderConsolidation()
+        public void ConsiderConsolidation()
         {
             if (_children.Length > 0 && GetItemCount() < MaxChildren)
             {
@@ -315,7 +315,7 @@ namespace Veldrid.Utilities
             }
         }
 
-        private void ConsolidateChildren()
+        public void ConsolidateChildren()
         {
             for (int i = 0; i < _children.Length; i++)
             {
@@ -395,7 +395,7 @@ namespace Veldrid.Utilities
             return CoreGetPreciseBounds(ref min, ref max);
         }
 
-        private BoundingBox CoreGetPreciseBounds(ref Vector3 min, ref Vector3 max)
+        public BoundingBox CoreGetPreciseBounds(ref Vector3 min, ref Vector3 max)
         {
             for (int i = 0; i < _items.Count; i++)
             {
@@ -424,7 +424,7 @@ namespace Veldrid.Utilities
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CoreGetContainedObjects(ref BoundingFrustum frustum, List<T> results, Func<T, bool> filter)
+        public void CoreGetContainedObjects(ref BoundingFrustum frustum, List<T> results, Func<T, bool> filter)
         {
             ContainmentType ct = frustum.Contains(ref _bounds);
             if (ct == ContainmentType.Contains)
@@ -467,7 +467,7 @@ namespace Veldrid.Utilities
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CoreGetAllContainedObjects(List<T> results, Func<T, bool> filter)
+        public void CoreGetAllContainedObjects(List<T> results, Func<T, bool> filter)
         {
             for (int i = 0; i < _items.Count; i++)
             {
@@ -493,7 +493,7 @@ namespace Veldrid.Utilities
             RecycleNode();
         }
 
-        private void RecycleNode(bool recycleChildren = true)
+        public void RecycleNode(bool recycleChildren = true)
         {
             if (recycleChildren)
             {
@@ -504,7 +504,7 @@ namespace Veldrid.Utilities
             _nodeCache.AddNode(this);
         }
 
-        private void RecycleChildren()
+        public void RecycleChildren()
         {
             if (_children.Length != 0)
             {
@@ -518,7 +518,7 @@ namespace Veldrid.Utilities
             }
         }
 
-        private bool CoreAddItem(OctreeItem<T> item)
+        public bool CoreAddItem(OctreeItem<T> item)
         {
             if (Bounds.Contains(ref item.Bounds) != ContainmentType.Contains)
             {
@@ -561,7 +561,7 @@ namespace Veldrid.Utilities
         }
 
         // Splits the node into 8 children
-        private OctreeNode<T> SplitChildren(ref BoundingBox itemBounds, OctreeNode<T> existingChild)
+        public OctreeNode<T> SplitChildren(ref BoundingBox itemBounds, OctreeNode<T> existingChild)
         {
             Debug.Assert(_children.Length == 0, "Children must be empty before SplitChildren is called.");
 
@@ -617,7 +617,7 @@ namespace Veldrid.Utilities
             return childBigEnough;
         }
 
-        private void PushItemsToChildren()
+        public void PushItemsToChildren()
         {
             for (int i = 0; i < _items.Count; i++)
             {
@@ -644,7 +644,7 @@ namespace Veldrid.Utilities
 #endif
         }
 
-        private OctreeNode<T> ResizeAndAdd(OctreeItem<T> octreeItem)
+        public OctreeNode<T> ResizeAndAdd(OctreeItem<T> octreeItem)
         {
             OctreeNode<T> oldRoot = this;
             Vector3 oldRootCenter = Bounds.GetCenter();
@@ -699,7 +699,7 @@ namespace Veldrid.Utilities
         {
         }
 
-        private OctreeNode(ref BoundingBox bounds, int maxChildren, OctreeNodeCache nodeCache, OctreeNode<T> parent)
+        public OctreeNode(ref BoundingBox bounds, int maxChildren, OctreeNodeCache nodeCache, OctreeNode<T> parent)
         {
             Bounds = bounds;
             MaxChildren = maxChildren;
@@ -707,7 +707,7 @@ namespace Veldrid.Utilities
             Parent = parent;
         }
 
-        private void Reset(ref BoundingBox newBounds)
+        public void Reset(ref BoundingBox newBounds)
         {
             Bounds = newBounds;
 
@@ -727,7 +727,7 @@ namespace Veldrid.Utilities
         /// <param name="item">The item to find.</param>
         /// <param name="octreeItem">The contained OctreeItem.</param>
         /// <returns>true if the item was contained in the Octree; false otherwise.</returns>
-        internal bool TryGetContainedOctreeItem(T item, out OctreeItem<T> octreeItem)
+        public bool TryGetContainedOctreeItem(T item, out OctreeItem<T> octreeItem)
         {
             for (int i = 0; i < _items.Count; i++)
             {
@@ -757,7 +757,7 @@ namespace Veldrid.Utilities
         /// Determines if there is only one child node in use. If so, recycles all other nodes and returns that one.
         /// If this is not true, the node is returned unchanged.
         /// </summary>
-        internal OctreeNode<T> TryTrimChildren()
+        public OctreeNode<T> TryTrimChildren()
         {
             if (_items.Count == 0)
             {
@@ -801,7 +801,7 @@ namespace Veldrid.Utilities
             return this;
         }
 
-        internal void CollectPendingMoves(List<OctreeItem<T>> pendingMoves)
+        public void CollectPendingMoves(List<OctreeItem<T>> pendingMoves)
         {
             for (int i = 0; i < _children.Length; i++)
             {
@@ -818,7 +818,7 @@ namespace Veldrid.Utilities
             }
         }
 
-        private string DebuggerDisplayString
+        public string DebuggerDisplayString
         {
             get
             {
@@ -826,13 +826,13 @@ namespace Veldrid.Utilities
             }
         }
 
-        private class OctreeNodeCache
+        public class OctreeNodeCache
         {
-            private readonly Stack<OctreeNode<T>> _cachedNodes = new Stack<OctreeNode<T>>();
-            private readonly Stack<OctreeNode<T>[]> _cachedChildren = new Stack<OctreeNode<T>[]>();
-            private readonly Stack<OctreeItem<T>> _cachedItems = new Stack<OctreeItem<T>>();
+            public readonly Stack<OctreeNode<T>> _cachedNodes = new Stack<OctreeNode<T>>();
+            public readonly Stack<OctreeNode<T>[]> _cachedChildren = new Stack<OctreeNode<T>[]>();
+            public readonly Stack<OctreeItem<T>> _cachedItems = new Stack<OctreeItem<T>>();
 
-            public int MaxChildren { get; private set; }
+            public int MaxChildren { get; set; }
 
             public int MaxCachedItemCount { get; set; } = 100;
 
@@ -935,9 +935,9 @@ namespace Veldrid.Utilities
                 return octreeItem;
             }
 
-            private OctreeItem<T> CreateNewItem(ref BoundingBox bounds, T item) => new OctreeItem<T>(ref bounds, item);
+            public OctreeItem<T> CreateNewItem(ref BoundingBox bounds, T item) => new OctreeItem<T>(ref bounds, item);
 
-            private OctreeNode<T> CreateNewNode(ref BoundingBox bounds)
+            public OctreeNode<T> CreateNewNode(ref BoundingBox bounds)
             {
                 OctreeNode<T> node = new OctreeNode<T>(ref bounds, MaxChildren, this, null);
                 return node;

@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocUpdateBufferEntry
+    public struct NoAllocUpdateBufferEntry
     {
         public readonly Tracked<DeviceBuffer> Buffer;
         public readonly uint BufferOffsetInBytes;

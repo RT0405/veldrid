@@ -8,14 +8,14 @@ namespace Veldrid.OpenGL
     /// <summary>
     /// A utility class managing the relationships between textures, samplers, and their binding locations.
     /// </summary>
-    internal unsafe class OpenGLTextureSamplerManager
+    public unsafe class OpenGLTextureSamplerManager
     {
-        private readonly bool _dsaAvailable;
-        private readonly int _maxTextureUnits;
-        private readonly uint _lastTextureUnit;
-        private readonly OpenGLTextureView[] _textureUnitTextures;
-        private readonly BoundSamplerStateInfo[] _textureUnitSamplers;
-        private uint _currentActiveUnit = 0;
+        public readonly bool _dsaAvailable;
+        public readonly int _maxTextureUnits;
+        public readonly uint _lastTextureUnit;
+        public readonly OpenGLTextureView[] _textureUnitTextures;
+        public readonly BoundSamplerStateInfo[] _textureUnitSamplers;
+        public uint _currentActiveUnit = 0;
 
         public OpenGLTextureSamplerManager(OpenGLExtensions extensions)
         {
@@ -84,7 +84,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void SetActiveTextureUnit(uint textureUnit)
+        public void SetActiveTextureUnit(uint textureUnit)
         {
             if (_currentActiveUnit != textureUnit)
             {
@@ -94,7 +94,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void EnsureSamplerMipmapState(uint textureUnit, bool mipmapped)
+        public void EnsureSamplerMipmapState(uint textureUnit, bool mipmapped)
         {
             if (_textureUnitSamplers[textureUnit].Sampler != null && _textureUnitSamplers[textureUnit].Mipmapped != mipmapped)
             {
@@ -107,7 +107,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private struct BoundSamplerStateInfo
+        public struct BoundSamplerStateInfo
         {
             public OpenGLSampler Sampler;
             public bool Mipmapped;

@@ -3,10 +3,10 @@ using System;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11TextureView : TextureView
+    public class D3D11TextureView : TextureView
     {
-        private string _name;
-        private bool _disposed;
+        public string _name;
+        public bool _disposed;
 
         public ID3D11ShaderResourceView ShaderResourceView { get; }
         public ID3D11UnorderedAccessView UnorderedAccessView { get; }

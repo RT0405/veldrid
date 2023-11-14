@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.VirtualReality.Oculus
 {
-    internal enum ovrResult
+    public enum ovrResult
     {
         Success = 0,
 

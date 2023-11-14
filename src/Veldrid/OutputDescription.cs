@@ -49,7 +49,7 @@ namespace Veldrid
             SampleCount = sampleCount;
         }
 
-        internal static OutputDescription CreateFromFramebuffer(Framebuffer fb)
+        public static OutputDescription CreateFromFramebuffer(Framebuffer fb)
         {
             TextureSampleCount sampleCount = 0;
             OutputAttachmentDescription? depthAttachment = null;

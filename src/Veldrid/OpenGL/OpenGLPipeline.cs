@@ -8,10 +8,10 @@ using System;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe class OpenGLPipeline : Pipeline, OpenGLDeferredResource
+    public unsafe class OpenGLPipeline : Pipeline, OpenGLDeferredResource
     {
-        private const uint GL_INVALID_INDEX = 0xFFFFFFFF;
-        private readonly OpenGLGraphicsDevice _gd;
+        public const uint GL_INVALID_INDEX = 0xFFFFFFFF;
+        public readonly OpenGLGraphicsDevice _gd;
 
 #if !VALIDATE_USAGE
         public ResourceLayout[] ResourceLayouts { get; }
@@ -29,11 +29,11 @@ namespace Veldrid.OpenGL
         public override bool IsComputePipeline { get; }
         public Shader ComputeShader { get; }
 
-        private uint _program;
-        private bool _disposeRequested;
-        private bool _disposed;
+        public uint _program;
+        public bool _disposeRequested;
+        public bool _disposed;
 
-        private SetBindingsInfo[] _setInfos;
+        public SetBindingsInfo[] _setInfos;
 
         public int[] VertexStrides { get; }
 
@@ -81,7 +81,7 @@ namespace Veldrid.OpenGL
 #endif
         }
 
-        public bool Created { get; private set; }
+        public bool Created { get; set; }
 
         public void EnsureResourcesCreated()
         {
@@ -91,7 +91,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void CreateGLResources()
+        public void CreateGLResources()
         {
             if (!IsComputePipeline)
             {
@@ -105,7 +105,7 @@ namespace Veldrid.OpenGL
             Created = true;
         }
 
-        private void CreateGraphicsGLResources()
+        public void CreateGraphicsGLResources()
         {
             _program = glCreateProgram();
             CheckLastError();
@@ -193,7 +193,7 @@ namespace Veldrid.OpenGL
             CheckLastError();
         }
 
-        private void ProcessResourceSetLayouts(ResourceLayout[] layouts)
+        public void ProcessResourceSetLayouts(ResourceLayout[] layouts)
         {
             int resourceLayoutCount = layouts.Length;
             _setInfos = new SetBindingsInfo[resourceLayoutCount];
@@ -423,7 +423,7 @@ namespace Veldrid.OpenGL
         }
 #endif
 
-        private void CreateComputeGLResources()
+        public void CreateComputeGLResources()
         {
             _program = glCreateProgram();
             CheckLastError();
@@ -500,12 +500,12 @@ namespace Veldrid.OpenGL
         }
     }
 
-    internal struct SetBindingsInfo
+    public struct SetBindingsInfo
     {
-        private readonly Dictionary<uint, OpenGLUniformBinding> _uniformBindings;
-        private readonly Dictionary<uint, OpenGLTextureBindingSlotInfo> _textureBindings;
-        private readonly Dictionary<uint, OpenGLSamplerBindingSlotInfo> _samplerBindings;
-        private readonly Dictionary<uint, OpenGLShaderStorageBinding> _storageBufferBindings;
+        public readonly Dictionary<uint, OpenGLUniformBinding> _uniformBindings;
+        public readonly Dictionary<uint, OpenGLTextureBindingSlotInfo> _textureBindings;
+        public readonly Dictionary<uint, OpenGLSamplerBindingSlotInfo> _samplerBindings;
+        public readonly Dictionary<uint, OpenGLShaderStorageBinding> _storageBufferBindings;
 
         public uint UniformBufferCount { get; }
         public uint ShaderStorageBufferCount { get; }
@@ -545,7 +545,7 @@ namespace Veldrid.OpenGL
         }
     }
 
-    internal struct OpenGLTextureBindingSlotInfo
+    public struct OpenGLTextureBindingSlotInfo
     {
         /// <summary>
         /// The relative index of this binding with relation to the other textures used by a shader.
@@ -558,7 +558,7 @@ namespace Veldrid.OpenGL
         public int UniformLocation;
     }
 
-    internal struct OpenGLSamplerBindingSlotInfo
+    public struct OpenGLSamplerBindingSlotInfo
     {
         /// <summary>
         /// The relative indices of this binding with relation to the other textures used by a shader.
@@ -567,7 +567,7 @@ namespace Veldrid.OpenGL
         public int[] RelativeIndices;
     }
 
-    internal class OpenGLUniformBinding
+    public class OpenGLUniformBinding
     {
         public uint Program { get; }
         public uint BlockLocation { get; }
@@ -581,7 +581,7 @@ namespace Veldrid.OpenGL
         }
     }
 
-    internal class OpenGLShaderStorageBinding
+    public class OpenGLShaderStorageBinding
     {
         public uint StorageBlockBinding { get; }
 

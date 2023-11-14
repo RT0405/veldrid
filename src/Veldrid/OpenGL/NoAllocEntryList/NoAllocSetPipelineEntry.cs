@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocSetPipelineEntry
+    public struct NoAllocSetPipelineEntry
     {
         public readonly Tracked<Pipeline> Pipeline;
 

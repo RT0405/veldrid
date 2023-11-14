@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocSetScissorRectEntry
+    public struct NoAllocSetScissorRectEntry
     {
         public readonly uint Index;
         public readonly uint X;

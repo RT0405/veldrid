@@ -7,21 +7,21 @@ using OVR = Valve.VR.OpenVR;
 
 namespace Veldrid.VirtualReality.OpenVR
 {
-    internal class OpenVRContext : VRContext
+    public class OpenVRContext : VRContext
     {
-        private readonly CVRSystem _vrSystem;
-        private readonly CVRCompositor _compositor;
-        private readonly OpenVRMirrorTexture _mirrorTexture;
-        private readonly VRContextOptions _options;
-        private GraphicsDevice _gd;
-        private string _deviceName;
-        private Framebuffer _leftEyeFB;
-        private Framebuffer _rightEyeFB;
-        private Matrix4x4 _projLeft;
-        private Matrix4x4 _projRight;
-        private Matrix4x4 _headToEyeLeft;
-        private Matrix4x4 _headToEyeRight;
-        private TrackedDevicePose_t[] _devicePoses = new TrackedDevicePose_t[1];
+        public readonly CVRSystem _vrSystem;
+        public readonly CVRCompositor _compositor;
+        public readonly OpenVRMirrorTexture _mirrorTexture;
+        public readonly VRContextOptions _options;
+        public GraphicsDevice _gd;
+        public string _deviceName;
+        public Framebuffer _leftEyeFB;
+        public Framebuffer _rightEyeFB;
+        public Matrix4x4 _projLeft;
+        public Matrix4x4 _projRight;
+        public Matrix4x4 _headToEyeLeft;
+        public Matrix4x4 _headToEyeRight;
+        public TrackedDevicePose_t[] _devicePoses = new TrackedDevicePose_t[1];
 
         public override string DeviceName => _deviceName;
 
@@ -29,7 +29,7 @@ namespace Veldrid.VirtualReality.OpenVR
 
         public override Framebuffer RightEyeFramebuffer => _rightEyeFB;
 
-        internal GraphicsDevice GraphicsDevice => _gd;
+        public GraphicsDevice GraphicsDevice => _gd;
 
         public OpenVRContext(VRContextOptions options)
         {
@@ -50,7 +50,7 @@ namespace Veldrid.VirtualReality.OpenVR
             _mirrorTexture = new OpenVRMirrorTexture(this);
         }
 
-        internal static bool IsSupported()
+        public static bool IsSupported()
         {
             try
             {
@@ -150,7 +150,7 @@ namespace Veldrid.VirtualReality.OpenVR
             _mirrorTexture.Render(cl, fb, source);
         }
 
-        private void SubmitTexture(CVRCompositor compositor, Texture colorTex, EVREye eye)
+        public void SubmitTexture(CVRCompositor compositor, Texture colorTex, EVREye eye)
         {
             Texture_t texT;
 
@@ -236,7 +236,7 @@ namespace Veldrid.VirtualReality.OpenVR
             OVR.Shutdown();
         }
 
-        private Framebuffer CreateFramebuffer(uint width, uint height)
+        public Framebuffer CreateFramebuffer(uint width, uint height)
         {
             ResourceFactory factory = _gd.ResourceFactory;
             Texture colorTarget = factory.CreateTexture(TextureDescription.Texture2D(
@@ -254,7 +254,7 @@ namespace Veldrid.VirtualReality.OpenVR
             return factory.CreateFramebuffer(new FramebufferDescription(depthTarget, colorTarget));
         }
 
-        private static Matrix4x4 ToSysMatrix(HmdMatrix34_t hmdMat)
+        public static Matrix4x4 ToSysMatrix(HmdMatrix34_t hmdMat)
         {
             return new Matrix4x4(
                 hmdMat.m0, hmdMat.m4, hmdMat.m8, 0f,
@@ -263,7 +263,7 @@ namespace Veldrid.VirtualReality.OpenVR
                 hmdMat.m3, hmdMat.m7, hmdMat.m11, 1f);
         }
 
-        private static Matrix4x4 ToSysMatrix(HmdMatrix44_t hmdMat)
+        public static Matrix4x4 ToSysMatrix(HmdMatrix44_t hmdMat)
         {
             return new Matrix4x4(
                 hmdMat.m0, hmdMat.m4, hmdMat.m8, hmdMat.m12,
@@ -272,7 +272,7 @@ namespace Veldrid.VirtualReality.OpenVR
                 hmdMat.m3, hmdMat.m7, hmdMat.m11, hmdMat.m15);
         }
 
-        private static uint GetSampleCount(TextureSampleCount sampleCount)
+        public static uint GetSampleCount(TextureSampleCount sampleCount)
         {
             switch (sampleCount)
             {

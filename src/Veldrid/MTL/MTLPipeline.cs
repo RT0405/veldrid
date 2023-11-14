@@ -5,10 +5,10 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLPipeline : Pipeline
+    public class MTLPipeline : Pipeline
     {
-        private bool _disposed;
-        private List<MTLFunction> _specializedFunctions;
+        public bool _disposed;
+        public List<MTLFunction> _specializedFunctions;
 
         public MTLRenderPipelineState RenderPipelineState { get; }
         public MTLComputePipelineState ComputePipelineState { get; }
@@ -266,7 +266,7 @@ namespace Veldrid.MTL
             ObjectiveCRuntime.release(mtlDesc.NativePtr);
         }
 
-        private unsafe MTLFunctionConstantValues CreateConstantValues(SpecializationConstant[] specializations)
+        public unsafe MTLFunctionConstantValues CreateConstantValues(SpecializationConstant[] specializations)
         {
             MTLFunctionConstantValues ret = MTLFunctionConstantValues.New();
             if (specializations != null)
@@ -281,7 +281,7 @@ namespace Veldrid.MTL
             return ret;
         }
 
-        private void AddSpecializedFunction(MTLFunction function)
+        public void AddSpecializedFunction(MTLFunction function)
         {
             if (_specializedFunctions == null) { _specializedFunctions = new List<MTLFunction>(); }
             _specializedFunctions.Add(function);

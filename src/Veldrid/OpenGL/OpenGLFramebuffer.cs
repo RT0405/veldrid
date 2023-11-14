@@ -4,21 +4,21 @@ using Veldrid.OpenGLBinding;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe class OpenGLFramebuffer : Framebuffer, OpenGLDeferredResource
+    public unsafe class OpenGLFramebuffer : Framebuffer, OpenGLDeferredResource
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private uint _framebuffer;
+        public readonly OpenGLGraphicsDevice _gd;
+        public uint _framebuffer;
 
-        private string _name;
-        private bool _nameChanged;
-        private bool _disposeRequested;
-        private bool _disposed;
+        public string _name;
+        public bool _nameChanged;
+        public bool _disposeRequested;
+        public bool _disposed;
 
         public override string Name { get => _name; set { _name = value; _nameChanged = true; } }
 
         public uint Framebuffer => _framebuffer;
 
-        public bool Created { get; private set; }
+        public bool Created { get; set; }
 
         public override bool IsDisposed => _disposeRequested;
 

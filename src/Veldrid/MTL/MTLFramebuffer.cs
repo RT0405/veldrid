@@ -3,10 +3,10 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLFramebuffer : MTLFramebufferBase
+    public class MTLFramebuffer : MTLFramebufferBase
     {
         public override bool IsRenderable => true;
-        private bool _disposed;
+        public bool _disposed;
 
         public MTLFramebuffer(MTLGraphicsDevice gd, ref FramebufferDescription description)
             : base(gd, ref description)

@@ -10,38 +10,38 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal unsafe class MTLGraphicsDevice : GraphicsDevice
+    public unsafe class MTLGraphicsDevice : GraphicsDevice
     {
-        private static readonly Lazy<bool> s_isSupported = new Lazy<bool>(GetIsSupported);
-        private static readonly Dictionary<IntPtr, MTLGraphicsDevice> s_aotRegisteredBlocks
+        public static readonly Lazy<bool> s_isSupported = new Lazy<bool>(GetIsSupported);
+        public static readonly Dictionary<IntPtr, MTLGraphicsDevice> s_aotRegisteredBlocks
             = new Dictionary<IntPtr, MTLGraphicsDevice>();
 
-        private readonly MTLDevice _device;
-        private readonly string _deviceName;
-        private readonly GraphicsApiVersion _apiVersion;
-        private readonly MTLCommandQueue _commandQueue;
-        private readonly MTLSwapchain _mainSwapchain;
-        private readonly bool[] _supportedSampleCounts;
-        private BackendInfoMetal _metalInfo;
+        public readonly MTLDevice _device;
+        public readonly string _deviceName;
+        public readonly GraphicsApiVersion _apiVersion;
+        public readonly MTLCommandQueue _commandQueue;
+        public readonly MTLSwapchain _mainSwapchain;
+        public readonly bool[] _supportedSampleCounts;
+        public BackendInfoMetal _metalInfo;
 
-        private readonly object _submittedCommandsLock = new object();
-        private readonly Dictionary<MTLCommandBuffer, MTLFence> _submittedCBs = new Dictionary<MTLCommandBuffer, MTLFence>();
-        private MTLCommandBuffer _latestSubmittedCB;
+        public readonly object _submittedCommandsLock = new object();
+        public readonly Dictionary<MTLCommandBuffer, MTLFence> _submittedCBs = new Dictionary<MTLCommandBuffer, MTLFence>();
+        public MTLCommandBuffer _latestSubmittedCB;
 
-        private readonly object _resetEventsLock = new object();
-        private readonly List<ManualResetEvent[]> _resetEvents = new List<ManualResetEvent[]>();
+        public readonly object _resetEventsLock = new object();
+        public readonly List<ManualResetEvent[]> _resetEvents = new List<ManualResetEvent[]>();
 
-        private const string UnalignedBufferCopyPipelineMacOSName = "MTL_UnalignedBufferCopy_macOS";
-        private const string UnalignedBufferCopyPipelineiOSName = "MTL_UnalignedBufferCopy_iOS";
-        private readonly object _unalignedBufferCopyPipelineLock = new object();
-        private readonly NativeLibrary _libSystem;
-        private readonly IntPtr _concreteGlobalBlock;
-        private MTLShader _unalignedBufferCopyShader;
-        private MTLComputePipelineState _unalignedBufferCopyPipeline;
-        private MTLCommandBufferHandler _completionHandler;
-        private readonly IntPtr _completionHandlerFuncPtr;
-        private readonly IntPtr _completionBlockDescriptor;
-        private readonly IntPtr _completionBlockLiteral;
+        public const string UnalignedBufferCopyPipelineMacOSName = "MTL_UnalignedBufferCopy_macOS";
+        public const string UnalignedBufferCopyPipelineiOSName = "MTL_UnalignedBufferCopy_iOS";
+        public readonly object _unalignedBufferCopyPipelineLock = new object();
+        public readonly NativeLibrary _libSystem;
+        public readonly IntPtr _concreteGlobalBlock;
+        public MTLShader _unalignedBufferCopyShader;
+        public MTLComputePipelineState _unalignedBufferCopyPipeline;
+        public MTLCommandBufferHandler _completionHandler;
+        public readonly IntPtr _completionHandlerFuncPtr;
+        public readonly IntPtr _completionBlockDescriptor;
+        public readonly IntPtr _completionBlockLiteral;
 
         public MTLDevice Device => _device;
         public MTLCommandQueue CommandQueue => _commandQueue;
@@ -159,7 +159,7 @@ namespace Veldrid.MTL
 
         public override GraphicsDeviceFeatures Features { get; }
 
-        private void OnCommandBufferCompleted(IntPtr block, MTLCommandBuffer cb)
+        public void OnCommandBufferCompleted(IntPtr block, MTLCommandBuffer cb)
         {
             lock (_submittedCommandsLock)
             {
@@ -180,7 +180,7 @@ namespace Veldrid.MTL
 
         // Xamarin AOT requires native callbacks be static.
         [MonoPInvokeCallback(typeof(MTLCommandBufferHandler))]
-        private static void OnCommandBufferCompleted_Static(IntPtr block, MTLCommandBuffer cb)
+        public static void OnCommandBufferCompleted_Static(IntPtr block, MTLCommandBuffer cb)
         {
             lock (s_aotRegisteredBlocks)
             {
@@ -396,7 +396,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private MappedResource MapBuffer(MTLBuffer buffer, MapMode mode)
+        public MappedResource MapBuffer(MTLBuffer buffer, MapMode mode)
         {
             void* data = buffer.DeviceBuffer.contents();
             return new MappedResource(
@@ -409,7 +409,7 @@ namespace Veldrid.MTL
                 buffer.SizeInBytes);
         }
 
-        private MappedResource MapTexture(MTLTexture texture, MapMode mode, uint subresource)
+        public MappedResource MapTexture(MTLTexture texture, MapMode mode, uint subresource)
         {
             Debug.Assert(!texture.StagingBuffer.IsNull);
             void* data = texture.StagingBuffer.contents();
@@ -492,7 +492,7 @@ namespace Veldrid.MTL
             return result;
         }
 
-        private ManualResetEvent[] GetResetEventArray(int length)
+        public ManualResetEvent[] GetResetEventArray(int length)
         {
             lock (_resetEventsLock)
             {
@@ -511,7 +511,7 @@ namespace Veldrid.MTL
             return newArray;
         }
 
-        private void ReturnResetEventArray(ManualResetEvent[] array)
+        public void ReturnResetEventArray(ManualResetEvent[] array)
         {
             lock (_resetEventsLock)
             {
@@ -524,9 +524,9 @@ namespace Veldrid.MTL
             Util.AssertSubtype<Fence, MTLFence>(fence).Reset();
         }
 
-        internal static bool IsSupported() => s_isSupported.Value;
+        public static bool IsSupported() => s_isSupported.Value;
 
-        private static bool GetIsSupported()
+        public static bool GetIsSupported()
         {
             bool result = false;
             try
@@ -558,7 +558,7 @@ namespace Veldrid.MTL
             return result;
         }
 
-        internal MTLComputePipelineState GetUnalignedBufferCopyPipeline()
+        public MTLComputePipelineState GetUnalignedBufferCopyPipeline()
         {
             lock (_unalignedBufferCopyPipelineLock)
             {
@@ -593,11 +593,11 @@ namespace Veldrid.MTL
             }
         }
 
-        internal override uint GetUniformBufferMinOffsetAlignmentCore() => MetalFeatures.IsMacOS ? 16u : 256u;
-        internal override uint GetStructuredBufferMinOffsetAlignmentCore() => 16u;
+        public override uint GetUniformBufferMinOffsetAlignmentCore() => MetalFeatures.IsMacOS ? 16u : 256u;
+        public override uint GetStructuredBufferMinOffsetAlignmentCore() => 16u;
     }
 
-    internal sealed class MonoPInvokeCallbackAttribute : Attribute
+    public sealed class MonoPInvokeCallbackAttribute : Attribute
     {
         public MonoPInvokeCallbackAttribute(Type t) { }
     }

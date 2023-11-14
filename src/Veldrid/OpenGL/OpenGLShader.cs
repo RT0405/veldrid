@@ -6,20 +6,20 @@ using System;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe class OpenGLShader : Shader, OpenGLDeferredResource
+    public unsafe class OpenGLShader : Shader, OpenGLDeferredResource
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private readonly ShaderType _shaderType;
-        private readonly StagingBlock _stagingBlock;
+        public readonly OpenGLGraphicsDevice _gd;
+        public readonly ShaderType _shaderType;
+        public readonly StagingBlock _stagingBlock;
 
-        private bool _disposeRequested;
-        private bool _disposed;
-        private string _name;
-        private bool _nameChanged;
+        public bool _disposeRequested;
+        public bool _disposed;
+        public string _name;
+        public bool _nameChanged;
         public override string Name { get => _name; set { _name = value; _nameChanged = true; } }
         public override bool IsDisposed => _disposeRequested;
 
-        private uint _shader;
+        public uint _shader;
 
         public uint Shader => _shader;
 
@@ -44,7 +44,7 @@ namespace Veldrid.OpenGL
             _stagingBlock = stagingBlock;
         }
 
-        public bool Created { get; private set; }
+        public bool Created { get; set; }
 
         public void EnsureResourcesCreated()
         {
@@ -62,7 +62,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void CreateGLResources()
+        public void CreateGLResources()
         {
             _shader = glCreateShader(_shaderType);
             CheckLastError();

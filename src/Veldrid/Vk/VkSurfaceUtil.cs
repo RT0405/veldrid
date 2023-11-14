@@ -9,9 +9,9 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.Vk
 {
-    internal static unsafe class VkSurfaceUtil
+    public static unsafe class VkSurfaceUtil
     {
-        internal static VkSurfaceKHR CreateSurface(VkGraphicsDevice gd, VkInstance instance, SwapchainSource swapchainSource)
+        public static VkSurfaceKHR CreateSurface(VkGraphicsDevice gd, VkInstance instance, SwapchainSource swapchainSource)
         {
             // TODO a null GD is passed from VkSurfaceSource.CreateSurface for compatibility
             //      when VkSurfaceInfo is removed we do not have to handle gd == null anymore
@@ -99,7 +99,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private static VkSurfaceKHR CreateWin32(VkInstance instance, Win32SwapchainSource win32Source)
+        public static VkSurfaceKHR CreateWin32(VkInstance instance, Win32SwapchainSource win32Source)
         {
             VkWin32SurfaceCreateInfoKHR surfaceCI = VkWin32SurfaceCreateInfoKHR.New();
             surfaceCI.hwnd = win32Source.Hwnd;
@@ -109,7 +109,7 @@ namespace Veldrid.Vk
             return surface;
         }
 
-        private static VkSurfaceKHR CreateXlib(VkInstance instance, XlibSwapchainSource xlibSource)
+        public static VkSurfaceKHR CreateXlib(VkInstance instance, XlibSwapchainSource xlibSource)
         {
             VkXlibSurfaceCreateInfoKHR xsci = VkXlibSurfaceCreateInfoKHR.New();
             xsci.dpy = (Display*)xlibSource.Display;
@@ -119,7 +119,7 @@ namespace Veldrid.Vk
             return surface;
         }
 
-        private static VkSurfaceKHR CreateWayland(VkInstance instance, WaylandSwapchainSource waylandSource)
+        public static VkSurfaceKHR CreateWayland(VkInstance instance, WaylandSwapchainSource waylandSource)
         {
             VkWaylandSurfaceCreateInfoKHR wsci = VkWaylandSurfaceCreateInfoKHR.New();
             wsci.display = (wl_display*)waylandSource.Display;
@@ -129,7 +129,7 @@ namespace Veldrid.Vk
             return surface;
         }
 
-        private static VkSurfaceKHR CreateAndroidSurface(VkInstance instance, AndroidSurfaceSwapchainSource androidSource)
+        public static VkSurfaceKHR CreateAndroidSurface(VkInstance instance, AndroidSurfaceSwapchainSource androidSource)
         {
             IntPtr aNativeWindow = AndroidRuntime.ANativeWindow_fromSurface(androidSource.JniEnv, androidSource.Surface);
 
@@ -140,13 +140,13 @@ namespace Veldrid.Vk
             return surface;
         }
 
-        private static unsafe VkSurfaceKHR CreateNSWindowSurface(VkGraphicsDevice gd, VkInstance instance, NSWindowSwapchainSource nsWindowSource, bool hasExtMetalSurface)
+        public static unsafe VkSurfaceKHR CreateNSWindowSurface(VkGraphicsDevice gd, VkInstance instance, NSWindowSwapchainSource nsWindowSource, bool hasExtMetalSurface)
         {
             NSWindow nswindow = new NSWindow(nsWindowSource.NSWindow);
             return CreateNSViewSurface(gd, instance, new NSViewSwapchainSource(nswindow.contentView), hasExtMetalSurface);
         }
 
-        private static unsafe VkSurfaceKHR CreateNSViewSurface(VkGraphicsDevice gd, VkInstance instance, NSViewSwapchainSource nsViewSource, bool hasExtMetalSurface)
+        public static unsafe VkSurfaceKHR CreateNSViewSurface(VkGraphicsDevice gd, VkInstance instance, NSViewSwapchainSource nsViewSource, bool hasExtMetalSurface)
         {
             NSView contentView = new NSView(nsViewSource.NSView);
 
@@ -177,7 +177,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private static VkSurfaceKHR CreateUIViewSurface(VkGraphicsDevice gd, VkInstance instance, UIViewSwapchainSource uiViewSource, bool hasExtMetalSurface)
+        public static VkSurfaceKHR CreateUIViewSurface(VkGraphicsDevice gd, VkInstance instance, UIViewSwapchainSource uiViewSource, bool hasExtMetalSurface)
         {
             UIView uiView = new UIView(uiViewSource.UIView);
 

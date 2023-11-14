@@ -8,28 +8,28 @@ namespace Veldrid.NeoDemo
 {
     public class Camera : IUpdateable
     {
-        private float _fov = 1f;
-        private float _near = 1f;
-        private float _far = 1000f;
+        public float _fov = 1f;
+        public float _near = 1f;
+        public float _far = 1000f;
 
-        private Matrix4x4 _viewMatrix;
-        private Matrix4x4 _projectionMatrix;
+        public Matrix4x4 _viewMatrix;
+        public Matrix4x4 _projectionMatrix;
 
-        private Vector3 _position = new Vector3(0, 3, 0);
-        private Vector3 _lookDirection = new Vector3(0, -.3f, -1f);
-        private float _moveSpeed = 10.0f;
+        public Vector3 _position = new Vector3(0, 3, 0);
+        public Vector3 _lookDirection = new Vector3(0, -.3f, -1f);
+        public float _moveSpeed = 10.0f;
 
-        private float _yaw;
-        private float _pitch;
+        public float _yaw;
+        public float _pitch;
 
-        private Vector2 _mousePressedPos;
-        private bool _mousePressed = false;
-        private GraphicsDevice _gd;
-        private bool _useReverseDepth;
-        private float _windowWidth;
-        private float _windowHeight;
-        private Sdl2Window _window;
-        private Sdl2ControllerTracker _controller;
+        public Vector2 _mousePressedPos;
+        public bool _mousePressed = false;
+        public GraphicsDevice _gd;
+        public bool _useReverseDepth;
+        public float _windowWidth;
+        public float _windowHeight;
+        public Sdl2Window _window;
+        public Sdl2ControllerTracker _controller;
 
         public event Action<Matrix4x4> ProjectionChanged;
         public event Action<Matrix4x4> ViewChanged;
@@ -187,7 +187,7 @@ namespace Veldrid.NeoDemo
             UpdatePerspectiveMatrix();
         }
 
-        private void UpdatePerspectiveMatrix()
+        public void UpdatePerspectiveMatrix()
         {
             _projectionMatrix = Util.CreatePerspective(
                 _gd,
@@ -199,7 +199,7 @@ namespace Veldrid.NeoDemo
             ProjectionChanged?.Invoke(_projectionMatrix);
         }
 
-        private void UpdateViewMatrix()
+        public void UpdateViewMatrix()
         {
             Quaternion lookRotation = Quaternion.CreateFromYawPitchRoll(Yaw, Pitch, 0f);
             Vector3 lookDir = Vector3.Transform(-Vector3.UnitZ, lookRotation);
@@ -219,8 +219,8 @@ namespace Veldrid.NeoDemo
     public struct CameraInfo
     {
         public Vector3 CameraPosition_WorldSpace;
-        private float _padding1;
+        public float _padding1;
         public Vector3 CameraLookDirection;
-        private float _padding2;
+        public float _padding2;
     }
 }

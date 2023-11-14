@@ -69,15 +69,15 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, "setDisplaySyncEnabled:", value);
         }
 
-        private static readonly ObjCClass s_class = new ObjCClass(nameof(CAMetalLayer));
-        private static readonly Selector sel_device = "device";
-        private static readonly Selector sel_setDevice = "setDevice:";
-        private static readonly Selector sel_pixelFormat = "pixelFormat";
-        private static readonly Selector sel_setPixelFormat = "setPixelFormat:";
-        private static readonly Selector sel_framebufferOnly = "framebufferOnly";
-        private static readonly Selector sel_setFramebufferOnly = "setFramebufferOnly:";
-        private static readonly Selector sel_drawableSize = "drawableSize";
-        private static readonly Selector sel_setDrawableSize = "setDrawableSize:";
-        private static readonly Selector sel_nextDrawable = "nextDrawable";
+        public static readonly ObjCClass s_class = new ObjCClass(nameof(CAMetalLayer));
+        public static readonly Selector sel_device = "device";
+        public static readonly Selector sel_setDevice = "setDevice:";
+        public static readonly Selector sel_pixelFormat = "pixelFormat";
+        public static readonly Selector sel_setPixelFormat = "setPixelFormat:";
+        public static readonly Selector sel_framebufferOnly = "framebufferOnly";
+        public static readonly Selector sel_setFramebufferOnly = "setFramebufferOnly:";
+        public static readonly Selector sel_drawableSize = "drawableSize";
+        public static readonly Selector sel_setDrawableSize = "setDrawableSize:";
+        public static readonly Selector sel_nextDrawable = "nextDrawable";
     }
 }

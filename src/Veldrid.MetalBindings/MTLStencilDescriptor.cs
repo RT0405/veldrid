@@ -43,17 +43,17 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setWriteMask, value);
         }
 
-        private static readonly Selector sel_depthFailureOperation = "depthFailureOperation";
-        private static readonly Selector sel_stencilFailureOperation = "stencilFailureOperation";
-        private static readonly Selector sel_setStencilFailureOperation = "setStencilFailureOperation:";
-        private static readonly Selector sel_setDepthFailureOperation = "setDepthFailureOperation:";
-        private static readonly Selector sel_depthStencilPassOperation = "depthStencilPassOperation";
-        private static readonly Selector sel_setDepthStencilPassOperation = "setDepthStencilPassOperation:";
-        private static readonly Selector sel_stencilCompareFunction = "stencilCompareFunction";
-        private static readonly Selector sel_setStencilCompareFunction = "setStencilCompareFunction:";
-        private static readonly Selector sel_readMask = "readMask";
-        private static readonly Selector sel_setReadMask = "setReadMask:";
-        private static readonly Selector sel_writeMask = "writeMask";
-        private static readonly Selector sel_setWriteMask = "setWriteMask:";
+        public static readonly Selector sel_depthFailureOperation = "depthFailureOperation";
+        public static readonly Selector sel_stencilFailureOperation = "stencilFailureOperation";
+        public static readonly Selector sel_setStencilFailureOperation = "setStencilFailureOperation:";
+        public static readonly Selector sel_setDepthFailureOperation = "setDepthFailureOperation:";
+        public static readonly Selector sel_depthStencilPassOperation = "depthStencilPassOperation";
+        public static readonly Selector sel_setDepthStencilPassOperation = "setDepthStencilPassOperation:";
+        public static readonly Selector sel_stencilCompareFunction = "stencilCompareFunction";
+        public static readonly Selector sel_setStencilCompareFunction = "setStencilCompareFunction:";
+        public static readonly Selector sel_readMask = "readMask";
+        public static readonly Selector sel_setReadMask = "setReadMask:";
+        public static readonly Selector sel_writeMask = "writeMask";
+        public static readonly Selector sel_setWriteMask = "setWriteMask:";
     }
 }

@@ -5,9 +5,9 @@ namespace Veldrid.NeoDemo
 {
     public class Transform
     {
-        private Vector3 _position;
-        private Quaternion _rotation = Quaternion.Identity;
-        private Vector3 _scale = Vector3.One;
+        public Vector3 _position;
+        public Quaternion _rotation = Quaternion.Identity;
+        public Vector3 _scale = Vector3.One;
 
         public Vector3 Position { get => _position; set { _position = value; TransformChanged?.Invoke(); } }
         public Quaternion Rotation { get => _rotation; set { _rotation = value; TransformChanged?.Invoke(); } }

@@ -28,7 +28,7 @@ namespace Veldrid.NeoDemo
             return hash;
         }
 
-        private bool ArraysEqual<T>(T[] a, T[] b) where T : IEquatable<T>
+        public bool ArraysEqual<T>(T[] a, T[] b) where T : IEquatable<T>
         {
             if (a.Length != b.Length) { return false; }
 

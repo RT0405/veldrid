@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 
 namespace Veldrid
 {
-    internal unsafe struct SmallFixedOrDynamicArray : IDisposable
+    public unsafe struct SmallFixedOrDynamicArray : IDisposable
     {
-        private const int MaxFixedValues = 5;
+        public const int MaxFixedValues = 5;
 
         public readonly uint Count;
-        private fixed uint FixedData[MaxFixedValues];
+        public fixed uint FixedData[MaxFixedValues];
         public readonly uint[] Data;
 
         public uint Get(uint i) => Count > MaxFixedValues ? Data[i] : FixedData[i];

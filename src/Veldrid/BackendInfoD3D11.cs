@@ -11,9 +11,9 @@ namespace Veldrid
     /// </summary>
     public class BackendInfoD3D11
     {
-        private readonly D3D11GraphicsDevice _gd;
+        public readonly D3D11GraphicsDevice _gd;
 
-        internal BackendInfoD3D11(D3D11GraphicsDevice gd)
+        public BackendInfoD3D11(D3D11GraphicsDevice gd)
         {
             _gd = gd;
         }

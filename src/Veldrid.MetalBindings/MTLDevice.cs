@@ -6,7 +6,7 @@ namespace Veldrid.MetalBindings
 {
     public unsafe struct MTLDevice
     {
-        private const string MetalFramework = "/System/Library/Frameworks/Metal.framework/Metal";
+        public const string MetalFramework = "/System/Library/Frameworks/Metal.framework/Metal";
 
         public readonly IntPtr NativePtr;
         public static implicit operator IntPtr(MTLDevice device) => device.NativePtr;
@@ -131,20 +131,20 @@ namespace Veldrid.MetalBindings
         [DllImport(MetalFramework)]
         public static extern NSArray MTLCopyAllDevices();
 
-        private static readonly Selector sel_name = "name";
-        private static readonly Selector sel_maxThreadsPerThreadgroup = "maxThreadsPerThreadgroup";
-        private static readonly Selector sel_newLibraryWithSource = "newLibraryWithSource:options:error:";
-        private static readonly Selector sel_newLibraryWithData = "newLibraryWithData:error:";
-        private static readonly Selector sel_newRenderPipelineStateWithDescriptor = "newRenderPipelineStateWithDescriptor:error:";
-        private static readonly Selector sel_newComputePipelineStateWithDescriptor = "newComputePipelineStateWithDescriptor:options:reflection:error:";
-        private static readonly Selector sel_newCommandQueue = "newCommandQueue";
-        private static readonly Selector sel_newBufferWithBytes = "newBufferWithBytes:length:options:";
-        private static readonly Selector sel_newBufferWithLength = "newBufferWithLength:options:";
-        private static readonly Selector sel_newTextureWithDescriptor = "newTextureWithDescriptor:";
-        private static readonly Selector sel_newSamplerStateWithDescriptor = "newSamplerStateWithDescriptor:";
-        private static readonly Selector sel_newDepthStencilStateWithDescriptor = "newDepthStencilStateWithDescriptor:";
-        private static readonly Selector sel_supportsTextureSampleCount = "supportsTextureSampleCount:";
-        private static readonly Selector sel_supportsFeatureSet = "supportsFeatureSet:";
-        private static readonly Selector sel_isDepth24Stencil8PixelFormatSupported = "isDepth24Stencil8PixelFormatSupported";
+        public static readonly Selector sel_name = "name";
+        public static readonly Selector sel_maxThreadsPerThreadgroup = "maxThreadsPerThreadgroup";
+        public static readonly Selector sel_newLibraryWithSource = "newLibraryWithSource:options:error:";
+        public static readonly Selector sel_newLibraryWithData = "newLibraryWithData:error:";
+        public static readonly Selector sel_newRenderPipelineStateWithDescriptor = "newRenderPipelineStateWithDescriptor:error:";
+        public static readonly Selector sel_newComputePipelineStateWithDescriptor = "newComputePipelineStateWithDescriptor:options:reflection:error:";
+        public static readonly Selector sel_newCommandQueue = "newCommandQueue";
+        public static readonly Selector sel_newBufferWithBytes = "newBufferWithBytes:length:options:";
+        public static readonly Selector sel_newBufferWithLength = "newBufferWithLength:options:";
+        public static readonly Selector sel_newTextureWithDescriptor = "newTextureWithDescriptor:";
+        public static readonly Selector sel_newSamplerStateWithDescriptor = "newSamplerStateWithDescriptor:";
+        public static readonly Selector sel_newDepthStencilStateWithDescriptor = "newDepthStencilStateWithDescriptor:";
+        public static readonly Selector sel_supportsTextureSampleCount = "supportsTextureSampleCount:";
+        public static readonly Selector sel_supportsFeatureSet = "supportsFeatureSet:";
+        public static readonly Selector sel_isDepth24Stencil8PixelFormatSupported = "isDepth24Stencil8PixelFormatSupported";
     }
 }

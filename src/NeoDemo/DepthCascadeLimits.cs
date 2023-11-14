@@ -8,6 +8,6 @@ namespace Veldrid.NeoDemo
         public float NearLimit;
         public float MidLimit;
         public float FarLimit;
-        private float _padding;
+        public float _padding;
     }
 }

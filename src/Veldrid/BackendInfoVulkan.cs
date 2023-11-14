@@ -13,12 +13,12 @@ namespace Veldrid
     /// </summary>
     public class BackendInfoVulkan
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly Lazy<ReadOnlyCollection<string>> _instanceLayers;
-        private readonly ReadOnlyCollection<string> _instanceExtensions;
-        private readonly Lazy<ReadOnlyCollection<ExtensionProperties>> _deviceExtensions;
+        public readonly VkGraphicsDevice _gd;
+        public readonly Lazy<ReadOnlyCollection<string>> _instanceLayers;
+        public readonly ReadOnlyCollection<string> _instanceExtensions;
+        public readonly Lazy<ReadOnlyCollection<ExtensionProperties>> _deviceExtensions;
 
-        internal BackendInfoVulkan(VkGraphicsDevice gd)
+        public BackendInfoVulkan(VkGraphicsDevice gd)
         {
             _gd = gd;
             _instanceLayers = new Lazy<ReadOnlyCollection<string>>(() => new ReadOnlyCollection<string>(VulkanUtil.EnumerateInstanceLayers()));
@@ -114,7 +114,7 @@ namespace Veldrid
             _gd.TransitionImageLayout(Util.AssertSubtype<Texture, VkTexture>(texture), (VkImageLayout)layout);
         }
 
-        private unsafe ReadOnlyCollection<ExtensionProperties> EnumerateDeviceExtensions()
+        public unsafe ReadOnlyCollection<ExtensionProperties> EnumerateDeviceExtensions()
         {
             VkExtensionProperties[] vkProps = _gd.GetDeviceExtensionProperties();
             ExtensionProperties[] veldridProps = new ExtensionProperties[vkProps.Length];

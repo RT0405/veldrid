@@ -16,8 +16,8 @@ namespace Veldrid.MetalBindings
         public MTLPipelineBufferDescriptorArray buffers
             => objc_msgSend<MTLPipelineBufferDescriptorArray>(NativePtr, sel_buffers);
 
-        private static readonly Selector sel_computeFunction = "computeFunction";
-        private static readonly Selector sel_setComputeFunction = "setComputeFunction:";
-        private static readonly Selector sel_buffers = "buffers";
+        public static readonly Selector sel_computeFunction = "computeFunction";
+        public static readonly Selector sel_setComputeFunction = "setComputeFunction:";
+        public static readonly Selector sel_buffers = "buffers";
     }
 }

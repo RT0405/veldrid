@@ -6,11 +6,11 @@ using static Vulkan.VulkanNative;
 
 namespace Veldrid.Vk
 {
-    internal class VkDescriptorPoolManager
+    public class VkDescriptorPoolManager
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly List<PoolInfo> _pools = new List<PoolInfo>();
-        private readonly object _lock = new object();
+        public readonly VkGraphicsDevice _gd;
+        public readonly List<PoolInfo> _pools = new List<PoolInfo>();
+        public readonly object _lock = new object();
 
         public VkDescriptorPoolManager(VkGraphicsDevice gd)
         {
@@ -48,7 +48,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private VkDescriptorPool GetPool(DescriptorResourceCounts counts)
+        public VkDescriptorPool GetPool(DescriptorResourceCounts counts)
         {
             lock (_lock)
             {
@@ -68,7 +68,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private unsafe PoolInfo CreateNewPool()
+        public unsafe PoolInfo CreateNewPool()
         {
             uint totalSets = 1000;
             uint descriptorCount = 100;
@@ -101,7 +101,7 @@ namespace Veldrid.Vk
             return new PoolInfo(descriptorPool, totalSets, descriptorCount);
         }
 
-        internal unsafe void DestroyAll()
+        public unsafe void DestroyAll()
         {
             foreach (PoolInfo poolInfo in _pools)
             {
@@ -109,7 +109,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private class PoolInfo
+        public class PoolInfo
         {
             public readonly VkDescriptorPool Pool;
 
@@ -136,7 +136,7 @@ namespace Veldrid.Vk
                 StorageImageCount = descriptorCount;
             }
 
-            internal bool Allocate(DescriptorResourceCounts counts)
+            public bool Allocate(DescriptorResourceCounts counts)
             {
                 if (RemainingSets > 0
                     && UniformBufferCount >= counts.UniformBufferCount
@@ -163,7 +163,7 @@ namespace Veldrid.Vk
                 }
             }
 
-            internal void Free(VkDevice device, DescriptorAllocationToken token, DescriptorResourceCounts counts)
+            public void Free(VkDevice device, DescriptorAllocationToken token, DescriptorResourceCounts counts)
             {
                 VkDescriptorSet set = token.Set;
                 vkFreeDescriptorSets(device, Pool, 1, ref set);
@@ -179,7 +179,7 @@ namespace Veldrid.Vk
         }
     }
 
-    internal struct DescriptorAllocationToken
+    public struct DescriptorAllocationToken
     {
         public readonly VkDescriptorSet Set;
         public readonly VkDescriptorPool Pool;

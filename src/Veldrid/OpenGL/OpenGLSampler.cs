@@ -4,16 +4,16 @@ using Veldrid.OpenGLBinding;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe class OpenGLSampler : Sampler, OpenGLDeferredResource
+    public unsafe class OpenGLSampler : Sampler, OpenGLDeferredResource
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private readonly SamplerDescription _description;
-        private readonly InternalSamplerState _noMipmapState;
-        private readonly InternalSamplerState _mipmapState;
-        private bool _disposeRequested;
+        public readonly OpenGLGraphicsDevice _gd;
+        public readonly SamplerDescription _description;
+        public readonly InternalSamplerState _noMipmapState;
+        public readonly InternalSamplerState _mipmapState;
+        public bool _disposeRequested;
 
-        private string _name;
-        private bool _nameChanged;
+        public string _name;
+        public bool _nameChanged;
         public override string Name { get => _name; set { _name = value; _nameChanged = true; } }
 
         public override bool IsDisposed => _disposeRequested;
@@ -30,7 +30,7 @@ namespace Veldrid.OpenGL
             _noMipmapState = new InternalSamplerState();
         }
 
-        public bool Created { get; private set; }
+        public bool Created { get; set; }
 
         public void EnsureResourcesCreated()
         {
@@ -49,7 +49,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void CreateGLResources()
+        public void CreateGLResources()
         {
             GraphicsBackend backendType = _gd.BackendType;
             _noMipmapState.CreateGLResources(_description, false, backendType);
@@ -72,9 +72,9 @@ namespace Veldrid.OpenGL
             _noMipmapState.DestroyGLResources();
         }
 
-        private class InternalSamplerState
+        public class InternalSamplerState
         {
-            private uint _sampler;
+            public uint _sampler;
 
             public uint Sampler => _sampler;
 
@@ -142,7 +142,7 @@ namespace Veldrid.OpenGL
                 CheckLastError();
             }
 
-            private RgbaFloat ToRgbaFloat(SamplerBorderColor borderColor)
+            public RgbaFloat ToRgbaFloat(SamplerBorderColor borderColor)
             {
                 switch (borderColor)
                 {

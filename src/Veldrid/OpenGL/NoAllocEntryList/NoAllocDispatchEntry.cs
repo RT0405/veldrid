@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocDispatchEntry
+    public struct NoAllocDispatchEntry
     {
         public uint GroupCountX;
         public uint GroupCountY;

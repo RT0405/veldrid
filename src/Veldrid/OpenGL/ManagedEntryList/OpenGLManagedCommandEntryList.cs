@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class OpenGLManagedCommandEntryList : OpenGLCommandEntryList
+    public class OpenGLManagedCommandEntryList : OpenGLCommandEntryList
     {
-        private readonly List<OpenGLCommandEntry> _commands = new List<OpenGLCommandEntry>();
-        private readonly StagingMemoryPool _memoryPool = new StagingMemoryPool();
+        public readonly List<OpenGLCommandEntry> _commands = new List<OpenGLCommandEntry>();
+        public readonly StagingMemoryPool _memoryPool = new StagingMemoryPool();
 
         public IReadOnlyList<OpenGLCommandEntry> Commands => _commands;
 

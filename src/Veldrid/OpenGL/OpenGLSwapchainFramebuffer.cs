@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Veldrid.OpenGL
 {
-    internal class OpenGLSwapchainFramebuffer : Framebuffer
+    public class OpenGLSwapchainFramebuffer : Framebuffer
     {
-        private readonly PixelFormat? _depthFormat;
-        private bool _disposed;
+        public readonly PixelFormat? _depthFormat;
+        public bool _disposed;
 
         public override uint Width => _colorTexture.Width;
         public override uint Height => _colorTexture.Height;
@@ -15,18 +15,18 @@ namespace Veldrid.OpenGL
         public override string Name { get; set; }
         public override bool IsDisposed => _disposed;
 
-        private readonly OpenGLPlaceholderTexture _colorTexture;
-        private readonly OpenGLPlaceholderTexture _depthTexture;
+        public readonly OpenGLPlaceholderTexture _colorTexture;
+        public readonly OpenGLPlaceholderTexture _depthTexture;
 
-        private readonly FramebufferAttachment[] _colorTargets;
-        private readonly FramebufferAttachment? _depthTarget;
+        public readonly FramebufferAttachment[] _colorTargets;
+        public readonly FramebufferAttachment? _depthTarget;
 
         public override IReadOnlyList<FramebufferAttachment> ColorTargets => _colorTargets;
         public override FramebufferAttachment? DepthTarget => _depthTarget;
 
         public bool DisableSrgbConversion { get; }
 
-        internal OpenGLSwapchainFramebuffer(
+        public OpenGLSwapchainFramebuffer(
             uint width, uint height,
             PixelFormat colorFormat,
             PixelFormat? depthFormat,

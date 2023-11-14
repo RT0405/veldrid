@@ -8,8 +8,8 @@ namespace Veldrid
     /// </summary>
     public abstract class Texture : DeviceResource, MappableResource, IDisposable, BindableResource
     {
-        private readonly object _fullTextureViewLock = new object();
-        private TextureView _fullTextureView;
+        public readonly object _fullTextureViewLock = new object();
+        public TextureView _fullTextureView;
 
         /// <summary>
         /// Calculates the subresource index, given a mipmap level and array layer.
@@ -70,7 +70,7 @@ namespace Veldrid
         /// </summary>
         public abstract bool IsDisposed { get; }
 
-        internal TextureView GetFullTextureView(GraphicsDevice gd)
+        public TextureView GetFullTextureView(GraphicsDevice gd)
         {
             lock (_fullTextureViewLock)
             {

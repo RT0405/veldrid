@@ -5,9 +5,9 @@ using Vortice.DXGI;
 
 namespace Veldrid.D3D11
 {
-    internal static class D3D11Formats
+    public static class D3D11Formats
     {
-        internal static Format ToDxgiFormat(PixelFormat format, bool depthFormat)
+        public static Format ToDxgiFormat(PixelFormat format, bool depthFormat)
         {
             switch (format)
             {
@@ -149,7 +149,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Format GetTypelessFormat(Format format)
+        public static Format GetTypelessFormat(Format format)
         {
             switch (format)
             {
@@ -258,7 +258,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static BindFlags VdToD3D11BindFlags(BufferUsage usage)
+        public static BindFlags VdToD3D11BindFlags(BufferUsage usage)
         {
             BindFlags flags = BindFlags.None;
             if ((usage & BufferUsage.VertexBuffer) == BufferUsage.VertexBuffer)
@@ -286,7 +286,7 @@ namespace Veldrid.D3D11
             return flags;
         }
 
-        internal static TextureUsage GetVdUsage(BindFlags bindFlags, CpuAccessFlags cpuFlags, ResourceOptionFlags optionFlags)
+        public static TextureUsage GetVdUsage(BindFlags bindFlags, CpuAccessFlags cpuFlags, ResourceOptionFlags optionFlags)
         {
             TextureUsage usage = 0;
             if ((bindFlags & BindFlags.RenderTarget) != 0)
@@ -318,14 +318,14 @@ namespace Veldrid.D3D11
             return usage;
         }
 
-        internal static bool IsUnsupportedFormat(PixelFormat format)
+        public static bool IsUnsupportedFormat(PixelFormat format)
         {
             return format == PixelFormat.ETC2_R8_G8_B8_UNorm
                 || format == PixelFormat.ETC2_R8_G8_B8_A1_UNorm
                 || format == PixelFormat.ETC2_R8_G8_B8_A8_UNorm;
         }
 
-        internal static Format GetViewFormat(Format format)
+        public static Format GetViewFormat(Format format)
         {
             switch (format)
             {
@@ -342,7 +342,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Blend VdToD3D11Blend(BlendFactor factor)
+        public static Blend VdToD3D11Blend(BlendFactor factor)
         {
             switch (factor)
             {
@@ -375,7 +375,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Format ToDxgiFormat(IndexFormat format)
+        public static Format ToDxgiFormat(IndexFormat format)
         {
             switch (format)
             {
@@ -388,7 +388,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Vortice.Direct3D11.StencilOperation VdToD3D11StencilOperation(StencilOperation op)
+        public static Vortice.Direct3D11.StencilOperation VdToD3D11StencilOperation(StencilOperation op)
         {
             switch (op)
             {
@@ -413,7 +413,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static PixelFormat ToVdFormat(Format format)
+        public static PixelFormat ToVdFormat(Format format)
         {
             switch (format)
             {
@@ -541,7 +541,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static BlendOperation VdToD3D11BlendOperation(BlendFunction function)
+        public static BlendOperation VdToD3D11BlendOperation(BlendFunction function)
         {
             switch (function)
             {
@@ -560,7 +560,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static ColorWriteEnable VdToD3D11ColorWriteEnable(ColorWriteMask mask)
+        public static ColorWriteEnable VdToD3D11ColorWriteEnable(ColorWriteMask mask)
         {
             ColorWriteEnable enable = ColorWriteEnable.None;
 
@@ -576,7 +576,7 @@ namespace Veldrid.D3D11
             return enable;
         }
 
-        internal static Filter ToD3D11Filter(SamplerFilter filter, bool isComparison)
+        public static Filter ToD3D11Filter(SamplerFilter filter, bool isComparison)
         {
             switch (filter)
             {
@@ -603,7 +603,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Vortice.Direct3D11.MapMode VdToD3D11MapMode(bool isDynamic, MapMode mode)
+        public static Vortice.Direct3D11.MapMode VdToD3D11MapMode(bool isDynamic, MapMode mode)
         {
             switch (mode)
             {
@@ -618,7 +618,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Vortice.Direct3D.PrimitiveTopology VdToD3D11PrimitiveTopology(PrimitiveTopology primitiveTopology)
+        public static Vortice.Direct3D.PrimitiveTopology VdToD3D11PrimitiveTopology(PrimitiveTopology primitiveTopology)
         {
             switch (primitiveTopology)
             {
@@ -637,7 +637,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static FillMode VdToD3D11FillMode(PolygonFillMode fillMode)
+        public static FillMode VdToD3D11FillMode(PolygonFillMode fillMode)
         {
             switch (fillMode)
             {
@@ -650,7 +650,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static CullMode VdToD3D11CullMode(FaceCullMode cullingMode)
+        public static CullMode VdToD3D11CullMode(FaceCullMode cullingMode)
         {
             switch (cullingMode)
             {
@@ -665,7 +665,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Format ToDxgiFormat(VertexElementFormat format)
+        public static Format ToDxgiFormat(VertexElementFormat format)
         {
             switch (format)
             {
@@ -737,7 +737,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static ComparisonFunction VdToD3D11ComparisonFunc(ComparisonKind comparisonKind)
+        public static ComparisonFunction VdToD3D11ComparisonFunc(ComparisonKind comparisonKind)
         {
             switch (comparisonKind)
             {
@@ -762,7 +762,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static TextureAddressMode VdToD3D11AddressMode(SamplerAddressMode mode)
+        public static TextureAddressMode VdToD3D11AddressMode(SamplerAddressMode mode)
         {
             switch (mode)
             {
@@ -779,7 +779,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal static Format GetDepthFormat(PixelFormat format)
+        public static Format GetDepthFormat(PixelFormat format)
         {
             switch (format)
             {

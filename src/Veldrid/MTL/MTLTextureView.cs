@@ -3,10 +3,10 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLTextureView : TextureView
+    public class MTLTextureView : TextureView
     {
-        private readonly bool _hasTextureView;
-        private bool _disposed;
+        public readonly bool _hasTextureView;
+        public bool _disposed;
 
         public MetalBindings.MTLTexture TargetDeviceTexture { get; }
 

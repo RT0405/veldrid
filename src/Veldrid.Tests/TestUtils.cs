@@ -8,8 +8,8 @@ namespace Veldrid.Tests
 {
     public static class TestUtils
     {
-        private static readonly bool InitializedSdl2;
-        private static readonly string InitializationFailedMessage;
+        public static readonly bool InitializedSdl2;
+        public static readonly string InitializationFailedMessage;
 
         static unsafe TestUtils()
         {
@@ -78,7 +78,7 @@ namespace Veldrid.Tests
             VeldridStartup.CreateWindowAndGraphicsDevice(wci, options, GraphicsBackend.Direct3D11, out window, out gd);
         }
 
-        internal static void CreateOpenGLDevice(out Sdl2Window window, out GraphicsDevice gd)
+        public static void CreateOpenGLDevice(out Sdl2Window window, out GraphicsDevice gd)
         {
             if (!InitializedSdl2)
             {
@@ -99,7 +99,7 @@ namespace Veldrid.Tests
             VeldridStartup.CreateWindowAndGraphicsDevice(wci, options, GraphicsBackend.OpenGL, out window, out gd);
         }
 
-        internal static void CreateOpenGLESDevice(out Sdl2Window window, out GraphicsDevice gd)
+        public static void CreateOpenGLESDevice(out Sdl2Window window, out GraphicsDevice gd)
         {
             if (!InitializedSdl2)
             {
@@ -151,7 +151,7 @@ namespace Veldrid.Tests
             VeldridStartup.CreateWindowAndGraphicsDevice(wci, options, GraphicsBackend.Metal, out window, out gd);
         }
 
-        internal static unsafe string GetString(byte* stringStart)
+        public static unsafe string GetString(byte* stringStart)
         {
             int characters = 0;
             while (stringStart[characters] != 0)
@@ -165,10 +165,10 @@ namespace Veldrid.Tests
 
     public abstract class GraphicsDeviceTestBase<T> : IDisposable where T : GraphicsDeviceCreator
     {
-        private readonly Sdl2Window _window;
-        private readonly GraphicsDevice _gd;
-        private readonly DisposeCollectorResourceFactory _factory;
-        private readonly RenderDoc _renderDoc;
+        public readonly Sdl2Window _window;
+        public readonly GraphicsDevice _gd;
+        public readonly DisposeCollectorResourceFactory _factory;
+        public readonly RenderDoc _renderDoc;
 
         public GraphicsDevice GD => _gd;
         public ResourceFactory RF => _factory;

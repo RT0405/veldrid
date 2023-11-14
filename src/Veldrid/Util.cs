@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Veldrid
 {
-    internal static class Util
+    public static class Util
     {
         [DebuggerNonUserCode]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static TDerived AssertSubtype<TBase, TDerived>(TBase value) where TDerived : class, TBase where TBase : class
+        public static TDerived AssertSubtype<TBase, TDerived>(TBase value) where TDerived : class, TBase where TBase : class
         {
 #if DEBUG
             if (value == null)
@@ -29,7 +29,7 @@ namespace Veldrid
 #endif
         }
 
-        internal static void EnsureArrayMinimumSize<T>(ref T[] array, uint size)
+        public static void EnsureArrayMinimumSize<T>(ref T[] array, uint size)
         {
             if (array == null)
             {
@@ -41,12 +41,12 @@ namespace Veldrid
             }
         }
 
-        internal static uint USizeOf<T>() where T : struct
+        public static uint USizeOf<T>() where T : struct
         {
             return (uint)Unsafe.SizeOf<T>();
         }
 
-        internal static unsafe string GetString(byte* stringStart)
+        public static unsafe string GetString(byte* stringStart)
         {
             int characters = 0;
             while (stringStart[characters] != 0)
@@ -57,7 +57,7 @@ namespace Veldrid
             return Encoding.UTF8.GetString(stringStart, characters);
         }
 
-        internal static bool NullableEquals<T>(T? left, T? right) where T : struct, IEquatable<T>
+        public static bool NullableEquals<T>(T? left, T? right) where T : struct, IEquatable<T>
         {
             if (left.HasValue && right.HasValue)
             {
@@ -67,7 +67,7 @@ namespace Veldrid
             return left.HasValue == right.HasValue;
         }
 
-        internal static bool ArrayEquals<T>(T[] left, T[] right) where T : class
+        public static bool ArrayEquals<T>(T[] left, T[] right) where T : class
         {
             if (left == null || right == null)
             {
@@ -90,7 +90,7 @@ namespace Veldrid
             return true;
         }
 
-        internal static bool ArrayEqualsEquatable<T>(T[] left, T[] right) where T : struct, IEquatable<T>
+        public static bool ArrayEqualsEquatable<T>(T[] left, T[] right) where T : struct, IEquatable<T>
         {
             if (left == null || right == null)
             {
@@ -113,7 +113,7 @@ namespace Veldrid
             return true;
         }
 
-        internal static void ClearArray<T>(T[] array)
+        public static void ClearArray<T>(T[] array)
         {
             if (array != null)
             {
@@ -137,20 +137,20 @@ namespace Veldrid
             }
         }
 
-        internal static void GetMipLevelAndArrayLayer(Texture tex, uint subresource, out uint mipLevel, out uint arrayLayer)
+        public static void GetMipLevelAndArrayLayer(Texture tex, uint subresource, out uint mipLevel, out uint arrayLayer)
         {
             arrayLayer = subresource / tex.MipLevels;
             mipLevel = subresource - (arrayLayer * tex.MipLevels);
         }
 
-        internal static void GetMipDimensions(Texture tex, uint mipLevel, out uint width, out uint height, out uint depth)
+        public static void GetMipDimensions(Texture tex, uint mipLevel, out uint width, out uint height, out uint depth)
         {
             width = GetDimension(tex.Width, mipLevel);
             height = GetDimension(tex.Height, mipLevel);
             depth = GetDimension(tex.Depth, mipLevel);
         }
 
-        internal static uint GetDimension(uint largestLevelDimension, uint mipLevel)
+        public static uint GetDimension(uint largestLevelDimension, uint mipLevel)
         {
             uint ret = largestLevelDimension;
             for (uint i = 0; i < mipLevel; i++)
@@ -161,13 +161,13 @@ namespace Veldrid
             return Math.Max(1, ret);
         }
 
-        internal static ulong ComputeSubresourceOffset(Texture tex, uint mipLevel, uint arrayLayer)
+        public static ulong ComputeSubresourceOffset(Texture tex, uint mipLevel, uint arrayLayer)
         {
             Debug.Assert((tex.Usage & TextureUsage.Staging) == TextureUsage.Staging);
             return ComputeArrayLayerOffset(tex, arrayLayer) + ComputeMipOffset(tex, mipLevel);
         }
 
-        internal static uint ComputeMipOffset(Texture tex, uint mipLevel)
+        public static uint ComputeMipOffset(Texture tex, uint mipLevel)
         {
             uint blockSize = FormatHelpers.IsCompressedFormat(tex.Format) ? 4u : 1u;
             uint offset = 0;
@@ -182,7 +182,7 @@ namespace Veldrid
             return offset;
         }
 
-        internal static uint ComputeArrayLayerOffset(Texture tex, uint arrayLayer)
+        public static uint ComputeArrayLayerOffset(Texture tex, uint arrayLayer)
         {
             if (arrayLayer == 0)
             {
@@ -254,7 +254,7 @@ namespace Veldrid
             }
         }
 
-        internal static T[] ShallowClone<T>(T[] array)
+        public static T[] ShallowClone<T>(T[] array)
         {
             return (T[])array.Clone();
         }
@@ -289,7 +289,7 @@ namespace Veldrid
             return false;
         }
 
-        internal static TextureView GetTextureView(GraphicsDevice gd, BindableResource resource)
+        public static TextureView GetTextureView(GraphicsDevice gd, BindableResource resource)
         {
             if (resource is TextureView view)
             {
@@ -306,14 +306,14 @@ namespace Veldrid
             }
         }
 
-        internal static void PackIntPtr(IntPtr sourcePtr, out uint low, out uint high)
+        public static void PackIntPtr(IntPtr sourcePtr, out uint low, out uint high)
         {
             ulong src64 = (ulong)sourcePtr;
             low = (uint)(src64 & 0x00000000FFFFFFFF);
             high = (uint)((src64 & 0xFFFFFFFF00000000u) >> 32);
         }
 
-        internal static IntPtr UnpackIntPtr(uint low, uint high)
+        public static IntPtr UnpackIntPtr(uint low, uint high)
         {
             ulong src64 = low | ((ulong)high << 32);
             return (IntPtr)src64;

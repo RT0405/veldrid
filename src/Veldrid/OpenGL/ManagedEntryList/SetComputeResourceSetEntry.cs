@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class SetComputeResourceSetEntry : OpenGLCommandEntry
+    public class SetComputeResourceSetEntry : OpenGLCommandEntry
     {
         public uint Slot;
         public ResourceSet ResourceSet;

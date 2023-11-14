@@ -7,14 +7,14 @@ using System.Runtime.CompilerServices;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkPipeline : Pipeline
+    public unsafe class VkPipeline : Pipeline
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly Vulkan.VkPipeline _devicePipeline;
-        private readonly VkPipelineLayout _pipelineLayout;
-        private readonly VkRenderPass _renderPass;
-        private bool _destroyed;
-        private string _name;
+        public readonly VkGraphicsDevice _gd;
+        public readonly Vulkan.VkPipeline _devicePipeline;
+        public readonly VkPipelineLayout _pipelineLayout;
+        public readonly VkRenderPass _renderPass;
+        public bool _destroyed;
+        public string _name;
 
         public Vulkan.VkPipeline DevicePipeline => _devicePipeline;
 
@@ -439,7 +439,7 @@ namespace Veldrid.Vk
             RefCount.Decrement();
         }
 
-        private void DisposeCore()
+        public void DisposeCore()
         {
             if (!_destroyed)
             {

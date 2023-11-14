@@ -7,6 +7,6 @@ namespace Veldrid.NeoDemo
     public struct LightInfo
     {
         public Vector3 Direction;
-        private float _padding;
+        public float _padding;
     }
 }

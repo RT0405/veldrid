@@ -1,10 +1,10 @@
 ﻿namespace Veldrid.OpenGL
 {
-    internal class OpenGLPlaceholderTexture : Texture
+    public class OpenGLPlaceholderTexture : Texture
     {
-        private uint _height;
-        private uint _width;
-        private bool _disposed;
+        public uint _height;
+        public uint _width;
+        public bool _disposed;
 
         public OpenGLPlaceholderTexture(
             uint width,

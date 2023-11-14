@@ -2,9 +2,9 @@
 
 namespace Veldrid.VirtualReality
 {
-    internal static class Util
+    public static class Util
     {
-        internal static unsafe string GetUtf8String(byte* ptr)
+        public static unsafe string GetUtf8String(byte* ptr)
         {
             int count = 0;
             while (ptr[count] != 0)
@@ -15,7 +15,7 @@ namespace Veldrid.VirtualReality
             return Encoding.UTF8.GetString(ptr, count);
         }
 
-        internal static TextureSampleCount GetSampleCount(int sampleCount)
+        public static TextureSampleCount GetSampleCount(int sampleCount)
         {
             switch (sampleCount)
             {
@@ -36,7 +36,7 @@ namespace Veldrid.VirtualReality
             }
         }
 
-        internal static int GetSampleCount(TextureSampleCount sampleCount)
+        public static int GetSampleCount(TextureSampleCount sampleCount)
         {
             switch (sampleCount)
             {

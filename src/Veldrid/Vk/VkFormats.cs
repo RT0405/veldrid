@@ -4,9 +4,9 @@ using Vulkan;
 
 namespace Veldrid.Vk
 {
-    internal static partial class VkFormats
+    public static partial class VkFormats
     {
-        internal static VkSamplerAddressMode VdToVkSamplerAddressMode(SamplerAddressMode mode)
+        public static VkSamplerAddressMode VdToVkSamplerAddressMode(SamplerAddressMode mode)
         {
             switch (mode)
             {
@@ -23,7 +23,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static void GetFilterParams(
+        public static void GetFilterParams(
             SamplerFilter filter,
             out VkFilter minFilter,
             out VkFilter magFilter,
@@ -81,7 +81,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkImageUsageFlags VdToVkTextureUsage(TextureUsage vdUsage)
+        public static VkImageUsageFlags VdToVkTextureUsage(TextureUsage vdUsage)
         {
             VkImageUsageFlags vkUsage = VkImageUsageFlags.None;
 
@@ -107,7 +107,7 @@ namespace Veldrid.Vk
             return vkUsage;
         }
 
-        internal static VkImageType VdToVkTextureType(TextureType type)
+        public static VkImageType VdToVkTextureType(TextureType type)
         {
             switch (type)
             {
@@ -122,7 +122,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkDescriptorType VdToVkDescriptorType(ResourceKind kind, ResourceLayoutElementOptions options)
+        public static VkDescriptorType VdToVkDescriptorType(ResourceKind kind, ResourceLayoutElementOptions options)
         {
             bool dynamicBinding = (options & ResourceLayoutElementOptions.DynamicBinding) != 0;
             switch (kind)
@@ -143,7 +143,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkSampleCountFlags VdToVkSampleCount(TextureSampleCount sampleCount)
+        public static VkSampleCountFlags VdToVkSampleCount(TextureSampleCount sampleCount)
         {
             switch (sampleCount)
             {
@@ -164,7 +164,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkStencilOp VdToVkStencilOp(StencilOperation op)
+        public static VkStencilOp VdToVkStencilOp(StencilOperation op)
         {
             switch (op)
             {
@@ -189,7 +189,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkPolygonMode VdToVkPolygonMode(PolygonFillMode fillMode)
+        public static VkPolygonMode VdToVkPolygonMode(PolygonFillMode fillMode)
         {
             switch (fillMode)
             {
@@ -202,7 +202,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkCullModeFlags VdToVkCullMode(FaceCullMode cullMode)
+        public static VkCullModeFlags VdToVkCullMode(FaceCullMode cullMode)
         {
             switch (cullMode)
             {
@@ -217,7 +217,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkBlendOp VdToVkBlendOp(BlendFunction func)
+        public static VkBlendOp VdToVkBlendOp(BlendFunction func)
         {
             switch (func)
             {
@@ -236,7 +236,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkColorComponentFlags VdToVkColorWriteMask(ColorWriteMask mask)
+        public static VkColorComponentFlags VdToVkColorWriteMask(ColorWriteMask mask)
         {
             VkColorComponentFlags flags = VkColorComponentFlags.None;
 
@@ -252,7 +252,7 @@ namespace Veldrid.Vk
             return flags;
         }
 
-        internal static VkPrimitiveTopology VdToVkPrimitiveTopology(PrimitiveTopology topology)
+        public static VkPrimitiveTopology VdToVkPrimitiveTopology(PrimitiveTopology topology)
         {
             switch (topology)
             {
@@ -271,7 +271,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static uint GetSpecializationConstantSize(ShaderConstantType type)
+        public static uint GetSpecializationConstantSize(ShaderConstantType type)
         {
             switch (type)
             {
@@ -298,7 +298,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkBlendFactor VdToVkBlendFactor(BlendFactor factor)
+        public static VkBlendFactor VdToVkBlendFactor(BlendFactor factor)
         {
             switch (factor)
             {
@@ -331,7 +331,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkFormat VdToVkVertexElementFormat(VertexElementFormat format)
+        public static VkFormat VdToVkVertexElementFormat(VertexElementFormat format)
         {
             switch (format)
             {
@@ -402,7 +402,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkShaderStageFlags VdToVkShaderStages(ShaderStages stage)
+        public static VkShaderStageFlags VdToVkShaderStages(ShaderStages stage)
         {
             VkShaderStageFlags ret = VkShaderStageFlags.None;
 
@@ -427,7 +427,7 @@ namespace Veldrid.Vk
             return ret;
         }
 
-        internal static VkBorderColor VdToVkSamplerBorderColor(SamplerBorderColor borderColor)
+        public static VkBorderColor VdToVkSamplerBorderColor(SamplerBorderColor borderColor)
         {
             switch (borderColor)
             {
@@ -442,7 +442,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkIndexType VdToVkIndexFormat(IndexFormat format)
+        public static VkIndexType VdToVkIndexFormat(IndexFormat format)
         {
             switch (format)
             {
@@ -455,7 +455,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static VkCompareOp VdToVkCompareOp(ComparisonKind comparisonKind)
+        public static VkCompareOp VdToVkCompareOp(ComparisonKind comparisonKind)
         {
             switch (comparisonKind)
             {
@@ -480,7 +480,7 @@ namespace Veldrid.Vk
             }
         }
 
-        internal static PixelFormat VkToVdPixelFormat(VkFormat vkFormat)
+        public static PixelFormat VkToVdPixelFormat(VkFormat vkFormat)
         {
             switch (vkFormat)
             {

@@ -1,10 +1,10 @@
 ﻿namespace Veldrid.D3D11
 {
-    internal class D3D11ResourceLayout : ResourceLayout
+    public class D3D11ResourceLayout : ResourceLayout
     {
-        private readonly ResourceBindingInfo[] _bindingInfosByVdIndex;
-        private string _name;
-        private bool _disposed;
+        public readonly ResourceBindingInfo[] _bindingInfosByVdIndex;
+        public string _name;
+        public bool _disposed;
 
         public int UniformBufferCount { get; }
         public int StorageBufferCount { get; }
@@ -86,7 +86,7 @@
             _disposed = true;
         }
 
-        internal struct ResourceBindingInfo
+        public struct ResourceBindingInfo
         {
             public int Slot;
             public ShaderStages Stages;

@@ -4,15 +4,15 @@ using System.Numerics;
 
 namespace Veldrid.VirtualReality.OpenVR
 {
-    internal class OpenVRMirrorTexture : IDisposable
+    public class OpenVRMirrorTexture : IDisposable
     {
-        private readonly List<IDisposable> _disposables = new List<IDisposable>();
-        private readonly Dictionary<OutputDescription, TextureBlitter> _blitters
+        public readonly List<IDisposable> _disposables = new List<IDisposable>();
+        public readonly Dictionary<OutputDescription, TextureBlitter> _blitters
             = new Dictionary<OutputDescription, TextureBlitter>();
 
-        private OpenVRContext _context;
-        private ResourceSet _leftSet;
-        private ResourceSet _rightSet;
+        public OpenVRContext _context;
+        public ResourceSet _leftSet;
+        public ResourceSet _rightSet;
 
         public OpenVRMirrorTexture(OpenVRContext context)
         {
@@ -44,21 +44,21 @@ namespace Veldrid.VirtualReality.OpenVR
             cl.SetFullViewports();
         }
 
-        private void BlitLeftEye(CommandList cl, TextureBlitter blitter, float viewportAspect)
+        public void BlitLeftEye(CommandList cl, TextureBlitter blitter, float viewportAspect)
         {
             GetSampleRatio(_context.LeftEyeFramebuffer, viewportAspect, out Vector2 minUV, out Vector2 maxUV);
             ResourceSet leftEyeSet = GetLeftEyeSet(blitter.ResourceLayout);
             blitter.Render(cl, leftEyeSet, minUV, maxUV);
         }
 
-        private void BlitRightEye(CommandList cl, TextureBlitter blitter, float viewportAspect)
+        public void BlitRightEye(CommandList cl, TextureBlitter blitter, float viewportAspect)
         {
             GetSampleRatio(_context.RightEyeFramebuffer, viewportAspect, out Vector2 minUV, out Vector2 maxUV);
             ResourceSet rightEyeSet = GetRightEyeSet(blitter.ResourceLayout);
             blitter.Render(cl, rightEyeSet, minUV, maxUV);
         }
 
-        private void GetSampleRatio(Framebuffer eyeFB, float viewportAspect, out Vector2 minUV, out Vector2 maxUV)
+        public void GetSampleRatio(Framebuffer eyeFB, float viewportAspect, out Vector2 minUV, out Vector2 maxUV)
         {
             uint eyeWidth = eyeFB.Width;
             uint eyeHeight = eyeFB.Height;
@@ -86,7 +86,7 @@ namespace Veldrid.VirtualReality.OpenVR
             maxUV = new Vector2(0.5f + sampleUVWidth / 2f, 0.5f + sampleUVHeight / 2f);
         }
 
-        private ResourceSet GetLeftEyeSet(ResourceLayout rl)
+        public ResourceSet GetLeftEyeSet(ResourceLayout rl)
         {
             if (_leftSet == null)
             {
@@ -96,7 +96,7 @@ namespace Veldrid.VirtualReality.OpenVR
             return _leftSet;
         }
 
-        private ResourceSet GetRightEyeSet(ResourceLayout rl)
+        public ResourceSet GetRightEyeSet(ResourceLayout rl)
         {
             if (_rightSet == null)
             {
@@ -106,7 +106,7 @@ namespace Veldrid.VirtualReality.OpenVR
             return _rightSet;
         }
 
-        private ResourceSet CreateColorTargetSet(ResourceLayout rl, Framebuffer fb)
+        public ResourceSet CreateColorTargetSet(ResourceLayout rl, Framebuffer fb)
         {
             ResourceFactory factory = _context.GraphicsDevice.ResourceFactory;
             Texture target = fb.ColorTargets[0].Target;
@@ -118,7 +118,7 @@ namespace Veldrid.VirtualReality.OpenVR
             return rs;
         }
 
-        private TextureBlitter GetBlitter(OutputDescription outputDescription)
+        public TextureBlitter GetBlitter(OutputDescription outputDescription)
         {
             if (!_blitters.TryGetValue(outputDescription, out TextureBlitter ret))
             {

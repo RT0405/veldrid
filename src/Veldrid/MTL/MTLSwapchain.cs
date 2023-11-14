@@ -4,16 +4,16 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLSwapchain : Swapchain
+    public class MTLSwapchain : Swapchain
     {
-        private readonly MTLSwapchainFramebuffer _framebuffer;
-        private CAMetalLayer _metalLayer;
-        private readonly MTLGraphicsDevice _gd;
-        private UIView _uiView; // Valid only when a UIViewSwapchainSource is used.
-        private bool _syncToVerticalBlank;
-        private bool _disposed;
+        public readonly MTLSwapchainFramebuffer _framebuffer;
+        public CAMetalLayer _metalLayer;
+        public readonly MTLGraphicsDevice _gd;
+        public UIView _uiView; // Valid only when a UIViewSwapchainSource is used.
+        public bool _syncToVerticalBlank;
+        public bool _disposed;
 
-        private CAMetalDrawable _drawable;
+        public CAMetalDrawable _drawable;
 
         public override Framebuffer Framebuffer => _framebuffer;
         public override bool SyncToVerticalBlank
@@ -152,7 +152,7 @@ namespace Veldrid.MTL
             GetNextDrawable();
         }
 
-        private void SetSyncToVerticalBlank(bool value)
+        public void SetSyncToVerticalBlank(bool value)
         {
             _syncToVerticalBlank = value;
 

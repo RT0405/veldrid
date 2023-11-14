@@ -4,7 +4,7 @@ using Veldrid.SPIRV;
 
 namespace Veldrid.Oculus.Sample
 {
-    internal static class ShaderHelper
+    public static class ShaderHelper
     {
         public static CrossCompileOptions GetOptions(GraphicsDevice gd)
         {

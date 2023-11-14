@@ -96,7 +96,7 @@
         /// </summary>
         public bool ShaderFloat64 { get; }
 
-        internal GraphicsDeviceFeatures(
+        public GraphicsDeviceFeatures(
             bool computeShader,
             bool geometryShader,
             bool tessellationShaders,

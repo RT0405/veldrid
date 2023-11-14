@@ -8,14 +8,14 @@ namespace Veldrid.MetalBindings
         public readonly IntPtr NativePtr;
         public bool IsNull => NativePtr == IntPtr.Zero;
 
-        private static readonly Selector sel_setComputePipelineState = "setComputePipelineState:";
-        private static readonly Selector sel_setBuffer = "setBuffer:offset:atIndex:";
-        private static readonly Selector sel_dispatchThreadgroups0 = "dispatchThreadgroups:threadsPerThreadgroup:";
-        private static readonly Selector sel_dispatchThreadgroups1 = "dispatchThreadgroupsWithIndirectBuffer:indirectBufferOffset:threadsPerThreadgroup:";
-        private static readonly Selector sel_endEncoding = "endEncoding";
-        private static readonly Selector sel_setTexture = "setTexture:atIndex:";
-        private static readonly Selector sel_setSamplerState = "setSamplerState:atIndex:";
-        private static readonly Selector sel_setBytes = "setBytes:length:atIndex:";
+        public static readonly Selector sel_setComputePipelineState = "setComputePipelineState:";
+        public static readonly Selector sel_setBuffer = "setBuffer:offset:atIndex:";
+        public static readonly Selector sel_dispatchThreadgroups0 = "dispatchThreadgroups:threadsPerThreadgroup:";
+        public static readonly Selector sel_dispatchThreadgroups1 = "dispatchThreadgroupsWithIndirectBuffer:indirectBufferOffset:threadsPerThreadgroup:";
+        public static readonly Selector sel_endEncoding = "endEncoding";
+        public static readonly Selector sel_setTexture = "setTexture:atIndex:";
+        public static readonly Selector sel_setSamplerState = "setSamplerState:atIndex:";
+        public static readonly Selector sel_setBytes = "setBytes:length:atIndex:";
 
         public void setComputePipelineState(MTLComputePipelineState state)
             => objc_msgSend(NativePtr, sel_setComputePipelineState, state.NativePtr);

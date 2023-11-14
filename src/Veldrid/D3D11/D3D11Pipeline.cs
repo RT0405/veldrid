@@ -5,10 +5,10 @@ using Vortice.Mathematics;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11Pipeline : Pipeline
+    public class D3D11Pipeline : Pipeline
     {
-        private string _name;
-        private bool _disposed;
+        public string _name;
+        public bool _disposed;
 
         public ID3D11BlendState BlendState { get; }
         public Color4 BlendFactor { get; }

@@ -5,9 +5,9 @@ namespace Veldrid.Utilities
 {
     public unsafe struct BoundingFrustum
     {
-        private SixPlane _planes;
+        public SixPlane _planes;
 
-        private struct SixPlane
+        public struct SixPlane
         {
             public Plane Left;
             public Plane Right;
@@ -227,7 +227,7 @@ namespace Veldrid.Utilities
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void PlaneIntersection(ref Plane p1, ref Plane p2, ref Plane p3, out Vector3 intersection)
+        public static void PlaneIntersection(ref Plane p1, ref Plane p2, ref Plane p3, out Vector3 intersection)
         {
             // Formula: http://geomalgorithms.com/a05-_intersect-1.html
             // The formula assumes that there is only a single intersection point.

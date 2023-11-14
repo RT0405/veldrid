@@ -13,7 +13,7 @@ namespace Veldrid.MetalBindings
         public MTLVertexAttributeDescriptorArray attributes
             => objc_msgSend<MTLVertexAttributeDescriptorArray>(NativePtr, sel_attributes);
 
-        private static readonly Selector sel_layouts = "layouts";
-        private static readonly Selector sel_attributes = "attributes";
+        public static readonly Selector sel_layouts = "layouts";
+        public static readonly Selector sel_attributes = "attributes";
     }
 }

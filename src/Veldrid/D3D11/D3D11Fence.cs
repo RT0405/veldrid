@@ -3,10 +3,10 @@ using System.Threading;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11Fence : Fence
+    public class D3D11Fence : Fence
     {
-        private readonly ManualResetEvent _mre;
-        private bool _disposed;
+        public readonly ManualResetEvent _mre;
+        public bool _disposed;
 
         public D3D11Fence(bool signaled)
         {
@@ -30,7 +30,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal bool Wait(ulong nanosecondTimeout)
+        public bool Wait(ulong nanosecondTimeout)
         {
             ulong timeout = Math.Min(int.MaxValue, nanosecondTimeout / 1_000_000);
             return _mre.WaitOne((int)timeout);

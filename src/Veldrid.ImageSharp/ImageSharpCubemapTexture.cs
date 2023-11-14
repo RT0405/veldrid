@@ -43,12 +43,12 @@ namespace Veldrid.ImageSharp
         /// <summary>
         /// Provides standardized access to the cubemap texture array
         /// </summary>
-        private const int PositiveXArrayLayer = 0;
-        private const int NegativeXArrayLayer = 1;
-        private const int PositiveYArrayLayer = 2;
-        private const int NegativeYArrayLayer = 3;
-        private const int PositiveZArrayLayer = 4;
-        private const int NegativeZArrayLayer = 5;
+        public const int PositiveXArrayLayer = 0;
+        public const int NegativeXArrayLayer = 1;
+        public const int PositiveYArrayLayer = 2;
+        public const int NegativeYArrayLayer = 3;
+        public const int PositiveZArrayLayer = 4;
+        public const int NegativeZArrayLayer = 5;
 
         public ImageSharpCubemapTexture(
             string positiveXPath,

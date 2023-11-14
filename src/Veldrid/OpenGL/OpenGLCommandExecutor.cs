@@ -6,36 +6,36 @@ using System.Text;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe class OpenGLCommandExecutor
+    public unsafe class OpenGLCommandExecutor
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private readonly GraphicsBackend _backend;
-        private readonly OpenGLTextureSamplerManager _textureSamplerManager;
-        private readonly StagingMemoryPool _stagingMemoryPool;
-        private readonly OpenGLExtensions _extensions;
-        private readonly OpenGLPlatformInfo _platformInfo;
-        private readonly GraphicsDeviceFeatures _features;
+        public readonly OpenGLGraphicsDevice _gd;
+        public readonly GraphicsBackend _backend;
+        public readonly OpenGLTextureSamplerManager _textureSamplerManager;
+        public readonly StagingMemoryPool _stagingMemoryPool;
+        public readonly OpenGLExtensions _extensions;
+        public readonly OpenGLPlatformInfo _platformInfo;
+        public readonly GraphicsDeviceFeatures _features;
 
-        private Framebuffer _fb;
-        private bool _isSwapchainFB;
-        private OpenGLPipeline _graphicsPipeline;
-        private BoundResourceSetInfo[] _graphicsResourceSets = Array.Empty<BoundResourceSetInfo>();
-        private bool[] _newGraphicsResourceSets = Array.Empty<bool>();
-        private OpenGLBuffer[] _vertexBuffers = Array.Empty<OpenGLBuffer>();
-        private uint[] _vbOffsets = Array.Empty<uint>();
-        private uint[] _vertexAttribDivisors = Array.Empty<uint>();
-        private uint _vertexAttributesBound;
-        private readonly Viewport[] _viewports = new Viewport[20];
-        private DrawElementsType _drawElementsType;
-        private uint _ibOffset;
-        private PrimitiveType _primitiveType;
+        public Framebuffer _fb;
+        public bool _isSwapchainFB;
+        public OpenGLPipeline _graphicsPipeline;
+        public BoundResourceSetInfo[] _graphicsResourceSets = Array.Empty<BoundResourceSetInfo>();
+        public bool[] _newGraphicsResourceSets = Array.Empty<bool>();
+        public OpenGLBuffer[] _vertexBuffers = Array.Empty<OpenGLBuffer>();
+        public uint[] _vbOffsets = Array.Empty<uint>();
+        public uint[] _vertexAttribDivisors = Array.Empty<uint>();
+        public uint _vertexAttributesBound;
+        public readonly Viewport[] _viewports = new Viewport[20];
+        public DrawElementsType _drawElementsType;
+        public uint _ibOffset;
+        public PrimitiveType _primitiveType;
 
-        private OpenGLPipeline _computePipeline;
-        private BoundResourceSetInfo[] _computeResourceSets = Array.Empty<BoundResourceSetInfo>();
-        private bool[] _newComputeResourceSets = Array.Empty<bool>();
+        public OpenGLPipeline _computePipeline;
+        public BoundResourceSetInfo[] _computeResourceSets = Array.Empty<BoundResourceSetInfo>();
+        public bool[] _newComputeResourceSets = Array.Empty<bool>();
 
-        private bool _graphicsPipelineActive;
-        private bool _vertexLayoutFlushed;
+        public bool _graphicsPipelineActive;
+        public bool _vertexLayoutFlushed;
 
         public OpenGLCommandExecutor(OpenGLGraphicsDevice gd, OpenGLPlatformInfo platformInfo)
         {
@@ -248,7 +248,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void PreDrawCommand()
+        public void PreDrawCommand()
         {
             if (!_graphicsPipelineActive)
             {
@@ -263,7 +263,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void FlushResourceSets(bool graphics)
+        public void FlushResourceSets(bool graphics)
         {
             uint sets = graphics
                 ? (uint)_graphicsPipeline.ResourceLayouts.Length
@@ -281,7 +281,7 @@ namespace Veldrid.OpenGL
             Util.ClearArray(graphics ? _newGraphicsResourceSets : _newComputeResourceSets);
         }
 
-        private void FlushVertexLayouts()
+        public void FlushVertexLayouts()
         {
             uint totalSlotsBound = 0;
             VertexLayoutDescription[] layouts = _graphicsPipeline.VertexLayouts;
@@ -351,7 +351,7 @@ namespace Veldrid.OpenGL
             _vertexAttributesBound = totalSlotsBound;
         }
 
-        internal void Dispatch(uint groupCountX, uint groupCountY, uint groupCountZ)
+        public void Dispatch(uint groupCountX, uint groupCountY, uint groupCountZ)
         {
             PreDispatchCommand();
 
@@ -375,7 +375,7 @@ namespace Veldrid.OpenGL
             PostDispatchCommand();
         }
 
-        private void PreDispatchCommand()
+        public void PreDispatchCommand()
         {
             if (_graphicsPipelineActive)
             {
@@ -385,7 +385,7 @@ namespace Veldrid.OpenGL
             FlushResourceSets(false);
         }
 
-        private static void PostDispatchCommand()
+        public static void PostDispatchCommand()
         {
             // TODO: Smart barriers?
             glMemoryBarrier(MemoryBarrierFlags.AllBarrierBits);
@@ -475,7 +475,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void ActivateGraphicsPipeline()
+        public void ActivateGraphicsPipeline()
         {
             _graphicsPipelineActive = true;
             _graphicsPipeline.EnsureResourcesCreated();
@@ -807,7 +807,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void ActivateComputePipeline()
+        public void ActivateComputePipeline()
         {
             _graphicsPipelineActive = false;
             _computePipeline.EnsureResourcesCreated();
@@ -845,7 +845,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void ActivateResourceSet(
+        public void ActivateResourceSet(
             uint slot,
             bool graphics,
             BoundResourceSetInfo brsi,
@@ -1049,7 +1049,7 @@ namespace Veldrid.OpenGL
             CheckLastError();
         }
 
-        private uint GetUniformBaseIndex(uint slot, bool graphics)
+        public uint GetUniformBaseIndex(uint slot, bool graphics)
         {
             OpenGLPipeline pipeline = graphics ? _graphicsPipeline : _computePipeline;
             uint ret = 0;
@@ -1061,7 +1061,7 @@ namespace Veldrid.OpenGL
             return ret;
         }
 
-        private uint GetShaderStorageBaseIndex(uint slot, bool graphics)
+        public uint GetShaderStorageBaseIndex(uint slot, bool graphics)
         {
             OpenGLPipeline pipeline = graphics ? _graphicsPipeline : _computePipeline;
             uint ret = 0;
@@ -1453,7 +1453,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private TextureTarget GetCubeTarget(uint arrayLayer)
+        public TextureTarget GetCubeTarget(uint arrayLayer)
         {
             switch (arrayLayer)
             {
@@ -1559,7 +1559,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void CopyRoundabout(
+        public void CopyRoundabout(
             OpenGLTexture srcGLTexture, OpenGLTexture dstGLTexture,
             uint srcX, uint srcY, uint srcZ, uint srcMipLevel, uint srcLayer,
             uint dstX, uint dstY, uint dstZ, uint dstMipLevel, uint dstLayer,
@@ -1746,7 +1746,7 @@ namespace Veldrid.OpenGL
             _stagingMemoryPool.Free(block);
         }
 
-        private static void CopyWithFBO(
+        public static void CopyWithFBO(
             OpenGLTextureSamplerManager textureSamplerManager,
             OpenGLTexture srcGLTexture, OpenGLTexture dstGLTexture,
             uint srcX, uint srcY, uint srcZ, uint srcMipLevel, uint srcBaseArrayLayer,

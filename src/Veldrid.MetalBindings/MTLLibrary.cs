@@ -37,7 +37,7 @@ namespace Veldrid.MetalBindings
             return new MTLFunction(function);
         }
 
-        private static readonly Selector sel_newFunctionWithName = "newFunctionWithName:";
-        private static readonly Selector sel_newFunctionWithNameConstantValues = "newFunctionWithName:constantValues:error:";
+        public static readonly Selector sel_newFunctionWithName = "newFunctionWithName:";
+        public static readonly Selector sel_newFunctionWithNameConstantValues = "newFunctionWithName:constantValues:error:";
     }
 }

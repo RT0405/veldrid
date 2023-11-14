@@ -3,12 +3,12 @@ using static Vulkan.VulkanNative;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkSampler : Sampler
+    public unsafe class VkSampler : Sampler
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly Vulkan.VkSampler _sampler;
-        private bool _disposed;
-        private string _name;
+        public readonly VkGraphicsDevice _gd;
+        public readonly Vulkan.VkSampler _sampler;
+        public bool _disposed;
+        public string _name;
 
         public Vulkan.VkSampler DeviceSampler => _sampler;
 
@@ -61,7 +61,7 @@ namespace Veldrid.Vk
             RefCount.Decrement();
         }
 
-        private void DisposeCore()
+        public void DisposeCore()
         {
             if (!_disposed)
             {

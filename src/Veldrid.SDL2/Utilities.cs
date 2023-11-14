@@ -2,7 +2,7 @@
 
 namespace Veldrid.Sdl2
 {
-    internal static class Utilities
+    public static class Utilities
     {
         public static unsafe string GetString(byte* stringStart)
         {

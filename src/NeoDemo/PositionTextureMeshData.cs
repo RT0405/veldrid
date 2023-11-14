@@ -7,7 +7,7 @@ namespace Veldrid.NeoDemo
 {
     public static partial class PrimitiveShapes
     {
-        internal class PositionTextureMeshData : MeshData
+        public class PositionTextureMeshData : MeshData
         {
             public readonly VertexPositionTexture[] Vertices;
             public readonly ushort[] Indices;

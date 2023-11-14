@@ -12,16 +12,16 @@ using Matrix4x4 = System.Numerics.Matrix4x4;
 
 namespace Veldrid.VirtualReality.Sample
 {
-    internal class AssimpMesh : IDisposable
+    public class AssimpMesh : IDisposable
     {
-        private readonly GraphicsDevice _gd;
-        private readonly List<IDisposable> _disposables = new List<IDisposable>();
-        private readonly List<MeshPiece> _meshPieces = new List<MeshPiece>();
-        private readonly Pipeline _pipeline;
-        private readonly DeviceBuffer _wvpBuffer;
-        private readonly Texture _texture;
-        private readonly TextureView _view;
-        private readonly ResourceSet _rs;
+        public readonly GraphicsDevice _gd;
+        public readonly List<IDisposable> _disposables = new List<IDisposable>();
+        public readonly List<MeshPiece> _meshPieces = new List<MeshPiece>();
+        public readonly Pipeline _pipeline;
+        public readonly DeviceBuffer _wvpBuffer;
+        public readonly Texture _texture;
+        public readonly TextureView _view;
+        public readonly ResourceSet _rs;
 
         public AssimpMesh(GraphicsDevice gd, OutputDescription outputs, string meshPath, string texturePath)
         {
@@ -110,7 +110,7 @@ namespace Veldrid.VirtualReality.Sample
             }
         }
 
-        private const string vertexGlsl =
+        public const string vertexGlsl =
 @"
 #version 450
 
@@ -132,7 +132,7 @@ void main()
     fsin_UV = vsin_UV;
 }
 ";
-        private const string fragmentGlsl =
+        public const string fragmentGlsl =
 @"
 #version 450
 
@@ -161,7 +161,7 @@ void main()
         }
     }
 
-    internal class MeshPiece
+    public class MeshPiece
     {
         public DeviceBuffer Positions { get; }
         public DeviceBuffer TexCoords { get; }
@@ -177,7 +177,7 @@ void main()
         }
     }
 
-    internal struct UBO
+    public struct UBO
     {
         public Matrix4x4 Projection;
         public Matrix4x4 View;

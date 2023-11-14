@@ -11,11 +11,11 @@ namespace Veldrid
     /// </summary>
     public abstract class GraphicsDevice : IDisposable
     {
-        private readonly object _deferredDisposalLock = new object();
-        private readonly List<IDisposable> _disposables = new List<IDisposable>();
-        private Sampler _aniso4xSampler;
+        public readonly object _deferredDisposalLock = new object();
+        public readonly List<IDisposable> _disposables = new List<IDisposable>();
+        public Sampler _aniso4xSampler;
 
-        internal GraphicsDevice() { }
+        public GraphicsDevice() { }
 
         /// <summary>
         /// Gets the name of the device.
@@ -106,8 +106,8 @@ namespace Veldrid
         /// </summary>
         public uint StructuredBufferMinOffsetAlignment => GetStructuredBufferMinOffsetAlignmentCore();
 
-        internal abstract uint GetUniformBufferMinOffsetAlignmentCore();
-        internal abstract uint GetStructuredBufferMinOffsetAlignmentCore();
+        public abstract uint GetUniformBufferMinOffsetAlignmentCore();
+        public abstract uint GetStructuredBufferMinOffsetAlignmentCore();
 
         /// <summary>
         /// Submits the given <see cref="CommandList"/> for execution by this device.
@@ -518,7 +518,7 @@ namespace Veldrid
             uint mipLevel, uint arrayLayer);
 
         [Conditional("VALIDATE_USAGE")]
-        private static void ValidateUpdateTextureParameters(
+        public static void ValidateUpdateTextureParameters(
             Texture texture,
             uint sizeInBytes,
             uint x, uint y, uint z,
@@ -779,7 +779,7 @@ namespace Veldrid
             }
         }
 
-        private void FlushDeferredDisposals()
+        public void FlushDeferredDisposals()
         {
             lock (_deferredDisposalLock)
             {
@@ -813,13 +813,13 @@ namespace Veldrid
         /// Gets a simple point-filtered <see cref="Sampler"/> object owned by this instance.
         /// This object is created with <see cref="SamplerDescription.Point"/>.
         /// </summary>
-        public Sampler PointSampler { get; private set; }
+        public Sampler PointSampler { get; set; }
 
         /// <summary>
         /// Gets a simple linear-filtered <see cref="Sampler"/> object owned by this instance.
         /// This object is created with <see cref="SamplerDescription.Linear"/>.
         /// </summary>
-        public Sampler LinearSampler { get; private set; }
+        public Sampler LinearSampler { get; set; }
 
         /// <summary>
         /// Gets a simple 4x anisotropic-filtered <see cref="Sampler"/> object owned by this instance.

@@ -7,8 +7,8 @@ namespace Veldrid.Sdl2
 {
     public static unsafe partial class Sdl2Native
     {
-        private static readonly NativeLibrary s_sdl2Lib = LoadSdl2();
-        private static NativeLibrary LoadSdl2()
+        public static readonly NativeLibrary s_sdl2Lib = LoadSdl2();
+        public static NativeLibrary LoadSdl2()
         {
             string[] names;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -65,18 +65,18 @@ namespace Veldrid.Sdl2
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte* SDL_GetError_t();
-        private static SDL_GetError_t s_sdl_getError = LoadFunction<SDL_GetError_t>("SDL_GetError");
+        public delegate byte* SDL_GetError_t();
+        public static SDL_GetError_t s_sdl_getError = LoadFunction<SDL_GetError_t>("SDL_GetError");
         public static byte* SDL_GetError() => s_sdl_getError();
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_ClearError_t();
-        private static SDL_ClearError_t s_sdl_clearError = LoadFunction<SDL_ClearError_t>("SDL_ClearError");
+        public delegate void SDL_ClearError_t();
+        public static SDL_ClearError_t s_sdl_clearError = LoadFunction<SDL_ClearError_t>("SDL_ClearError");
         public static byte* SDL_ClearError() { s_sdl_clearError(); return null; }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_free_t(void* ptr);
-        private static SDL_free_t s_sdl_free = LoadFunction<SDL_free_t>("SDL_free");
+        public delegate void SDL_free_t(void* ptr);
+        public static SDL_free_t s_sdl_free = LoadFunction<SDL_free_t>("SDL_free");
         public static void SDL_free(void* ptr) { s_sdl_free(ptr); }
     }
 }

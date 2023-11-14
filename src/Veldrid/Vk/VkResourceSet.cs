@@ -5,20 +5,20 @@ using static Veldrid.Vk.VulkanUtil;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkResourceSet : ResourceSet
+    public unsafe class VkResourceSet : ResourceSet
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly DescriptorResourceCounts _descriptorCounts;
-        private readonly DescriptorAllocationToken _descriptorAllocationToken;
-        private readonly List<ResourceRefCount> _refCounts = new List<ResourceRefCount>();
-        private bool _destroyed;
-        private string _name;
+        public readonly VkGraphicsDevice _gd;
+        public readonly DescriptorResourceCounts _descriptorCounts;
+        public readonly DescriptorAllocationToken _descriptorAllocationToken;
+        public readonly List<ResourceRefCount> _refCounts = new List<ResourceRefCount>();
+        public bool _destroyed;
+        public string _name;
 
         public VkDescriptorSet DescriptorSet => _descriptorAllocationToken.Set;
 
-        private readonly List<VkTexture> _sampledTextures = new List<VkTexture>();
+        public readonly List<VkTexture> _sampledTextures = new List<VkTexture>();
         public List<VkTexture> SampledTextures => _sampledTextures;
-        private readonly List<VkTexture> _storageImages = new List<VkTexture>();
+        public readonly List<VkTexture> _storageImages = new List<VkTexture>();
         public List<VkTexture> StorageTextures => _storageImages;
 
         public ResourceRefCount RefCount { get; }
@@ -111,7 +111,7 @@ namespace Veldrid.Vk
             RefCount.Decrement();
         }
 
-        private void DisposeCore()
+        public void DisposeCore()
         {
             if (!_destroyed)
             {

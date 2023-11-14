@@ -8,12 +8,12 @@ using static Veldrid.Sdl2.Sdl2Native;
 
 namespace Veldrid.Sdl2
 {
-    internal static class Sdl2WindowRegistry
+    public static class Sdl2WindowRegistry
     {
         public static readonly object Lock = new object();
-        private static readonly Dictionary<uint, Sdl2Window> _eventsByWindowID
+        public static readonly Dictionary<uint, Sdl2Window> _eventsByWindowID
             = new Dictionary<uint, Sdl2Window>();
-        private static bool _firstInit;
+        public static bool _firstInit;
 
         public static void RegisterWindow(Sdl2Window window)
         {
@@ -36,7 +36,7 @@ namespace Veldrid.Sdl2
             }
         }
 
-        private static unsafe void ProcessWindowEvent(ref SDL_Event ev)
+        public static unsafe void ProcessWindowEvent(ref SDL_Event ev)
         {
             bool handled = false;
             uint windowID = 0;

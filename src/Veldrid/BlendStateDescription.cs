@@ -115,7 +115,7 @@ namespace Veldrid
                 HashHelper.Array(AttachmentStates));
         }
 
-        internal BlendStateDescription ShallowClone()
+        public BlendStateDescription ShallowClone()
         {
             BlendStateDescription result = this;
             result.AttachmentStates = Util.ShallowClone(result.AttachmentStates);

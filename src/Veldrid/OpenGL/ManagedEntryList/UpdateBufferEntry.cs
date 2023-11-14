@@ -2,7 +2,7 @@
 
 namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class UpdateBufferEntry : OpenGLCommandEntry
+    public class UpdateBufferEntry : OpenGLCommandEntry
     {
         public DeviceBuffer Buffer;
         public uint BufferOffsetInBytes;

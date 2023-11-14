@@ -6,27 +6,27 @@ using static Veldrid.VirtualReality.Oculus.LibOvrNative;
 
 namespace Veldrid.VirtualReality.Oculus
 {
-    internal class OculusMirrorTexture : IDisposable
+    public class OculusMirrorTexture : IDisposable
     {
         public static readonly Guid s_d3d11Tex2DGuid = new Guid("6f15aaf2-d208-4e89-9ab4-489535d34f9c");
 
-        private readonly OculusContext _context;
-        private readonly Dictionary<OutputDescription, TextureBlitter> _blitters
+        public readonly OculusContext _context;
+        public readonly Dictionary<OutputDescription, TextureBlitter> _blitters
             = new Dictionary<OutputDescription, TextureBlitter>();
 
-        private (uint width, uint height, MirrorTextureEyeSource source) _texProperties;
-        private ovrMirrorTexture _ovrMirrorTex;
-        private Texture _vdMirrorTex;
-        private TextureView _vdMirrorTexView;
-        private ResourceSet _set;
-        private Texture _vkTrueMirrorTex;
+        public (uint width, uint height, MirrorTextureEyeSource source) _texProperties;
+        public ovrMirrorTexture _ovrMirrorTex;
+        public Texture _vdMirrorTex;
+        public TextureView _vdMirrorTexView;
+        public ResourceSet _set;
+        public Texture _vkTrueMirrorTex;
 
         public OculusMirrorTexture(OculusContext oculusContext)
         {
             _context = oculusContext;
         }
 
-        private void CreateMirrorTex(uint width, uint height, MirrorTextureEyeSource source)
+        public void CreateMirrorTex(uint width, uint height, MirrorTextureEyeSource source)
         {
             _set?.Dispose();
             _set = null;
@@ -59,7 +59,7 @@ namespace Veldrid.VirtualReality.Oculus
             _texProperties = (width, height, source);
         }
 
-        private unsafe void CreateMirrorTextureGL(uint width, uint height, MirrorTextureEyeSource source)
+        public unsafe void CreateMirrorTextureGL(uint width, uint height, MirrorTextureEyeSource source)
         {
             GraphicsDevice gd = _context.GraphicsDevice;
 
@@ -108,7 +108,7 @@ namespace Veldrid.VirtualReality.Oculus
             _vdMirrorTexView = _context.GraphicsDevice.ResourceFactory.CreateTextureView(_vdMirrorTex);
         }
 
-        private unsafe void CreateMirrorTextureVulkan(uint width, uint height, MirrorTextureEyeSource source)
+        public unsafe void CreateMirrorTextureVulkan(uint width, uint height, MirrorTextureEyeSource source)
         {
             GraphicsDevice gd = _context.GraphicsDevice;
 
@@ -160,7 +160,7 @@ namespace Veldrid.VirtualReality.Oculus
             _vdMirrorTexView = _context.GraphicsDevice.ResourceFactory.CreateTextureView(_vdMirrorTex);
         }
 
-        private unsafe void CreateMirrorTextureD3D11(uint width, uint height, MirrorTextureEyeSource source)
+        public unsafe void CreateMirrorTextureD3D11(uint width, uint height, MirrorTextureEyeSource source)
         {
             ovrMirrorTextureDesc desc;
             desc.Format = ovrTextureFormat.R8G8B8A8_UNORM_SRGB;
@@ -213,7 +213,7 @@ namespace Veldrid.VirtualReality.Oculus
             blitter.Render(cl, set, Vector2.Zero, Vector2.One);
         }
 
-        private void EnsureMirrorTexture(uint width, uint height, MirrorTextureEyeSource source)
+        public void EnsureMirrorTexture(uint width, uint height, MirrorTextureEyeSource source)
         {
             if (_texProperties != (width, height, source))
             {
@@ -221,7 +221,7 @@ namespace Veldrid.VirtualReality.Oculus
             }
         }
 
-        private ResourceSet GetResourceSet(TextureBlitter blitter)
+        public ResourceSet GetResourceSet(TextureBlitter blitter)
         {
             if (_set == null)
             {
@@ -232,7 +232,7 @@ namespace Veldrid.VirtualReality.Oculus
             return _set;
         }
 
-        private TextureBlitter GetBlitter(OutputDescription outputDescription)
+        public TextureBlitter GetBlitter(OutputDescription outputDescription)
         {
             if (!_blitters.TryGetValue(outputDescription, out TextureBlitter ret))
             {

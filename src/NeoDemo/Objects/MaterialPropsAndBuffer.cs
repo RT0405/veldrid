@@ -4,11 +4,11 @@ namespace Veldrid.NeoDemo.Objects
 {
     public class MaterialPropsAndBuffer
     {
-        private MaterialProperties _properties;
-        private bool _newProperties;
+        public MaterialProperties _properties;
+        public bool _newProperties;
 
         public string Name { get; set; }
-        public DeviceBuffer UniformBuffer { get; private set; }
+        public DeviceBuffer UniformBuffer { get; set; }
 
         public MaterialProperties Properties
         {

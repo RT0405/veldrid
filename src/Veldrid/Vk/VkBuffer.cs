@@ -5,15 +5,15 @@ using static Vulkan.VulkanNative;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkBuffer : DeviceBuffer
+    public unsafe class VkBuffer : DeviceBuffer
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly Vulkan.VkBuffer _deviceBuffer;
-        private readonly VkMemoryBlock _memory;
-        private readonly VkMemoryRequirements _bufferMemoryRequirements;
+        public readonly VkGraphicsDevice _gd;
+        public readonly Vulkan.VkBuffer _deviceBuffer;
+        public readonly VkMemoryBlock _memory;
+        public readonly VkMemoryRequirements _bufferMemoryRequirements;
         public ResourceRefCount RefCount { get; }
-        private bool _destroyed;
-        private string _name;
+        public bool _destroyed;
+        public string _name;
         public override bool IsDisposed => _destroyed;
 
         public override uint SizeInBytes { get; }
@@ -130,7 +130,7 @@ namespace Veldrid.Vk
             RefCount.Decrement();
         }
 
-        private void DisposeCore()
+        public void DisposeCore()
         {
             if (!_destroyed)
             {

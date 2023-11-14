@@ -15,7 +15,7 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setMutability, (uint)value);
         }
 
-        private static readonly Selector sel_mutability = "mutability";
-        private static readonly Selector sel_setMutability = "setMutability:";
+        public static readonly Selector sel_mutability = "mutability";
+        public static readonly Selector sel_setMutability = "setMutability:";
     }
 }

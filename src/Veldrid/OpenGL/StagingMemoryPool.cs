@@ -6,14 +6,14 @@ using System.Runtime.InteropServices;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe sealed class StagingMemoryPool : IDisposable
+    public unsafe sealed class StagingMemoryPool : IDisposable
     {
-        private const uint MinimumCapacity = 128;
+        public const uint MinimumCapacity = 128;
 
-        private readonly List<StagingBlock> _storage;
-        private readonly SortedList<uint, uint> _availableBlocks;
-        private object _lock = new object();
-        private bool _disposed;
+        public readonly List<StagingBlock> _storage;
+        public readonly SortedList<uint, uint> _availableBlocks;
+        public object _lock = new object();
+        public bool _disposed;
 
         public StagingMemoryPool()
         {
@@ -46,7 +46,7 @@ namespace Veldrid.OpenGL
             return _storage[(int)id];
         }
 
-        private void Rent(uint size, out StagingBlock block)
+        public void Rent(uint size, out StagingBlock block)
         {
             lock (_lock)
             {
@@ -70,7 +70,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void Allocate(uint sizeInBytes, out StagingBlock stagingBlock)
+        public void Allocate(uint sizeInBytes, out StagingBlock stagingBlock)
         {
             uint capacity = Math.Max(MinimumCapacity, sizeInBytes);
             IntPtr ptr = Marshal.AllocHGlobal((int)capacity);
@@ -105,7 +105,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private class CapacityComparer : IComparer<uint>
+        public class CapacityComparer : IComparer<uint>
         {
             public int Compare(uint x, uint y)
             {
@@ -114,7 +114,7 @@ namespace Veldrid.OpenGL
         }
     }
 
-    internal unsafe struct StagingBlock
+    public unsafe struct StagingBlock
     {
         public readonly uint Id;
         public readonly void* Data;

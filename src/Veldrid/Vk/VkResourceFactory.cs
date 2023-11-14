@@ -2,10 +2,10 @@
 
 namespace Veldrid.Vk
 {
-    internal class VkResourceFactory : ResourceFactory
+    public class VkResourceFactory : ResourceFactory
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly VkDevice _device;
+        public readonly VkGraphicsDevice _gd;
+        public readonly VkDevice _device;
 
         public VkResourceFactory(VkGraphicsDevice vkGraphicsDevice)
             : base (vkGraphicsDevice.Features)

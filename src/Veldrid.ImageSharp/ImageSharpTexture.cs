@@ -67,7 +67,7 @@ namespace Veldrid.ImageSharp
             return CreateTextureViaUpdate(gd, factory);
         }
 
-        private unsafe Texture CreateTextureViaStaging(GraphicsDevice gd, ResourceFactory factory)
+        public unsafe Texture CreateTextureViaStaging(GraphicsDevice gd, ResourceFactory factory)
         {
             Texture staging = factory.CreateTexture(
                 TextureDescription.Texture2D(Width, Height, MipLevels, 1, Format, TextureUsage.Staging));
@@ -119,7 +119,7 @@ namespace Veldrid.ImageSharp
             return ret;
         }
 
-        private unsafe Texture CreateTextureViaUpdate(GraphicsDevice gd, ResourceFactory factory)
+        public unsafe Texture CreateTextureViaUpdate(GraphicsDevice gd, ResourceFactory factory)
         {
             Texture tex = factory.CreateTexture(TextureDescription.Texture2D(
                 Width, Height, MipLevels, 1, Format, TextureUsage.Sampled));

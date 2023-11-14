@@ -13,10 +13,10 @@ namespace Veldrid
     /// </summary>
     public class BackendInfoMetal
     {
-        private readonly MTLGraphicsDevice _gd;
-        private ReadOnlyCollection<MTLFeatureSet> _featureSet;
+        public readonly MTLGraphicsDevice _gd;
+        public ReadOnlyCollection<MTLFeatureSet> _featureSet;
 
-        internal BackendInfoMetal(MTLGraphicsDevice gd)
+        public BackendInfoMetal(MTLGraphicsDevice gd)
         {
             _gd = gd;
             _featureSet = new ReadOnlyCollection<MTLFeatureSet>(_gd.MetalFeatures.ToArray());

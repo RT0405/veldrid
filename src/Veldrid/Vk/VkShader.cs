@@ -5,12 +5,12 @@ using System;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkShader : Shader
+    public unsafe class VkShader : Shader
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly VkShaderModule _shaderModule;
-        private bool _disposed;
-        private string _name;
+        public readonly VkGraphicsDevice _gd;
+        public readonly VkShaderModule _shaderModule;
+        public bool _disposed;
+        public string _name;
 
         public VkShaderModule ShaderModule => _shaderModule;
 

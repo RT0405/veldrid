@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class ClearDepthTargetEntry : OpenGLCommandEntry
+    public class ClearDepthTargetEntry : OpenGLCommandEntry
     {
         public float Depth;
 

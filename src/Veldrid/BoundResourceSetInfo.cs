@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Veldrid
 {
-    internal struct BoundResourceSetInfo : IEquatable<BoundResourceSetInfo>
+    public struct BoundResourceSetInfo : IEquatable<BoundResourceSetInfo>
     {
         public ResourceSet Set;
         public SmallFixedOrDynamicArray Offsets;

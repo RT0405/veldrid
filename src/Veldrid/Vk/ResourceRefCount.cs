@@ -3,10 +3,10 @@ using System.Threading;
 
 namespace Veldrid.Vk
 {
-    internal class ResourceRefCount
+    public class ResourceRefCount
     {
-        private readonly Action _disposeAction;
-        private int _refCount;
+        public readonly Action _disposeAction;
+        public int _refCount;
 
         public ResourceRefCount(Action disposeAction)
         {

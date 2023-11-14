@@ -48,24 +48,24 @@ namespace Veldrid.Sdl2
         public const int SDL_ENABLE = 1;
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_ShowCursor_t(int toggle);
-        private static SDL_ShowCursor_t s_sdl_showCursor = LoadFunction<SDL_ShowCursor_t>("SDL_ShowCursor");
+        public delegate int SDL_ShowCursor_t(int toggle);
+        public static SDL_ShowCursor_t s_sdl_showCursor = LoadFunction<SDL_ShowCursor_t>("SDL_ShowCursor");
         /// <summary>
         /// Toggle whether or not the cursor should be shown.
         /// </summary>
         public static int SDL_ShowCursor(int toggle) => s_sdl_showCursor(toggle);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_WarpMouseInWindow_t(SDL_Window window, int x, int y);
-        private static SDL_WarpMouseInWindow_t s_sdl_warpMouseInWindow = LoadFunction<SDL_WarpMouseInWindow_t>("SDL_WarpMouseInWindow");
+        public delegate void SDL_WarpMouseInWindow_t(SDL_Window window, int x, int y);
+        public static SDL_WarpMouseInWindow_t s_sdl_warpMouseInWindow = LoadFunction<SDL_WarpMouseInWindow_t>("SDL_WarpMouseInWindow");
         /// <summary>
         /// Move mouse position to the given position in the window.
         /// </summary>
         public static void SDL_WarpMouseInWindow(SDL_Window window, int x, int y) => s_sdl_warpMouseInWindow(window, x, y);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_SetRelativeMouseMode_t(bool enabled);
-        private static SDL_SetRelativeMouseMode_t s_sdl_setRelativeMouseMode = LoadFunction<SDL_SetRelativeMouseMode_t>("SDL_SetRelativeMouseMode");
+        public delegate int SDL_SetRelativeMouseMode_t(bool enabled);
+        public static SDL_SetRelativeMouseMode_t s_sdl_setRelativeMouseMode = LoadFunction<SDL_SetRelativeMouseMode_t>("SDL_SetRelativeMouseMode");
         /// <summary>
         /// Enable/disable relative mouse mode.
         /// If enabled mouse cursor will be hidden and only relative
@@ -78,8 +78,8 @@ namespace Veldrid.Sdl2
         public static int SDL_SetRelativeMouseMode(bool enabled) => s_sdl_setRelativeMouseMode(enabled);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_CaptureMouse_t(bool enabled);
-        private static SDL_CaptureMouse_t s_sdl_captureMouse = LoadFunction<SDL_CaptureMouse_t>("SDL_CaptureMouse");
+        public delegate int SDL_CaptureMouse_t(bool enabled);
+        public static SDL_CaptureMouse_t s_sdl_captureMouse = LoadFunction<SDL_CaptureMouse_t>("SDL_CaptureMouse");
         /// <summary>
         /// Enable/disable capture mouse.
         /// If enabled mouse will also be tracked outside the window.
@@ -90,8 +90,8 @@ namespace Veldrid.Sdl2
         public static int SDL_CaptureMouse(bool enabled) => s_sdl_captureMouse(enabled);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_SetWindowGrab_t(SDL_Window window, bool grabbed);
-        private static SDL_SetWindowGrab_t s_sdl_setWindowGrabbed = LoadFunction<SDL_SetWindowGrab_t>("SDL_SetWindowGrab");
+        public delegate void SDL_SetWindowGrab_t(SDL_Window window, bool grabbed);
+        public static SDL_SetWindowGrab_t s_sdl_setWindowGrabbed = LoadFunction<SDL_SetWindowGrab_t>("SDL_SetWindowGrab");
         /// <summary>
         /// Enable/disable window grab mouse.
         /// If enabled mouse will be contained inside of window.
@@ -99,32 +99,32 @@ namespace Veldrid.Sdl2
         public static void SDL_SetWindowGrab(SDL_Window window, bool grabbed) => s_sdl_setWindowGrabbed(window, grabbed);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Cursor SDL_CreateSystemCursor_t(SDL_SystemCursor id);
-        private static SDL_CreateSystemCursor_t s_sdl_createSystemCursor = LoadFunction<SDL_CreateSystemCursor_t>("SDL_CreateSystemCursor");
+        public delegate SDL_Cursor SDL_CreateSystemCursor_t(SDL_SystemCursor id);
+        public static SDL_CreateSystemCursor_t s_sdl_createSystemCursor = LoadFunction<SDL_CreateSystemCursor_t>("SDL_CreateSystemCursor");
         /// <summary>
         /// Create a system cursor.
         /// </summary>
         public static SDL_Cursor SDL_CreateSystemCursor(SDL_SystemCursor id) => s_sdl_createSystemCursor(id);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_FreeCursor_t(SDL_Cursor cursor);
-        private static SDL_FreeCursor_t s_sdl_freeCursor = LoadFunction<SDL_FreeCursor_t>("SDL_FreeCursor");
+        public delegate void SDL_FreeCursor_t(SDL_Cursor cursor);
+        public static SDL_FreeCursor_t s_sdl_freeCursor = LoadFunction<SDL_FreeCursor_t>("SDL_FreeCursor");
         /// <summary>
         /// Free a cursor created with SDL_CreateCursor(), SDL_CreateColorCursor() or SDL_CreateSystemCursor().
         /// </summary>
         public static void SDL_FreeCursor(SDL_Cursor cursor) => s_sdl_freeCursor(cursor);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Cursor SDL_GetDefaultCursor_t();
-        private static SDL_GetDefaultCursor_t s_sdl_getDefaultCursor = LoadFunction<SDL_GetDefaultCursor_t>("SDL_GetDefaultCursor");
+        public delegate SDL_Cursor SDL_GetDefaultCursor_t();
+        public static SDL_GetDefaultCursor_t s_sdl_getDefaultCursor = LoadFunction<SDL_GetDefaultCursor_t>("SDL_GetDefaultCursor");
         /// <summary>
         /// Get the default cursor.
         /// </summary>
         public static SDL_Cursor SDL_GetDefaultCursor() => s_sdl_getDefaultCursor();
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_SetCursor_t(SDL_Cursor cursor);
-        private static SDL_SetCursor_t s_sdl_setCursor = LoadFunction<SDL_SetCursor_t>("SDL_SetCursor");
+        public delegate void SDL_SetCursor_t(SDL_Cursor cursor);
+        public static SDL_SetCursor_t s_sdl_setCursor = LoadFunction<SDL_SetCursor_t>("SDL_SetCursor");
         /// <summary>
         /// Set the active cursor.
         /// </summary>

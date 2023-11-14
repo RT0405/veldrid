@@ -2,9 +2,9 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLResourceFactory : ResourceFactory
+    public class MTLResourceFactory : ResourceFactory
     {
-        private readonly MTLGraphicsDevice _gd;
+        public readonly MTLGraphicsDevice _gd;
 
         public MTLResourceFactory(MTLGraphicsDevice gd)
             : base(gd.Features)

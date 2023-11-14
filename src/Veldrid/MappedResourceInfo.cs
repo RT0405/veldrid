@@ -1,6 +1,6 @@
 ﻿namespace Veldrid
 {
-    internal struct MappedResourceInfo
+    public struct MappedResourceInfo
     {
         public int RefCount;
         public MapMode Mode;

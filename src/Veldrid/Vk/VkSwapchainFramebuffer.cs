@@ -7,26 +7,26 @@ using System.Collections.Generic;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkSwapchainFramebuffer : VkFramebufferBase
+    public unsafe class VkSwapchainFramebuffer : VkFramebufferBase
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly VkSwapchain _swapchain;
-        private readonly VkSurfaceKHR _surface;
-        private readonly PixelFormat? _depthFormat;
-        private uint _currentImageIndex;
+        public readonly VkGraphicsDevice _gd;
+        public readonly VkSwapchain _swapchain;
+        public readonly VkSurfaceKHR _surface;
+        public readonly PixelFormat? _depthFormat;
+        public uint _currentImageIndex;
 
-        private VkFramebuffer[] _scFramebuffers;
-        private VkImage[] _scImages = {};
-        private VkFormat _scImageFormat;
-        private VkExtent2D _scExtent;
-        private FramebufferAttachment[][] _scColorTextures;
+        public VkFramebuffer[] _scFramebuffers;
+        public VkImage[] _scImages = {};
+        public VkFormat _scImageFormat;
+        public VkExtent2D _scExtent;
+        public FramebufferAttachment[][] _scColorTextures;
 
-        private FramebufferAttachment? _depthAttachment;
-        private uint _desiredWidth;
-        private uint _desiredHeight;
-        private bool _destroyed;
-        private string _name;
-        private OutputDescription _outputDescription;
+        public FramebufferAttachment? _depthAttachment;
+        public uint _desiredWidth;
+        public uint _desiredHeight;
+        public bool _destroyed;
+        public string _name;
+        public OutputDescription _outputDescription;
 
         public override Vulkan.VkFramebuffer CurrentFramebuffer => _scFramebuffers[(int)_currentImageIndex].CurrentFramebuffer;
 
@@ -71,12 +71,12 @@ namespace Veldrid.Vk
             AttachmentCount = depthFormat.HasValue ? 2u : 1u; // 1 Color + 1 Depth
         }
 
-        internal void SetImageIndex(uint index)
+        public void SetImageIndex(uint index)
         {
             _currentImageIndex = index;
         }
 
-        internal void SetNewSwapchain(
+        public void SetNewSwapchain(
             VkSwapchainKHR deviceSwapchain,
             uint width,
             uint height,
@@ -106,7 +106,7 @@ namespace Veldrid.Vk
             _outputDescription = OutputDescription.CreateFromFramebuffer(this);
         }
 
-        private void DestroySwapchainFramebuffers()
+        public void DestroySwapchainFramebuffers()
         {
             if (_scFramebuffers != null)
             {
@@ -119,7 +119,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void CreateDepthTexture()
+        public void CreateDepthTexture()
         {
             if (_depthFormat.HasValue)
             {
@@ -135,7 +135,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void CreateFramebuffers()
+        public void CreateFramebuffers()
         {
             if (_scFramebuffers != null)
             {

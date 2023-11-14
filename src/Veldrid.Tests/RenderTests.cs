@@ -9,19 +9,19 @@ using Xunit;
 
 namespace Veldrid.Tests
 {
-    internal struct UIntVertexAttribsVertex
+    public struct UIntVertexAttribsVertex
     {
         public Vector2 Position;
         public UInt4 Color_Int;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct UIntVertexAttribsInfo
+    public struct UIntVertexAttribsInfo
     {
         public uint ColorNormalizationFactor;
-        private float padding0;
-        private float padding1;
-        private float padding2;
+        public float padding0;
+        public float padding1;
+        public float padding2;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -29,7 +29,7 @@ namespace Veldrid.Tests
     {
         public Vector4 Color;
         public Vector2 Position;
-        private Vector2 _padding0;
+        public Vector2 _padding0;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -314,7 +314,7 @@ namespace Veldrid.Tests
             public ushort A;
         }
 
-        private ushort UShortNorm(float normalizedValue)
+        public ushort UShortNorm(float normalizedValue)
         {
             Debug.Assert(normalizedValue >= 0 && normalizedValue <= 1);
             return (ushort)(normalizedValue * ushort.MaxValue);

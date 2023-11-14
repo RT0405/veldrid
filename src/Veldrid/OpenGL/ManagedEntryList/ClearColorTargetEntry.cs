@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class ClearColorTargetEntry : OpenGLCommandEntry
+    public class ClearColorTargetEntry : OpenGLCommandEntry
     {
         public uint Index;
         public RgbaFloat ClearColor;

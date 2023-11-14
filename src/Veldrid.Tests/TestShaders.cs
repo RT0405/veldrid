@@ -4,7 +4,7 @@ using Veldrid.SPIRV;
 
 namespace Veldrid.Tests
 {
-    internal static class TestShaders
+    public static class TestShaders
     {
         public static Shader[] LoadVertexFragment(ResourceFactory factory, string setName)
         {

@@ -6,7 +6,7 @@ namespace Veldrid.VirtualReality
 {
     public abstract class VRContext : IDisposable
     {
-        internal VRContext() { }
+        public VRContext() { }
 
         public abstract void Initialize(GraphicsDevice gd);
 

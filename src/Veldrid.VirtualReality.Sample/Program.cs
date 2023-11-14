@@ -13,10 +13,10 @@ namespace Veldrid.VirtualReality.Sample
 {
     class Program
     {
-        private static Vector3 _userPosition;
-        private static double _motionSpeed = 2.0;
-        private static bool _useOculus;
-        private static bool _switchVRContext;
+        public static Vector3 _userPosition;
+        public static double _motionSpeed = 2.0;
+        public static bool _useOculus;
+        public static bool _switchVRContext;
 
         static void Main(string[] args)
         {
@@ -189,7 +189,7 @@ namespace Veldrid.VirtualReality.Sample
             gd.Dispose();
         }
 
-        private static void RenderEye(CommandList cl, Framebuffer fb, AssimpMesh mesh, Skybox skybox, Matrix4x4 proj, Matrix4x4 view)
+        public static void RenderEye(CommandList cl, Framebuffer fb, AssimpMesh mesh, Skybox skybox, Matrix4x4 proj, Matrix4x4 view)
         {
             cl.SetFramebuffer(fb);
             cl.ClearDepthStencil(1f);
@@ -213,7 +213,7 @@ namespace Veldrid.VirtualReality.Sample
             skybox.Render(cl, fb, proj, view);
         }
 
-        private static void HandleInputs(double deltaSeconds)
+        public static void HandleInputs(double deltaSeconds)
         {
             Vector3 motionDir = Vector3.Zero;
 
@@ -231,7 +231,7 @@ namespace Veldrid.VirtualReality.Sample
             }
         }
 
-        private static (GraphicsDevice gd, Swapchain sc) CreateDeviceAndSwapchain(
+        public static (GraphicsDevice gd, Swapchain sc) CreateDeviceAndSwapchain(
             Sdl2Window window,
             VRContext vrc,
             GraphicsBackend backend,

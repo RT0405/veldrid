@@ -4,12 +4,12 @@ using Veldrid.Utilities;
 
 namespace Veldrid.NeoDemo.Objects
 {
-    internal class FullScreenQuad : Renderable
+    public class FullScreenQuad : Renderable
     {
-        private DisposeCollector _disposeCollector;
-        private Pipeline _pipeline;
-        private DeviceBuffer _ib;
-        private DeviceBuffer _vb;
+        public DisposeCollector _disposeCollector;
+        public Pipeline _pipeline;
+        public DeviceBuffer _ib;
+        public DeviceBuffer _vb;
 
         public bool UseMultipleRenderTargets { get; set; }
 
@@ -79,6 +79,6 @@ namespace Veldrid.NeoDemo.Objects
         {
         }
 
-        private static ushort[] s_quadIndices = new ushort[] { 0, 1, 2, 0, 2, 3 };
+        public static ushort[] s_quadIndices = new ushort[] { 0, 1, 2, 0, 2, 3 };
     }
 }

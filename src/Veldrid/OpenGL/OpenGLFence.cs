@@ -3,10 +3,10 @@ using System.Threading;
 
 namespace Veldrid.OpenGL
 {
-    internal class OpenGLFence : Fence
+    public class OpenGLFence : Fence
     {
-        private readonly ManualResetEvent _mre;
-        private bool _disposed;
+        public readonly ManualResetEvent _mre;
+        public bool _disposed;
 
         public OpenGLFence(bool signaled)
         {
@@ -30,7 +30,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal bool Wait(ulong nanosecondTimeout)
+        public bool Wait(ulong nanosecondTimeout)
         {
             ulong timeout = Math.Min(int.MaxValue, nanosecondTimeout / 1_000_000);
             return _mre.WaitOne((int)timeout);

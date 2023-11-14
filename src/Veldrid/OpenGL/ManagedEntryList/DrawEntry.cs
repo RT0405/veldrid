@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class DrawEntry : OpenGLCommandEntry
+    public class DrawEntry : OpenGLCommandEntry
     {
         public uint VertexCount;
         public uint InstanceCount;

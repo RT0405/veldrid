@@ -3,9 +3,9 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLTexture : Texture
+    public class MTLTexture : Texture
     {
-        private bool _disposed;
+        public bool _disposed;
 
         /// <summary>
         /// The native MTLTexture object. This property is only valid for non-staging Textures.
@@ -118,7 +118,7 @@ namespace Veldrid.MTL
                     (Usage & TextureUsage.Cubemap) != 0);
         }
 
-        internal uint GetSubresourceSize(uint mipLevel, uint arrayLayer)
+        public uint GetSubresourceSize(uint mipLevel, uint arrayLayer)
         {
             uint blockSize = FormatHelpers.IsCompressedFormat(Format) ? 4u : 1u;
             Util.GetMipDimensions(this, mipLevel, out uint width, out uint height, out uint depth);
@@ -130,7 +130,7 @@ namespace Veldrid.MTL
                 Format);
         }
 
-        internal void GetSubresourceLayout(uint mipLevel, uint arrayLayer, out uint rowPitch, out uint depthPitch)
+        public void GetSubresourceLayout(uint mipLevel, uint arrayLayer, out uint rowPitch, out uint depthPitch)
         {
             uint blockSize = FormatHelpers.IsCompressedFormat(Format) ? 4u : 1u;
             Util.GetMipDimensions(this, mipLevel, out uint mipWidth, out uint mipHeight, out uint mipDepth);

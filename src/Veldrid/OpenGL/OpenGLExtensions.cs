@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace Veldrid.OpenGL
 {
-    internal class OpenGLExtensions : IReadOnlyCollection<string>
+    public class OpenGLExtensions : IReadOnlyCollection<string>
     {
-        private readonly HashSet<string> _extensions;
-        private readonly GraphicsBackend _backend;
-        private readonly int _major;
-        private readonly int _minor;
+        public readonly HashSet<string> _extensions;
+        public readonly GraphicsBackend _backend;
+        public readonly int _major;
+        public readonly int _minor;
 
         public int Count => _extensions.Count;
 
-        internal OpenGLExtensions(HashSet<string> extensions, GraphicsBackend backend, int major, int minor)
+        public OpenGLExtensions(HashSet<string> extensions, GraphicsBackend backend, int major, int minor)
         {
             _extensions = extensions;
             _backend = backend;

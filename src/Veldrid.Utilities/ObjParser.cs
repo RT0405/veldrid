@@ -12,11 +12,11 @@ namespace Veldrid.Utilities
     /// </summary>
     public class ObjParser
     {
-        private static readonly string[] s_newline = new string[] { "\n" };
-        private static readonly char[] s_whitespaceChars = new char[] { ' ' };
-        private static readonly char[] s_slashChar = new char[] { '/' };
+        public static readonly string[] s_newline = new string[] { "\n" };
+        public static readonly char[] s_whitespaceChars = new char[] { ' ' };
+        public static readonly char[] s_slashChar = new char[] { '/' };
 
-        private readonly ParseContext _pc = new ParseContext();
+        public readonly ParseContext _pc = new ParseContext();
 
         /// <summary>
         /// Parses an <see cref="ObjFile"/> from the given raw text lines.
@@ -70,23 +70,23 @@ namespace Veldrid.Utilities
             return _pc.FinalizeFile();
         }
 
-        private class ParseContext
+        public class ParseContext
         {
-            private List<Vector3> _positions = new List<Vector3>();
-            private List<Vector3> _normals = new List<Vector3>();
-            private List<Vector2> _texCoords = new List<Vector2>();
+            public List<Vector3> _positions = new List<Vector3>();
+            public List<Vector3> _normals = new List<Vector3>();
+            public List<Vector2> _texCoords = new List<Vector2>();
 
-            private List<ObjFile.MeshGroup> _groups = new List<ObjFile.MeshGroup>();
+            public List<ObjFile.MeshGroup> _groups = new List<ObjFile.MeshGroup>();
 
-            private string _currentGroupName;
-            private string _currentMaterial;
-            private int _currentSmoothingGroup;
-            private List<ObjFile.Face> _currentGroupFaces = new List<ObjFile.Face>();
+            public string _currentGroupName;
+            public string _currentMaterial;
+            public int _currentSmoothingGroup;
+            public List<ObjFile.Face> _currentGroupFaces = new List<ObjFile.Face>();
 
-            private int _currentLine;
-            private string _currentLineText;
+            public int _currentLine;
+            public string _currentLineText;
 
-            private string _materialLibName;
+            public string _materialLibName;
 
             public void Process(string line)
             {
@@ -159,7 +159,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private void DiscoverMaterialLib(string libName)
+            public void DiscoverMaterialLib(string libName)
             {
                 if (_materialLibName != null)
                 {
@@ -170,7 +170,7 @@ namespace Veldrid.Utilities
                 _materialLibName = libName;
             }
 
-            private void ProcessFaceLine(string[] pieces)
+            public void ProcessFaceLine(string[] pieces)
             {
                 string first = pieces[1];
                 ObjFile.FaceVertex faceVertex0 = ParseFaceVertex(first);
@@ -186,7 +186,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private ObjFile.FaceVertex ParseFaceVertex(string faceComponents)
+            public ObjFile.FaceVertex ParseFaceVertex(string faceComponents)
             {
                 string[] slashSplit = faceComponents.Split(s_slashChar, StringSplitOptions.None);
                 if (slashSplit.Length != 1 && slashSplit.Length != 2 && slashSplit.Length != 3)
@@ -211,7 +211,7 @@ namespace Veldrid.Utilities
                 return new ObjFile.FaceVertex() { PositionIndex = pos, NormalIndex = normal, TexCoordIndex = texCoord };
             }
 
-            private ObjParseException CreateExceptionForWrongFaceCount(int count)
+            public ObjParseException CreateExceptionForWrongFaceCount(int count)
             {
                 return new ObjParseException(
                     string.Format("Expected 1, 2, or 3 face components, but got {0}, on line {1}, \"{2}\"",
@@ -265,7 +265,7 @@ namespace Veldrid.Utilities
                 return new ObjFile(_positions.ToArray(), _normals.ToArray(), _texCoords.ToArray(), _groups.ToArray(), _materialLibName);
             }
 
-            private Vector3 ParseVector3(string xStr, string yStr, string zStr, string location)
+            public Vector3 ParseVector3(string xStr, string yStr, string zStr, string location)
             {
                 try
                 {
@@ -281,7 +281,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private Vector2 ParseVector2(string xStr, string yStr, string location)
+            public Vector2 ParseVector2(string xStr, string yStr, string location)
             {
                 try
                 {
@@ -296,7 +296,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private int ParseInt(string intStr, string location)
+            public int ParseInt(string intStr, string location)
             {
                 try
                 {
@@ -309,7 +309,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private void ExpectExactly(string[] pieces, int count, string name)
+            public void ExpectExactly(string[] pieces, int count, string name)
             {
                 if (pieces.Length != count + 1)
                 {
@@ -323,7 +323,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private void ExpectAtLeast(string[] pieces, int count, string name)
+            public void ExpectAtLeast(string[] pieces, int count, string name)
             {
                 if (pieces.Length < count + 1)
                 {
@@ -337,7 +337,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private ObjParseException CreateParseException(string location, FormatException fe)
+            public ObjParseException CreateParseException(string location, FormatException fe)
             {
                 string message = string.Format("An error ocurred while parsing {0} on line {1}, \"{2}\"", location, _currentLine, _currentLineText);
                 return new ObjParseException(message, fe);
@@ -415,7 +415,7 @@ namespace Veldrid.Utilities
             return GetMesh(MeshGroups[0]);
         }
 
-        private ushort GetOrCreate(
+        public ushort GetOrCreate(
             Dictionary<FaceVertex, ushort> vertexMap,
             List<VertexPositionNormalTexture> vertices,
             FaceVertex key,
@@ -434,7 +434,7 @@ namespace Veldrid.Utilities
             return index;
         }
 
-        private VertexPositionNormalTexture ConstructVertex(FaceVertex key, FaceVertex adjacent1, FaceVertex adjacent2)
+        public VertexPositionNormalTexture ConstructVertex(FaceVertex key, FaceVertex adjacent1, FaceVertex adjacent2)
         {
             Vector3 position = Positions[key.PositionIndex - 1];
             Vector3 normal;
@@ -453,7 +453,7 @@ namespace Veldrid.Utilities
             return new VertexPositionNormalTexture(position, normal, texCoord);
         }
 
-        private Vector3 ComputeNormal(FaceVertex v1, FaceVertex v2, FaceVertex v3)
+        public Vector3 ComputeNormal(FaceVertex v1, FaceVertex v2, FaceVertex v3)
         {
             Vector3 pos1 = Positions[v1.PositionIndex - 1];
             Vector3 pos2 = Positions[v2.PositionIndex - 1];

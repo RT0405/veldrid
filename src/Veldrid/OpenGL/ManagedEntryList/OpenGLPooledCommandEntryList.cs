@@ -4,33 +4,33 @@ using System.Collections.Generic;
 
 namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class OpenGLPooledCommandEntryList : OpenGLCommandEntryList
+    public class OpenGLPooledCommandEntryList : OpenGLCommandEntryList
     {
-        private readonly List<OpenGLCommandEntry> _commands = new List<OpenGLCommandEntry>();
-        private readonly StagingMemoryPool _memoryPool = new StagingMemoryPool();
+        public readonly List<OpenGLCommandEntry> _commands = new List<OpenGLCommandEntry>();
+        public readonly StagingMemoryPool _memoryPool = new StagingMemoryPool();
 
-        private readonly EntryPool<BeginEntry> _beginEntryPool = new EntryPool<BeginEntry>();
-        private readonly EntryPool<ClearColorTargetEntry> _clearColorTargetEntryPool = new EntryPool<ClearColorTargetEntry>();
-        private readonly EntryPool<ClearDepthTargetEntry> _clearDepthTargetEntryPool = new EntryPool<ClearDepthTargetEntry>();
-        private readonly EntryPool<DrawEntry> _drawEntryPool = new EntryPool<DrawEntry>();
-        private readonly EntryPool<DrawIndexedEntry> _drawIndexedEntryPool = new EntryPool<DrawIndexedEntry>();
-        private readonly EntryPool<DispatchEntry> _dispatchEntryPool = new EntryPool<DispatchEntry>();
-        private readonly EntryPool<EndEntry> _endEntryPool = new EntryPool<EndEntry>();
-        private readonly EntryPool<SetFramebufferEntry> _setFramebufferEntryPool = new EntryPool<SetFramebufferEntry>();
-        private readonly EntryPool<SetIndexBufferEntry> _setIndexBufferEntryPool = new EntryPool<SetIndexBufferEntry>();
-        private readonly EntryPool<SetPipelineEntry> _setPipelineEntryPool = new EntryPool<SetPipelineEntry>();
-        private readonly EntryPool<SetGraphicsResourceSetEntry> _setGraphicsResourceSetEntryPool = new EntryPool<SetGraphicsResourceSetEntry>();
-        private readonly EntryPool<SetComputeResourceSetEntry> _setComputeResourceSetEntryPool = new EntryPool<SetComputeResourceSetEntry>();
-        private readonly EntryPool<SetScissorRectEntry> _setScissorRectEntryPool = new EntryPool<SetScissorRectEntry>();
-        private readonly EntryPool<SetVertexBufferEntry> _setVertexBufferEntryPool = new EntryPool<SetVertexBufferEntry>();
-        private readonly EntryPool<SetViewportEntry> _setViewportEntryPool = new EntryPool<SetViewportEntry>();
-        private readonly EntryPool<UpdateBufferEntry> _updateBufferEntryPool = new EntryPool<UpdateBufferEntry>();
-        private readonly EntryPool<UpdateTextureEntry> _updateTextureEntryPool = new EntryPool<UpdateTextureEntry>();
-        private readonly EntryPool<UpdateTextureCubeEntry> _updateTextureCubeEntryPool = new EntryPool<UpdateTextureCubeEntry>();
-        private readonly EntryPool<ResolveTextureEntry> _resolveTextureEntryPool = new EntryPool<ResolveTextureEntry>();
-        private readonly EntryPool<DrawIndirectEntry> _drawIndirectEntryPool = new EntryPool<DrawIndirectEntry>();
-        private readonly EntryPool<DrawIndexedIndirectEntry> _drawIndexedIndirectEntryPool = new EntryPool<DrawIndexedIndirectEntry>();
-        private readonly EntryPool<DispatchIndirectEntry> _dispatchIndirectEntryPool = new EntryPool<DispatchIndirectEntry>();
+        public readonly EntryPool<BeginEntry> _beginEntryPool = new EntryPool<BeginEntry>();
+        public readonly EntryPool<ClearColorTargetEntry> _clearColorTargetEntryPool = new EntryPool<ClearColorTargetEntry>();
+        public readonly EntryPool<ClearDepthTargetEntry> _clearDepthTargetEntryPool = new EntryPool<ClearDepthTargetEntry>();
+        public readonly EntryPool<DrawEntry> _drawEntryPool = new EntryPool<DrawEntry>();
+        public readonly EntryPool<DrawIndexedEntry> _drawIndexedEntryPool = new EntryPool<DrawIndexedEntry>();
+        public readonly EntryPool<DispatchEntry> _dispatchEntryPool = new EntryPool<DispatchEntry>();
+        public readonly EntryPool<EndEntry> _endEntryPool = new EntryPool<EndEntry>();
+        public readonly EntryPool<SetFramebufferEntry> _setFramebufferEntryPool = new EntryPool<SetFramebufferEntry>();
+        public readonly EntryPool<SetIndexBufferEntry> _setIndexBufferEntryPool = new EntryPool<SetIndexBufferEntry>();
+        public readonly EntryPool<SetPipelineEntry> _setPipelineEntryPool = new EntryPool<SetPipelineEntry>();
+        public readonly EntryPool<SetGraphicsResourceSetEntry> _setGraphicsResourceSetEntryPool = new EntryPool<SetGraphicsResourceSetEntry>();
+        public readonly EntryPool<SetComputeResourceSetEntry> _setComputeResourceSetEntryPool = new EntryPool<SetComputeResourceSetEntry>();
+        public readonly EntryPool<SetScissorRectEntry> _setScissorRectEntryPool = new EntryPool<SetScissorRectEntry>();
+        public readonly EntryPool<SetVertexBufferEntry> _setVertexBufferEntryPool = new EntryPool<SetVertexBufferEntry>();
+        public readonly EntryPool<SetViewportEntry> _setViewportEntryPool = new EntryPool<SetViewportEntry>();
+        public readonly EntryPool<UpdateBufferEntry> _updateBufferEntryPool = new EntryPool<UpdateBufferEntry>();
+        public readonly EntryPool<UpdateTextureEntry> _updateTextureEntryPool = new EntryPool<UpdateTextureEntry>();
+        public readonly EntryPool<UpdateTextureCubeEntry> _updateTextureCubeEntryPool = new EntryPool<UpdateTextureCubeEntry>();
+        public readonly EntryPool<ResolveTextureEntry> _resolveTextureEntryPool = new EntryPool<ResolveTextureEntry>();
+        public readonly EntryPool<DrawIndirectEntry> _drawIndirectEntryPool = new EntryPool<DrawIndirectEntry>();
+        public readonly EntryPool<DrawIndexedIndirectEntry> _drawIndexedIndirectEntryPool = new EntryPool<DrawIndexedIndirectEntry>();
+        public readonly EntryPool<DispatchIndirectEntry> _dispatchIndirectEntryPool = new EntryPool<DispatchIndirectEntry>();
 
         public IReadOnlyList<OpenGLCommandEntry> Commands => _commands;
 
@@ -308,9 +308,9 @@ namespace Veldrid.OpenGL.ManagedEntryList
             }
         }
 
-        private class EntryPool<T> where T : OpenGLCommandEntry, new()
+        public class EntryPool<T> where T : OpenGLCommandEntry, new()
         {
-            private readonly Queue<T> _entries = new Queue<T>();
+            public readonly Queue<T> _entries = new Queue<T>();
 
             public T Rent()
             {

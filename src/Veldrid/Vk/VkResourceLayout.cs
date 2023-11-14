@@ -4,13 +4,13 @@ using static Veldrid.Vk.VulkanUtil;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkResourceLayout : ResourceLayout
+    public unsafe class VkResourceLayout : ResourceLayout
     {
-        private readonly VkGraphicsDevice _gd;
-        private readonly VkDescriptorSetLayout _dsl;
-        private readonly VkDescriptorType[] _descriptorTypes;
-        private bool _disposed;
-        private string _name;
+        public readonly VkGraphicsDevice _gd;
+        public readonly VkDescriptorSetLayout _dsl;
+        public readonly VkDescriptorType[] _descriptorTypes;
+        public bool _disposed;
+        public string _name;
 
         public VkDescriptorSetLayout DescriptorSetLayout => _dsl;
         public VkDescriptorType[] DescriptorTypes => _descriptorTypes;

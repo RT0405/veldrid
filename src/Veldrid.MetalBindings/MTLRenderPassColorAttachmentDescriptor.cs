@@ -60,7 +60,7 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, Selectors.setLevel, value);
         }
 
-        private static readonly Selector sel_clearColor = "clearColor";
-        private static readonly Selector sel_setClearColor = "setClearColor:";
+        public static readonly Selector sel_clearColor = "clearColor";
+        public static readonly Selector sel_setClearColor = "setClearColor:";
     }
 }

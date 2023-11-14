@@ -12,9 +12,9 @@ namespace Veldrid.Utilities
     /// </summary>
     public class MtlParser
     {
-        private static readonly string[] s_newline = new string[] { "\n" };
+        public static readonly string[] s_newline = new string[] { "\n" };
 
-        private readonly ParseContext _pc = new ParseContext();
+        public readonly ParseContext _pc = new ParseContext();
 
         /// <summary>
         /// Parses a <see cref="MtlFile"/> from the given array of text lines.
@@ -68,15 +68,15 @@ namespace Veldrid.Utilities
             return _pc.FinalizeFile();
         }
 
-        private class ParseContext
+        public class ParseContext
         {
-            private static readonly char[] s_whitespaceChars = new char[] { ' ' };
+            public static readonly char[] s_whitespaceChars = new char[] { ' ' };
 
-            private readonly List<MaterialDefinition> _definitions = new List<MaterialDefinition>();
-            private MaterialDefinition _currentDefinition;
+            public readonly List<MaterialDefinition> _definitions = new List<MaterialDefinition>();
+            public MaterialDefinition _currentDefinition;
 
-            private int _currentLine;
-            private string _currentLineText;
+            public int _currentLine;
+            public string _currentLineText;
 
             public void Process(string line)
             {
@@ -175,7 +175,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private void FinalizeCurrentMaterial()
+            public void FinalizeCurrentMaterial()
             {
                 if (_currentDefinition != null)
                 {
@@ -194,7 +194,7 @@ namespace Veldrid.Utilities
                 return new MtlFile(_definitions);
             }
 
-            private Vector3 ParseVector3(string xStr, string yStr, string zStr, string location)
+            public Vector3 ParseVector3(string xStr, string yStr, string zStr, string location)
             {
                 try
                 {
@@ -210,7 +210,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private Vector2 ParseVector2(string xStr, string yStr, string location)
+            public Vector2 ParseVector2(string xStr, string yStr, string location)
             {
                 try
                 {
@@ -225,7 +225,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private int ParseInt(string intStr, string location)
+            public int ParseInt(string intStr, string location)
             {
                 try
                 {
@@ -238,7 +238,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private float ParseFloat(string intStr, string location)
+            public float ParseFloat(string intStr, string location)
             {
                 try
                 {
@@ -251,7 +251,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private void ExpectExactly(string[] pieces, int count, string name)
+            public void ExpectExactly(string[] pieces, int count, string name)
             {
                 if (pieces.Length != count + 1)
                 {
@@ -265,7 +265,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private void ExpectAtLeast(string[] pieces, int count, string name)
+            public void ExpectAtLeast(string[] pieces, int count, string name)
             {
                 if (pieces.Length < count + 1)
                 {
@@ -279,7 +279,7 @@ namespace Veldrid.Utilities
                 }
             }
 
-            private MtlParseException CreateParseException(string location, Exception e)
+            public MtlParseException CreateParseException(string location, Exception e)
             {
                 string message = string.Format("An error ocurred while parsing {0} on line {1}, \"{2}\"", location, _currentLine, _currentLineText);
                 return new MtlParseException(message, e);
@@ -323,32 +323,32 @@ namespace Veldrid.Utilities
     /// </summary>
     public class MaterialDefinition
     {
-        internal MaterialDefinition(string name)
+        public MaterialDefinition(string name)
         {
             Name = name;
         }
 
         public string Name { get; }
 
-        public Vector3 AmbientReflectivity { get; internal set; }
-        public Vector3 DiffuseReflectivity { get; internal set; }
-        public Vector3 SpecularReflectivity { get; internal set; }
-        public Vector3 EmissiveCoefficient { get; internal set; }
-        public Vector3 TransmissionFilter { get; internal set; }
-        public int IlluminationModel { get; internal set; }
-        public float Opacity { get; internal set; }
+        public Vector3 AmbientReflectivity { get; set; }
+        public Vector3 DiffuseReflectivity { get; set; }
+        public Vector3 SpecularReflectivity { get; set; }
+        public Vector3 EmissiveCoefficient { get; set; }
+        public Vector3 TransmissionFilter { get; set; }
+        public int IlluminationModel { get; set; }
+        public float Opacity { get; set; }
         public float Transparency => 1 - Opacity;
-        public float SpecularExponent { get; internal set; }
-        public float Sharpness { get; internal set; }
-        public float OpticalDensity { get; internal set; }
+        public float SpecularExponent { get; set; }
+        public float Sharpness { get; set; }
+        public float OpticalDensity { get; set; }
 
-        public string AmbientTexture { get; internal set; }
-        public string DiffuseTexture { get; internal set; }
-        public string SpecularColorTexture { get; internal set; }
-        public string SpecularHighlightTexture { get; internal set; }
-        public string AlphaMap { get; internal set; }
-        public string BumpMap { get; internal set; }
-        public string DisplacementMap { get; internal set; }
-        public string StencilDecalTexture { get; internal set; }
+        public string AmbientTexture { get; set; }
+        public string DiffuseTexture { get; set; }
+        public string SpecularColorTexture { get; set; }
+        public string SpecularHighlightTexture { get; set; }
+        public string AlphaMap { get; set; }
+        public string BumpMap { get; set; }
+        public string DisplacementMap { get; set; }
+        public string StencilDecalTexture { get; set; }
     }
 }

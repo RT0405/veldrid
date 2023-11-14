@@ -5,22 +5,22 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLSwapchainFramebuffer : MTLFramebufferBase
+    public class MTLSwapchainFramebuffer : MTLFramebufferBase
     {
-        private readonly MTLGraphicsDevice _gd;
-        private readonly MTLPlaceholderTexture _placeholderTexture;
-        private MTLTexture _depthTexture;
-        private readonly MTLSwapchain _parentSwapchain;
-        private bool _disposed;
+        public readonly MTLGraphicsDevice _gd;
+        public readonly MTLPlaceholderTexture _placeholderTexture;
+        public MTLTexture _depthTexture;
+        public readonly MTLSwapchain _parentSwapchain;
+        public bool _disposed;
 
         public override uint Width => _placeholderTexture.Width;
         public override uint Height => _placeholderTexture.Height;
 
         public override OutputDescription OutputDescription { get; }
 
-        private readonly FramebufferAttachment[] _colorTargets;
-        private readonly FramebufferAttachment? _depthTarget;
-        private readonly PixelFormat? _depthFormat;
+        public readonly FramebufferAttachment[] _colorTargets;
+        public readonly FramebufferAttachment? _depthTarget;
+        public readonly PixelFormat? _depthFormat;
 
         public override IReadOnlyList<FramebufferAttachment> ColorTargets => _colorTargets;
         public override FramebufferAttachment? DepthTarget => _depthTarget;
@@ -55,7 +55,7 @@ namespace Veldrid.MTL
             _colorTargets = new[] { new FramebufferAttachment(_placeholderTexture, 0) };
         }
 
-        private void RecreateDepthTexture(uint width, uint height)
+        public void RecreateDepthTexture(uint width, uint height)
         {
             Debug.Assert(_depthFormat.HasValue);
             if (_depthTexture != null)

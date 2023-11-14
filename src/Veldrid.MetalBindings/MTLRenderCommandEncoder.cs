@@ -140,30 +140,30 @@ namespace Veldrid.MetalBindings
         public void insertDebugSignpost(NSString @string)
             => objc_msgSend(NativePtr, Selectors.insertDebugSignpost, @string.NativePtr);
 
-        private static readonly Selector sel_setRenderPipelineState = "setRenderPipelineState:";
-        private static readonly Selector sel_setVertexBuffer = "setVertexBuffer:offset:atIndex:";
-        private static readonly Selector sel_setFragmentBuffer = "setFragmentBuffer:offset:atIndex:";
-        private static readonly Selector sel_setVertexTexture = "setVertexTexture:atIndex:";
-        private static readonly Selector sel_setFragmentTexture = "setFragmentTexture:atIndex:";
-        private static readonly Selector sel_setVertexSamplerState = "setVertexSamplerState:atIndex:";
-        private static readonly Selector sel_setFragmentSamplerState = "setFragmentSamplerState:atIndex:";
-        private static readonly Selector sel_drawPrimitives0 = "drawPrimitives:vertexStart:vertexCount:instanceCount:baseInstance:";
-        private static readonly Selector sel_drawPrimitives1 = "drawPrimitives:indirectBuffer:indirectBufferOffset:";
-        private static readonly Selector sel_drawPrimitives2 = "drawPrimitives:vertexStart:vertexCount:instanceCount:";
-        private static readonly Selector sel_drawIndexedPrimitives0 = "drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:";
-        private static readonly Selector sel_drawIndexedPrimitives1 = "drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:baseVertex:baseInstance:";
-        private static readonly Selector sel_drawIndexedPrimitives2 = "drawIndexedPrimitives:indexType:indexBuffer:indexBufferOffset:indirectBuffer:indirectBufferOffset:";
-        private static readonly Selector sel_setViewport = "setViewport:";
-        private static readonly Selector sel_setViewports = "setViewports:count:";
-        private static readonly Selector sel_setScissorRect = "setScissorRect:";
-        private static readonly Selector sel_setScissorRects = "setScissorRects:count:";
-        private static readonly Selector sel_setCullMode = "setCullMode:";
-        private static readonly Selector sel_setFrontFacingWinding = "setFrontFacingWinding:";
-        private static readonly Selector sel_setDepthStencilState = "setDepthStencilState:";
-        private static readonly Selector sel_setDepthClipMode = "setDepthClipMode:";
-        private static readonly Selector sel_endEncoding = "endEncoding";
-        private static readonly Selector sel_setStencilReferenceValue = "setStencilReferenceValue:";
-        private static readonly Selector sel_setBlendColor = "setBlendColorRed:green:blue:alpha:";
-        private static readonly Selector sel_setTriangleFillMode = "setTriangleFillMode:";
+        public static readonly Selector sel_setRenderPipelineState = "setRenderPipelineState:";
+        public static readonly Selector sel_setVertexBuffer = "setVertexBuffer:offset:atIndex:";
+        public static readonly Selector sel_setFragmentBuffer = "setFragmentBuffer:offset:atIndex:";
+        public static readonly Selector sel_setVertexTexture = "setVertexTexture:atIndex:";
+        public static readonly Selector sel_setFragmentTexture = "setFragmentTexture:atIndex:";
+        public static readonly Selector sel_setVertexSamplerState = "setVertexSamplerState:atIndex:";
+        public static readonly Selector sel_setFragmentSamplerState = "setFragmentSamplerState:atIndex:";
+        public static readonly Selector sel_drawPrimitives0 = "drawPrimitives:vertexStart:vertexCount:instanceCount:baseInstance:";
+        public static readonly Selector sel_drawPrimitives1 = "drawPrimitives:indirectBuffer:indirectBufferOffset:";
+        public static readonly Selector sel_drawPrimitives2 = "drawPrimitives:vertexStart:vertexCount:instanceCount:";
+        public static readonly Selector sel_drawIndexedPrimitives0 = "drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:";
+        public static readonly Selector sel_drawIndexedPrimitives1 = "drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferOffset:instanceCount:baseVertex:baseInstance:";
+        public static readonly Selector sel_drawIndexedPrimitives2 = "drawIndexedPrimitives:indexType:indexBuffer:indexBufferOffset:indirectBuffer:indirectBufferOffset:";
+        public static readonly Selector sel_setViewport = "setViewport:";
+        public static readonly Selector sel_setViewports = "setViewports:count:";
+        public static readonly Selector sel_setScissorRect = "setScissorRect:";
+        public static readonly Selector sel_setScissorRects = "setScissorRects:count:";
+        public static readonly Selector sel_setCullMode = "setCullMode:";
+        public static readonly Selector sel_setFrontFacingWinding = "setFrontFacingWinding:";
+        public static readonly Selector sel_setDepthStencilState = "setDepthStencilState:";
+        public static readonly Selector sel_setDepthClipMode = "setDepthClipMode:";
+        public static readonly Selector sel_endEncoding = "endEncoding";
+        public static readonly Selector sel_setStencilReferenceValue = "setStencilReferenceValue:";
+        public static readonly Selector sel_setBlendColor = "setBlendColorRed:green:blue:alpha:";
+        public static readonly Selector sel_setTriangleFillMode = "setTriangleFillMode:";
     }
 }

@@ -7,41 +7,41 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal unsafe class MTLCommandList : CommandList
+    public unsafe class MTLCommandList : CommandList
     {
-        private readonly MTLGraphicsDevice _gd;
-        private MTLCommandBuffer _cb;
-        private MTLFramebufferBase _mtlFramebuffer;
-        private uint _viewportCount;
-        private bool _currentFramebufferEverActive;
-        private MTLRenderCommandEncoder _rce;
-        private MTLBlitCommandEncoder _bce;
-        private MTLComputeCommandEncoder _cce;
-        private RgbaFloat?[] _clearColors = Array.Empty<RgbaFloat?>();
-        private (float depth, byte stencil)? _clearDepth;
-        private MTLBuffer _indexBuffer;
-        private uint _ibOffset;
-        private MTLIndexType _indexType;
-        private new MTLPipeline _graphicsPipeline;
-        private bool _graphicsPipelineChanged;
-        private new MTLPipeline _computePipeline;
-        private bool _computePipelineChanged;
-        private MTLViewport[] _viewports = Array.Empty<MTLViewport>();
-        private bool _viewportsChanged;
-        private MTLScissorRect[] _scissorRects = Array.Empty<MTLScissorRect>();
-        private bool _scissorRectsChanged;
-        private uint _graphicsResourceSetCount;
-        private BoundResourceSetInfo[] _graphicsResourceSets;
-        private bool[] _graphicsResourceSetsActive;
-        private uint _computeResourceSetCount;
-        private BoundResourceSetInfo[] _computeResourceSets;
-        private bool[] _computeResourceSetsActive;
-        private uint _vertexBufferCount;
-        private uint _nonVertexBufferCount;
-        private MTLBuffer[] _vertexBuffers;
-        private uint[] _vbOffsets;
-        private bool[] _vertexBuffersActive;
-        private bool _disposed;
+        public readonly MTLGraphicsDevice _gd;
+        public MTLCommandBuffer _cb;
+        public MTLFramebufferBase _mtlFramebuffer;
+        public uint _viewportCount;
+        public bool _currentFramebufferEverActive;
+        public MTLRenderCommandEncoder _rce;
+        public MTLBlitCommandEncoder _bce;
+        public MTLComputeCommandEncoder _cce;
+        public RgbaFloat?[] _clearColors = Array.Empty<RgbaFloat?>();
+        public (float depth, byte stencil)? _clearDepth;
+        public MTLBuffer _indexBuffer;
+        public uint _ibOffset;
+        public MTLIndexType _indexType;
+        public new MTLPipeline _graphicsPipeline;
+        public bool _graphicsPipelineChanged;
+        public new MTLPipeline _computePipeline;
+        public bool _computePipelineChanged;
+        public MTLViewport[] _viewports = Array.Empty<MTLViewport>();
+        public bool _viewportsChanged;
+        public MTLScissorRect[] _scissorRects = Array.Empty<MTLScissorRect>();
+        public bool _scissorRectsChanged;
+        public uint _graphicsResourceSetCount;
+        public BoundResourceSetInfo[] _graphicsResourceSets;
+        public bool[] _graphicsResourceSetsActive;
+        public uint _computeResourceSetCount;
+        public BoundResourceSetInfo[] _computeResourceSets;
+        public bool[] _computeResourceSetsActive;
+        public uint _vertexBufferCount;
+        public uint _nonVertexBufferCount;
+        public MTLBuffer[] _vertexBuffers;
+        public uint[] _vbOffsets;
+        public bool[] _vertexBuffersActive;
+        public bool _disposed;
 
         public MTLCommandBuffer CommandBuffer => _cb;
 
@@ -155,7 +155,7 @@ namespace Veldrid.MTL
                 }
             }
         }
-        private bool PreDrawCommand()
+        public bool PreDrawCommand()
         {
             if (EnsureRenderPass())
             {
@@ -214,7 +214,7 @@ namespace Veldrid.MTL
         }
 
 
-        private void FlushViewports()
+        public void FlushViewports()
         {
             if (_gd.MetalFeatures.IsSupported(MTLFeatureSet.macOS_GPUFamily1_v3))
             {
@@ -229,7 +229,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private void FlushScissorRects()
+        public void FlushScissorRects()
         {
             if (_gd.MetalFeatures.IsSupported(MTLFeatureSet.macOS_GPUFamily1_v3))
             {
@@ -244,7 +244,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private void PreComputeCommand()
+        public void PreComputeCommand()
         {
             EnsureComputeEncoder();
             if (_computePipelineChanged)
@@ -716,7 +716,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private void ActivateGraphicsResourceSet(uint slot, BoundResourceSetInfo brsi)
+        public void ActivateGraphicsResourceSet(uint slot, BoundResourceSetInfo brsi)
         {
             Debug.Assert(RenderEncoderActive);
             MTLResourceSet mtlRS = Util.AssertSubtype<ResourceSet, MTLResourceSet>(brsi.Set);
@@ -773,7 +773,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private void ActivateComputeResourceSet(uint slot, BoundResourceSetInfo brsi)
+        public void ActivateComputeResourceSet(uint slot, BoundResourceSetInfo brsi)
         {
             Debug.Assert(ComputeEncoderActive);
             MTLResourceSet mtlRS = Util.AssertSubtype<ResourceSet, MTLResourceSet>(brsi.Set);
@@ -831,7 +831,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private void BindBuffer(DeviceBufferRange range, uint set, uint slot, ShaderStages stages)
+        public void BindBuffer(DeviceBufferRange range, uint set, uint slot, ShaderStages stages)
         {
             MTLBuffer mtlBuffer = Util.AssertSubtype<DeviceBuffer, MTLBuffer>(range.Buffer);
             uint baseBuffer = GetBufferBase(set, stages != ShaderStages.Compute);
@@ -855,7 +855,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private void BindTexture(MTLTextureView mtlTexView, uint set, uint slot, ShaderStages stages)
+        public void BindTexture(MTLTextureView mtlTexView, uint set, uint slot, ShaderStages stages)
         {
             uint baseTexture = GetTextureBase(set, stages != ShaderStages.Compute);
             if (stages == ShaderStages.Compute)
@@ -872,7 +872,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private void BindSampler(MTLSampler mtlSampler, uint set, uint slot, ShaderStages stages)
+        public void BindSampler(MTLSampler mtlSampler, uint set, uint slot, ShaderStages stages)
         {
             uint baseSampler = GetSamplerBase(set, stages != ShaderStages.Compute);
             if (stages == ShaderStages.Compute)
@@ -889,7 +889,7 @@ namespace Veldrid.MTL
             }
         }
 
-        private uint GetBufferBase(uint set, bool graphics)
+        public uint GetBufferBase(uint set, bool graphics)
         {
             MTLResourceLayout[] layouts = graphics ? _graphicsPipeline.ResourceLayouts : _computePipeline.ResourceLayouts;
             uint ret = 0;
@@ -902,7 +902,7 @@ namespace Veldrid.MTL
             return ret;
         }
 
-        private uint GetTextureBase(uint set, bool graphics)
+        public uint GetTextureBase(uint set, bool graphics)
         {
             MTLResourceLayout[] layouts = graphics ? _graphicsPipeline.ResourceLayouts : _computePipeline.ResourceLayouts;
             uint ret = 0;
@@ -915,7 +915,7 @@ namespace Veldrid.MTL
             return ret;
         }
 
-        private uint GetSamplerBase(uint set, bool graphics)
+        public uint GetSamplerBase(uint set, bool graphics)
         {
             MTLResourceLayout[] layouts = graphics ? _graphicsPipeline.ResourceLayouts : _computePipeline.ResourceLayouts;
             uint ret = 0;
@@ -928,7 +928,7 @@ namespace Veldrid.MTL
             return ret;
         }
 
-        private bool EnsureRenderPass()
+        public bool EnsureRenderPass()
         {
             Debug.Assert(_mtlFramebuffer != null);
             EnsureNoBlitEncoder();
@@ -936,11 +936,11 @@ namespace Veldrid.MTL
             return RenderEncoderActive || BeginCurrentRenderPass();
         }
 
-        private bool RenderEncoderActive => !_rce.IsNull;
-        private bool BlitEncoderActive => !_bce.IsNull;
-        private bool ComputeEncoderActive => !_cce.IsNull;
+        public bool RenderEncoderActive => !_rce.IsNull;
+        public bool BlitEncoderActive => !_bce.IsNull;
+        public bool ComputeEncoderActive => !_cce.IsNull;
 
-        private bool BeginCurrentRenderPass()
+        public bool BeginCurrentRenderPass()
         {
             if (!_mtlFramebuffer.IsRenderable)
             {
@@ -988,7 +988,7 @@ namespace Veldrid.MTL
             return true;
         }
 
-        private void EnsureNoRenderPass()
+        public void EnsureNoRenderPass()
         {
             if (RenderEncoderActive)
             {
@@ -998,7 +998,7 @@ namespace Veldrid.MTL
             Debug.Assert(!RenderEncoderActive);
         }
 
-        private void EndCurrentRenderPass()
+        public void EndCurrentRenderPass()
         {
             _rce.endEncoding();
             ObjectiveCRuntime.release(_rce.NativePtr);
@@ -1009,7 +1009,7 @@ namespace Veldrid.MTL
             _scissorRectsChanged = true;
         }
 
-        private void EnsureBlitEncoder()
+        public void EnsureBlitEncoder()
         {
             if (!BlitEncoderActive)
             {
@@ -1027,7 +1027,7 @@ namespace Veldrid.MTL
             Debug.Assert(!ComputeEncoderActive);
         }
 
-        private void EnsureNoBlitEncoder()
+        public void EnsureNoBlitEncoder()
         {
             if (BlitEncoderActive)
             {
@@ -1039,7 +1039,7 @@ namespace Veldrid.MTL
             Debug.Assert(!BlitEncoderActive);
         }
 
-        private void EnsureComputeEncoder()
+        public void EnsureComputeEncoder()
         {
             if (!ComputeEncoderActive)
             {
@@ -1058,7 +1058,7 @@ namespace Veldrid.MTL
             Debug.Assert(!BlitEncoderActive);
         }
 
-        private void EnsureNoComputeEncoder()
+        public void EnsureNoComputeEncoder()
         {
             if (ComputeEncoderActive)
             {

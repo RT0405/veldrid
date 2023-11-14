@@ -11,80 +11,80 @@ using Vortice.Mathematics;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11CommandList : CommandList
+    public class D3D11CommandList : CommandList
     {
-        private readonly D3D11GraphicsDevice _gd;
-        private readonly ID3D11DeviceContext _context;
-        private readonly ID3D11DeviceContext1 _context1;
-        private readonly ID3DUserDefinedAnnotation _uda;
-        private bool _begun;
-        private bool _disposed;
-        private ID3D11CommandList _commandList;
+        public readonly D3D11GraphicsDevice _gd;
+        public readonly ID3D11DeviceContext _context;
+        public readonly ID3D11DeviceContext1 _context1;
+        public readonly ID3DUserDefinedAnnotation _uda;
+        public bool _begun;
+        public bool _disposed;
+        public ID3D11CommandList _commandList;
 
-        private Viewport[] _viewports = new Viewport[0];
-        private RawRect[] _scissors = new RawRect[0];
-        private bool _viewportsChanged;
-        private bool _scissorRectsChanged;
+        public Viewport[] _viewports = new Viewport[0];
+        public RawRect[] _scissors = new RawRect[0];
+        public bool _viewportsChanged;
+        public bool _scissorRectsChanged;
 
-        private uint _numVertexBindings = 0;
-        private ID3D11Buffer[] _vertexBindings = new ID3D11Buffer[1];
-        private int[] _vertexStrides;
-        private int[] _vertexOffsets = new int[1];
+        public uint _numVertexBindings = 0;
+        public ID3D11Buffer[] _vertexBindings = new ID3D11Buffer[1];
+        public int[] _vertexStrides;
+        public int[] _vertexOffsets = new int[1];
 
         // Cached pipeline State
-        private DeviceBuffer _ib;
-        private uint _ibOffset;
-        private ID3D11BlendState _blendState;
-        private Color4 _blendFactor;
-        private ID3D11DepthStencilState _depthStencilState;
-        private uint _stencilReference;
-        private ID3D11RasterizerState _rasterizerState;
-        private Vortice.Direct3D.PrimitiveTopology _primitiveTopology;
-        private ID3D11InputLayout _inputLayout;
-        private ID3D11VertexShader _vertexShader;
-        private ID3D11GeometryShader _geometryShader;
-        private ID3D11HullShader _hullShader;
-        private ID3D11DomainShader _domainShader;
-        private ID3D11PixelShader _pixelShader;
+        public DeviceBuffer _ib;
+        public uint _ibOffset;
+        public ID3D11BlendState _blendState;
+        public Color4 _blendFactor;
+        public ID3D11DepthStencilState _depthStencilState;
+        public uint _stencilReference;
+        public ID3D11RasterizerState _rasterizerState;
+        public Vortice.Direct3D.PrimitiveTopology _primitiveTopology;
+        public ID3D11InputLayout _inputLayout;
+        public ID3D11VertexShader _vertexShader;
+        public ID3D11GeometryShader _geometryShader;
+        public ID3D11HullShader _hullShader;
+        public ID3D11DomainShader _domainShader;
+        public ID3D11PixelShader _pixelShader;
 
-        private new D3D11Pipeline _graphicsPipeline;
-        private BoundResourceSetInfo[] _graphicsResourceSets = new BoundResourceSetInfo[1];
+        public new D3D11Pipeline _graphicsPipeline;
+        public BoundResourceSetInfo[] _graphicsResourceSets = new BoundResourceSetInfo[1];
         // Resource sets are invalidated when a new resource set is bound with an incompatible SRV or UAV.
-        private bool[] _invalidatedGraphicsResourceSets = new bool[1];
+        public bool[] _invalidatedGraphicsResourceSets = new bool[1];
 
-        private new D3D11Pipeline _computePipeline;
-        private BoundResourceSetInfo[] _computeResourceSets = new BoundResourceSetInfo[1];
+        public new D3D11Pipeline _computePipeline;
+        public BoundResourceSetInfo[] _computeResourceSets = new BoundResourceSetInfo[1];
         // Resource sets are invalidated when a new resource set is bound with an incompatible SRV or UAV.
-        private bool[] _invalidatedComputeResourceSets = new bool[1];
-        private string _name;
-        private bool _vertexBindingsChanged;
-        private ID3D11Buffer[] _cbOut = new ID3D11Buffer[1];
-        private int[] _firstConstRef = new int[1];
-        private int[] _numConstsRef = new int[1];
+        public bool[] _invalidatedComputeResourceSets = new bool[1];
+        public string _name;
+        public bool _vertexBindingsChanged;
+        public ID3D11Buffer[] _cbOut = new ID3D11Buffer[1];
+        public int[] _firstConstRef = new int[1];
+        public int[] _numConstsRef = new int[1];
 
         // Cached resources
-        private const int MaxCachedUniformBuffers = 15;
-        private readonly D3D11BufferRange[] _vertexBoundUniformBuffers = new D3D11BufferRange[MaxCachedUniformBuffers];
-        private readonly D3D11BufferRange[] _fragmentBoundUniformBuffers = new D3D11BufferRange[MaxCachedUniformBuffers];
-        private const int MaxCachedTextureViews = 16;
-        private readonly D3D11TextureView[] _vertexBoundTextureViews = new D3D11TextureView[MaxCachedTextureViews];
-        private readonly D3D11TextureView[] _fragmentBoundTextureViews = new D3D11TextureView[MaxCachedTextureViews];
-        private const int MaxCachedSamplers = 4;
-        private readonly D3D11Sampler[] _vertexBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
-        private readonly D3D11Sampler[] _fragmentBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
+        public const int MaxCachedUniformBuffers = 15;
+        public readonly D3D11BufferRange[] _vertexBoundUniformBuffers = new D3D11BufferRange[MaxCachedUniformBuffers];
+        public readonly D3D11BufferRange[] _fragmentBoundUniformBuffers = new D3D11BufferRange[MaxCachedUniformBuffers];
+        public const int MaxCachedTextureViews = 16;
+        public readonly D3D11TextureView[] _vertexBoundTextureViews = new D3D11TextureView[MaxCachedTextureViews];
+        public readonly D3D11TextureView[] _fragmentBoundTextureViews = new D3D11TextureView[MaxCachedTextureViews];
+        public const int MaxCachedSamplers = 4;
+        public readonly D3D11Sampler[] _vertexBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
+        public readonly D3D11Sampler[] _fragmentBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
 
-        private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundSRVs = new Dictionary<Texture, List<BoundTextureInfo>>();
-        private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundUAVs = new Dictionary<Texture, List<BoundTextureInfo>>();
-        private readonly List<List<BoundTextureInfo>> _boundTextureInfoPool = new List<List<BoundTextureInfo>>(20);
+        public readonly Dictionary<Texture, List<BoundTextureInfo>> _boundSRVs = new Dictionary<Texture, List<BoundTextureInfo>>();
+        public readonly Dictionary<Texture, List<BoundTextureInfo>> _boundUAVs = new Dictionary<Texture, List<BoundTextureInfo>>();
+        public readonly List<List<BoundTextureInfo>> _boundTextureInfoPool = new List<List<BoundTextureInfo>>(20);
 
-        private const int MaxUAVs = 8;
-        private readonly List<(DeviceBuffer, int)> _boundComputeUAVBuffers = new List<(DeviceBuffer, int)>(MaxUAVs);
-        private readonly List<(DeviceBuffer, int)> _boundOMUAVBuffers = new List<(DeviceBuffer, int)>(MaxUAVs);
+        public const int MaxUAVs = 8;
+        public readonly List<(DeviceBuffer, int)> _boundComputeUAVBuffers = new List<(DeviceBuffer, int)>(MaxUAVs);
+        public readonly List<(DeviceBuffer, int)> _boundOMUAVBuffers = new List<(DeviceBuffer, int)>(MaxUAVs);
 
-        private readonly List<D3D11Buffer> _availableStagingBuffers = new List<D3D11Buffer>();
-        private readonly List<D3D11Buffer> _submittedStagingBuffers = new List<D3D11Buffer>();
+        public readonly List<D3D11Buffer> _availableStagingBuffers = new List<D3D11Buffer>();
+        public readonly List<D3D11Buffer> _submittedStagingBuffers = new List<D3D11Buffer>();
 
-        private readonly List<D3D11Swapchain> _referencedSwapchains = new List<D3D11Swapchain>();
+        public readonly List<D3D11Swapchain> _referencedSwapchains = new List<D3D11Swapchain>();
 
         public D3D11CommandList(D3D11GraphicsDevice gd, ref CommandListDescription description)
             : base(ref description, gd.Features, gd.UniformBufferMinOffsetAlignment, gd.StructuredBufferMinOffsetAlignment)
@@ -97,9 +97,9 @@ namespace Veldrid.D3D11
 
         public ID3D11CommandList DeviceCommandList => _commandList;
 
-        internal ID3D11DeviceContext DeviceContext => _context;
+        public ID3D11DeviceContext DeviceContext => _context;
 
-        private D3D11Framebuffer D3D11Framebuffer => Util.AssertSubtype<Framebuffer, D3D11Framebuffer>(_framebuffer);
+        public D3D11Framebuffer D3D11Framebuffer => Util.AssertSubtype<Framebuffer, D3D11Framebuffer>(_framebuffer);
 
         public override bool IsDisposed => _disposed;
 
@@ -111,14 +111,14 @@ namespace Veldrid.D3D11
             _begun = true;
         }
 
-        private void ClearState()
+        public void ClearState()
         {
             ClearCachedState();
             _context.ClearState();
             ResetManagedState();
         }
 
-        private void ResetManagedState()
+        public void ResetManagedState()
         {
             _numVertexBindings = 0;
             Util.ClearArray(_vertexBindings);
@@ -175,7 +175,7 @@ namespace Veldrid.D3D11
             _boundUAVs.Clear();
         }
 
-        private void ClearSets(BoundResourceSetInfo[] boundSets)
+        public void ClearSets(BoundResourceSetInfo[] boundSets)
         {
             foreach (BoundResourceSetInfo boundSetInfo in boundSets)
             {
@@ -360,7 +360,7 @@ namespace Veldrid.D3D11
             ActivateResourceSet(slot, _computeResourceSets[slot], false);
         }
 
-        private void ActivateResourceSet(uint slot, BoundResourceSetInfo brsi, bool graphics)
+        public void ActivateResourceSet(uint slot, BoundResourceSetInfo brsi, bool graphics)
         {
             D3D11ResourceSet d3d11RS = Util.AssertSubtype<ResourceSet, D3D11ResourceSet>(brsi.Set);
 
@@ -424,7 +424,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private D3D11BufferRange GetBufferRange(BindableResource resource, uint additionalOffset)
+        public D3D11BufferRange GetBufferRange(BindableResource resource, uint additionalOffset)
         {
             if (resource is D3D11Buffer d3d11Buff)
             {
@@ -443,7 +443,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void UnbindSRVTexture(Texture target)
+        public void UnbindSRVTexture(Texture target)
         {
             if (_boundSRVs.TryGetValue(target, out List<BoundTextureInfo> btis))
             {
@@ -469,12 +469,12 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void PoolBoundTextureList(List<BoundTextureInfo> btis)
+        public void PoolBoundTextureList(List<BoundTextureInfo> btis)
         {
             _boundTextureInfoPool.Add(btis);
         }
 
-        private void UnbindUAVTexture(Texture target)
+        public void UnbindUAVTexture(Texture target)
         {
             if (_boundUAVs.TryGetValue(target, out List<BoundTextureInfo> btis))
             {
@@ -499,7 +499,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private int GetConstantBufferBase(uint slot, bool graphics)
+        public int GetConstantBufferBase(uint slot, bool graphics)
         {
             D3D11ResourceLayout[] layouts = graphics ? _graphicsPipeline.ResourceLayouts : _computePipeline.ResourceLayouts;
             int ret = 0;
@@ -512,7 +512,7 @@ namespace Veldrid.D3D11
             return ret;
         }
 
-        private int GetUnorderedAccessBase(uint slot, bool graphics)
+        public int GetUnorderedAccessBase(uint slot, bool graphics)
         {
             D3D11ResourceLayout[] layouts = graphics ? _graphicsPipeline.ResourceLayouts : _computePipeline.ResourceLayouts;
             int ret = 0;
@@ -525,7 +525,7 @@ namespace Veldrid.D3D11
             return ret;
         }
 
-        private int GetTextureBase(uint slot, bool graphics)
+        public int GetTextureBase(uint slot, bool graphics)
         {
             D3D11ResourceLayout[] layouts = graphics ? _graphicsPipeline.ResourceLayouts : _computePipeline.ResourceLayouts;
             int ret = 0;
@@ -538,7 +538,7 @@ namespace Veldrid.D3D11
             return ret;
         }
 
-        private int GetSamplerBase(uint slot, bool graphics)
+        public int GetSamplerBase(uint slot, bool graphics)
         {
             D3D11ResourceLayout[] layouts = graphics ? _graphicsPipeline.ResourceLayouts : _computePipeline.ResourceLayouts;
             int ret = 0;
@@ -619,7 +619,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void PreDrawCommand()
+        public void PreDrawCommand()
         {
             FlushViewports();
             FlushScissorRects();
@@ -650,7 +650,7 @@ namespace Veldrid.D3D11
             _context.DispatchIndirect(d3d11Buffer.Buffer, (int)offset);
         }
 
-        private void PreDispatchCommand()
+        public void PreDispatchCommand()
         {
             int computeResourceCount = _computePipeline.ResourceLayouts.Length;
             for (uint i = 0; i < computeResourceCount; i++)
@@ -675,7 +675,7 @@ namespace Veldrid.D3D11
                 d3d11Destination.DxgiFormat);
         }
 
-        private void FlushViewports()
+        public void FlushViewports()
         {
             if (_viewportsChanged)
             {
@@ -684,7 +684,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void FlushScissorRects()
+        public void FlushScissorRects()
         {
             if (_scissorRectsChanged)
             {
@@ -698,7 +698,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private unsafe void FlushVertexBindings()
+        public unsafe void FlushVertexBindings()
         {
             if (_vertexBindingsChanged)
             {
@@ -726,7 +726,7 @@ namespace Veldrid.D3D11
             _viewports[index] = viewport;
         }
 
-        private void BindTextureView(D3D11TextureView texView, int slot, ShaderStages stages, uint resourceSet)
+        public void BindTextureView(D3D11TextureView texView, int slot, ShaderStages stages, uint resourceSet)
         {
             ID3D11ShaderResourceView srv = texView?.ShaderResourceView ?? null;
             if (srv != null)
@@ -797,7 +797,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private List<BoundTextureInfo> GetNewOrCachedBoundTextureInfoList()
+        public List<BoundTextureInfo> GetNewOrCachedBoundTextureInfoList()
         {
             if (_boundTextureInfoPool.Count > 0)
             {
@@ -810,7 +810,7 @@ namespace Veldrid.D3D11
             return new List<BoundTextureInfo>();
         }
 
-        private void BindStorageBufferView(D3D11BufferRange range, int slot, ShaderStages stages)
+        public void BindStorageBufferView(D3D11BufferRange range, int slot, ShaderStages stages)
         {
             bool compute = (stages & ShaderStages.Compute) != 0;
             UnbindUAVBuffer(range.Buffer);
@@ -843,7 +843,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void BindUniformBuffer(D3D11BufferRange range, int slot, ShaderStages stages)
+        public void BindUniformBuffer(D3D11BufferRange range, int slot, ShaderStages stages)
         {
             if ((stages & ShaderStages.Vertex) == ShaderStages.Vertex)
             {
@@ -975,7 +975,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void PackRangeParams(D3D11BufferRange range)
+        public void PackRangeParams(D3D11BufferRange range)
         {
             _cbOut[0] = range.Buffer.Buffer;
             _firstConstRef[0] = (int)range.Offset / 16;
@@ -983,7 +983,7 @@ namespace Veldrid.D3D11
             _numConstsRef[0] = (int)roundedSize / 16;
         }
 
-        private void BindUnorderedAccessView(
+        public void BindUnorderedAccessView(
             Texture texture,
             DeviceBuffer buffer,
             ID3D11UnorderedAccessView uav,
@@ -1027,19 +1027,19 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void TrackBoundUAVBuffer(DeviceBuffer buffer, int slot, bool compute)
+        public void TrackBoundUAVBuffer(DeviceBuffer buffer, int slot, bool compute)
         {
             List<(DeviceBuffer, int)> list = compute ? _boundComputeUAVBuffers : _boundOMUAVBuffers;
             list.Add((buffer, slot));
         }
 
-        private void UnbindUAVBuffer(DeviceBuffer buffer)
+        public void UnbindUAVBuffer(DeviceBuffer buffer)
         {
             UnbindUAVBufferIndividual(buffer, false);
             UnbindUAVBufferIndividual(buffer, true);
         }
 
-        private void UnbindUAVBufferIndividual(DeviceBuffer buffer, bool compute)
+        public void UnbindUAVBufferIndividual(DeviceBuffer buffer, bool compute)
         {
             List<(DeviceBuffer, int)> list = compute ? _boundComputeUAVBuffers : _boundOMUAVBuffers;
             for (int i = 0; i < list.Count; i++)
@@ -1062,7 +1062,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private void BindSampler(D3D11Sampler sampler, int slot, ShaderStages stages)
+        public void BindSampler(D3D11Sampler sampler, int slot, ShaderStages stages)
         {
             if ((stages & ShaderStages.Vertex) == ShaderStages.Vertex)
             {
@@ -1207,7 +1207,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private unsafe void UpdateSubresource_Workaround(
+        public unsafe void UpdateSubresource_Workaround(
             ID3D11Resource resource,
             int subresource,
             Box region,
@@ -1225,7 +1225,7 @@ namespace Veldrid.D3D11
         }
 
 
-        private D3D11Buffer GetFreeStagingBuffer(uint sizeInBytes)
+        public D3D11Buffer GetFreeStagingBuffer(uint sizeInBytes)
         {
             foreach (D3D11Buffer buffer in _availableStagingBuffers)
             {
@@ -1319,7 +1319,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal void OnCompleted()
+        public void OnCompleted()
         {
             _commandList.Dispose();
             _commandList = null;
@@ -1381,14 +1381,14 @@ namespace Veldrid.D3D11
             }
         }
 
-        private struct BoundTextureInfo
+        public struct BoundTextureInfo
         {
             public int Slot;
             public ShaderStages Stages;
             public uint ResourceSet;
         }
 
-        private struct D3D11BufferRange : IEquatable<D3D11BufferRange>
+        public struct D3D11BufferRange : IEquatable<D3D11BufferRange>
         {
             public readonly D3D11Buffer Buffer;
             public readonly uint Offset;

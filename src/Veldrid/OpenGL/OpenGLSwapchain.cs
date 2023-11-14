@@ -2,12 +2,12 @@
 
 namespace Veldrid.OpenGL
 {
-    internal class OpenGLSwapchain : Swapchain
+    public class OpenGLSwapchain : Swapchain
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private readonly OpenGLSwapchainFramebuffer _framebuffer;
-        private readonly Action<uint, uint> _resizeAction;
-        private bool _disposed;
+        public readonly OpenGLGraphicsDevice _gd;
+        public readonly OpenGLSwapchainFramebuffer _framebuffer;
+        public readonly Action<uint, uint> _resizeAction;
+        public bool _disposed;
 
         public override Framebuffer Framebuffer => _framebuffer;
         public override bool SyncToVerticalBlank { get => _gd.SyncToVerticalBlank; set => _gd.SyncToVerticalBlank = value; }

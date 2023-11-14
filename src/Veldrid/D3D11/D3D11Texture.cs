@@ -4,10 +4,10 @@ using Vortice.Direct3D11;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11Texture : Texture
+    public class D3D11Texture : Texture
     {
-        private readonly ID3D11Device _device;
-        private string _name;
+        public readonly ID3D11Device _device;
+        public string _name;
 
         public override uint Width { get; }
         public override uint Height { get; }

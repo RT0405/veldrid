@@ -559,7 +559,7 @@ namespace Veldrid.Tests
             GD.Unmap(readback);
         }
 
-        private DeviceBuffer CreateBuffer(uint size, BufferUsage usage)
+        public DeviceBuffer CreateBuffer(uint size, BufferUsage usage)
         {
             return RF.CreateBuffer(new BufferDescription(size, usage));
         }

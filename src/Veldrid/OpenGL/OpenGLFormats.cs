@@ -4,9 +4,9 @@ using Veldrid.OpenGLBinding;
 
 namespace Veldrid.OpenGL
 {
-    internal static class OpenGLFormats
+    public static class OpenGLFormats
     {
-        internal static DrawElementsType VdToGLDrawElementsType(IndexFormat format)
+        public static DrawElementsType VdToGLDrawElementsType(IndexFormat format)
         {
             switch (format)
             {
@@ -19,7 +19,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static ShaderType VdToGLShaderType(ShaderStages stage)
+        public static ShaderType VdToGLShaderType(ShaderStages stage)
         {
             switch (stage)
             {
@@ -40,7 +40,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static PixelInternalFormat VdToGLPixelInternalFormat(PixelFormat format)
+        public static PixelInternalFormat VdToGLPixelInternalFormat(PixelFormat format)
         {
             switch (format)
             {
@@ -184,7 +184,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static TextureWrapMode VdToGLTextureWrapMode(SamplerAddressMode mode)
+        public static TextureWrapMode VdToGLTextureWrapMode(SamplerAddressMode mode)
         {
             switch (mode)
             {
@@ -201,7 +201,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static GLPixelFormat VdToGLPixelFormat(PixelFormat format)
+        public static GLPixelFormat VdToGLPixelFormat(PixelFormat format)
         {
             switch (format)
             {
@@ -294,7 +294,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static GLPixelType VdToGLPixelType(PixelFormat format)
+        public static GLPixelType VdToGLPixelType(PixelFormat format)
         {
             switch (format)
             {
@@ -381,7 +381,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static SizedInternalFormat VdToGLSizedInternalFormat(PixelFormat format, bool depthFormat)
+        public static SizedInternalFormat VdToGLSizedInternalFormat(PixelFormat format, bool depthFormat)
         {
             switch (format)
             {
@@ -527,7 +527,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static void VdToGLTextureMinMagFilter(SamplerFilter filter, bool mip, out TextureMinFilter min, out TextureMagFilter mag)
+        public static void VdToGLTextureMinMagFilter(SamplerFilter filter, bool mip, out TextureMinFilter min, out TextureMagFilter mag)
         {
             switch (filter)
             {
@@ -569,7 +569,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static BufferAccessMask VdToGLMapMode(MapMode mode)
+        public static BufferAccessMask VdToGLMapMode(MapMode mode)
         {
             switch (mode)
             {
@@ -584,7 +584,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static VertexAttribPointerType VdToGLVertexAttribPointerType(
+        public static VertexAttribPointerType VdToGLVertexAttribPointerType(
             VertexElementFormat format,
             out bool normalized,
             out bool isInteger)
@@ -663,7 +663,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static bool IsFormatSupported(OpenGLExtensions extensions, PixelFormat format, GraphicsBackend backend)
+        public static bool IsFormatSupported(OpenGLExtensions extensions, PixelFormat format, GraphicsBackend backend)
         {
             switch (format)
             {
@@ -704,7 +704,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static DepthFunction VdToGLDepthFunction(ComparisonKind value)
+        public static DepthFunction VdToGLDepthFunction(ComparisonKind value)
         {
             switch (value)
             {
@@ -729,7 +729,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static BlendingFactorSrc VdToGLBlendFactorSrc(BlendFactor factor)
+        public static BlendingFactorSrc VdToGLBlendFactorSrc(BlendFactor factor)
         {
             switch (factor)
             {
@@ -762,7 +762,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static BlendEquationMode VdToGLBlendEquationMode(BlendFunction function)
+        public static BlendEquationMode VdToGLBlendEquationMode(BlendFunction function)
         {
             switch (function)
             {
@@ -781,7 +781,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static PolygonMode VdToGLPolygonMode(PolygonFillMode fillMode)
+        public static PolygonMode VdToGLPolygonMode(PolygonFillMode fillMode)
         {
             switch (fillMode)
             {
@@ -794,7 +794,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static StencilFunction VdToGLStencilFunction(ComparisonKind comparison)
+        public static StencilFunction VdToGLStencilFunction(ComparisonKind comparison)
         {
             switch (comparison)
             {
@@ -819,7 +819,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static StencilOp VdToGLStencilOp(StencilOperation op)
+        public static StencilOp VdToGLStencilOp(StencilOperation op)
         {
             switch (op)
             {
@@ -844,7 +844,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static CullFaceMode VdToGLCullFaceMode(FaceCullMode cullMode)
+        public static CullFaceMode VdToGLCullFaceMode(FaceCullMode cullMode)
         {
             switch (cullMode)
             {
@@ -857,7 +857,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static PrimitiveType VdToGLPrimitiveType(PrimitiveTopology primitiveTopology)
+        public static PrimitiveType VdToGLPrimitiveType(PrimitiveTopology primitiveTopology)
         {
             switch (primitiveTopology)
             {
@@ -876,7 +876,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static FrontFaceDirection VdToGLFrontFaceDirection(FrontFace frontFace)
+        public static FrontFaceDirection VdToGLFrontFaceDirection(FrontFace frontFace)
         {
             switch (frontFace)
             {
@@ -889,7 +889,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        internal static BlendingFactorDest VdToGLBlendFactorDest(BlendFactor factor)
+        public static BlendingFactorDest VdToGLBlendFactorDest(BlendFactor factor)
         {
             switch (factor)
             {

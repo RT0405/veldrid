@@ -13,7 +13,7 @@ namespace Veldrid.MetalBindings
 
         public void insertDebugCaptureBoundary() => objc_msgSend(NativePtr, sel_insertDebugCaptureBoundary);
 
-        private static readonly Selector sel_commandBuffer = "commandBuffer";
-        private static readonly Selector sel_insertDebugCaptureBoundary = "insertDebugCaptureBoundary";
+        public static readonly Selector sel_commandBuffer = "commandBuffer";
+        public static readonly Selector sel_insertDebugCaptureBoundary = "insertDebugCaptureBoundary";
     }
 }

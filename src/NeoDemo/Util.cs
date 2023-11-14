@@ -7,15 +7,15 @@ using Veldrid.Utilities;
 
 namespace Veldrid.NeoDemo
 {
-    internal static class Util
+    public static class Util
     {
-        internal static uint SizeInBytes<T>(this T[] array) where T : struct
+        public static uint SizeInBytes<T>(this T[] array) where T : struct
         {
             return (uint)(array.Length * Unsafe.SizeOf<T>());
         }
 
         // Code adapted from https://bitbucket.org/sinbad/ogre/src/9db75e3ba05c/OgreMain/include/OgreVector3.h
-        internal static Quaternion FromToRotation(Vector3 from, Vector3 to, Vector3 fallbackAxis = default(Vector3))
+        public static Quaternion FromToRotation(Vector3 from, Vector3 to, Vector3 fallbackAxis = default(Vector3))
         {
             // Based on Stan Melax's article in Game Programming Gems
             Quaternion q;
@@ -89,7 +89,7 @@ namespace Veldrid.NeoDemo
             projection.M34 = c.W;
         }
 
-        private static float sgn(float x)
+        public static float sgn(float x)
         {
             if (x > 0) return 1;
             else if (x < 0) return -1;
@@ -130,7 +130,7 @@ namespace Veldrid.NeoDemo
             return persp;
         }
 
-        private static Matrix4x4 CreatePerspective(float fov, float aspectRatio, float near, float far)
+        public static Matrix4x4 CreatePerspective(float fov, float aspectRatio, float near, float far)
         {
             if (fov <= 0.0f || fov >= MathF.PI)
                 throw new ArgumentOutOfRangeException(nameof(fov));
@@ -163,7 +163,7 @@ namespace Veldrid.NeoDemo
             return result;
         }
 
-        internal static Matrix4x4 CreateOrtho(
+        public static Matrix4x4 CreateOrtho(
             GraphicsDevice gd,
             bool useReverseDepth,
             float left, float right,

@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class SetPipelineEntry : OpenGLCommandEntry
+    public class SetPipelineEntry : OpenGLCommandEntry
     {
         public Pipeline Pipeline;
 

@@ -1,9 +1,9 @@
 ﻿namespace Veldrid.D3D11
 {
-    internal class D3D11ResourceSet : ResourceSet
+    public class D3D11ResourceSet : ResourceSet
     {
-        private string _name;
-        private bool _disposed;
+        public string _name;
+        public bool _disposed;
 
         public new BindableResource[] Resources { get; }
         public new D3D11ResourceLayout Layout { get; }

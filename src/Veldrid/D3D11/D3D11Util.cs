@@ -2,14 +2,14 @@
 
 namespace Veldrid.D3D11
 {
-    internal static class D3D11Util
+    public static class D3D11Util
     {
         public static int ComputeSubresource(uint mipLevel, uint mipLevelCount, uint arrayLayer)
         {
             return (int)((arrayLayer * mipLevelCount) + mipLevel);
         }
 
-        internal static ShaderResourceViewDescription GetSrvDesc(
+        public static ShaderResourceViewDescription GetSrvDesc(
             D3D11Texture tex,
             uint baseMipLevel,
             uint levelCount,
@@ -88,7 +88,7 @@ namespace Veldrid.D3D11
             return srvDesc;
         }
 
-        internal static int GetSyncInterval(bool syncToVBlank)
+        public static int GetSyncInterval(bool syncToVBlank)
         {
             return syncToVBlank ? 1 : 0;
         }

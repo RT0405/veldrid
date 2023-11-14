@@ -13,37 +13,37 @@ namespace Veldrid
     /// </summary>
     public class ImGuiRenderer : IDisposable
     {
-        private GraphicsDevice _gd;
-        private readonly Assembly _assembly;
-        private ColorSpaceHandling _colorSpaceHandling;
+        public GraphicsDevice _gd;
+        public readonly Assembly _assembly;
+        public ColorSpaceHandling _colorSpaceHandling;
 
         // Device objects
-        private DeviceBuffer _vertexBuffer;
-        private DeviceBuffer _indexBuffer;
-        private DeviceBuffer _projMatrixBuffer;
-        private Texture _fontTexture;
-        private Shader _vertexShader;
-        private Shader _fragmentShader;
-        private ResourceLayout _layout;
-        private ResourceLayout _textureLayout;
-        private Pipeline _pipeline;
-        private ResourceSet _mainResourceSet;
-        private ResourceSet _fontTextureResourceSet;
-        private IntPtr _fontAtlasID = (IntPtr)1;
+        public DeviceBuffer _vertexBuffer;
+        public DeviceBuffer _indexBuffer;
+        public DeviceBuffer _projMatrixBuffer;
+        public Texture _fontTexture;
+        public Shader _vertexShader;
+        public Shader _fragmentShader;
+        public ResourceLayout _layout;
+        public ResourceLayout _textureLayout;
+        public Pipeline _pipeline;
+        public ResourceSet _mainResourceSet;
+        public ResourceSet _fontTextureResourceSet;
+        public IntPtr _fontAtlasID = (IntPtr)1;
 
-        private int _windowWidth;
-        private int _windowHeight;
-        private Vector2 _scaleFactor = Vector2.One;
+        public int _windowWidth;
+        public int _windowHeight;
+        public Vector2 _scaleFactor = Vector2.One;
 
         // Image trackers
-        private readonly Dictionary<TextureView, ResourceSetInfo> _setsByView
+        public readonly Dictionary<TextureView, ResourceSetInfo> _setsByView
             = new Dictionary<TextureView, ResourceSetInfo>();
-        private readonly Dictionary<Texture, TextureView> _autoViewsByTexture
+        public readonly Dictionary<Texture, TextureView> _autoViewsByTexture
             = new Dictionary<Texture, TextureView>();
-        private readonly Dictionary<IntPtr, ResourceSetInfo> _viewsById = new Dictionary<IntPtr, ResourceSetInfo>();
-        private readonly List<IDisposable> _ownedResources = new List<IDisposable>();
-        private int _lastAssignedID = 100;
-        private bool _frameBegun;
+        public readonly Dictionary<IntPtr, ResourceSetInfo> _viewsById = new Dictionary<IntPtr, ResourceSetInfo>();
+        public readonly List<IDisposable> _ownedResources = new List<IDisposable>();
+        public int _lastAssignedID = 100;
+        public bool _frameBegun;
 
         /// <summary>
         /// Constructs a new ImGuiRenderer.
@@ -192,7 +192,7 @@ namespace Veldrid
             }
         }
 
-        private IntPtr GetNextImGuiBindingID()
+        public IntPtr GetNextImGuiBindingID()
         {
             int newID = _lastAssignedID++;
             return (IntPtr)newID;
@@ -253,7 +253,7 @@ namespace Veldrid
             _lastAssignedID = 100;
         }
 
-        private byte[] LoadEmbeddedShaderCode(
+        public byte[] LoadEmbeddedShaderCode(
             ResourceFactory factory,
             string name,
             ShaderStages stage,
@@ -294,7 +294,7 @@ namespace Veldrid
             }
         }
 
-        private string GetEmbeddedResourceText(string resourceName)
+        public string GetEmbeddedResourceText(string resourceName)
         {
             using (StreamReader sr = new StreamReader(_assembly.GetManifestResourceStream(resourceName)))
             {
@@ -302,7 +302,7 @@ namespace Veldrid
             }
         }
 
-        private byte[] GetEmbeddedResourceBytes(string resourceName)
+        public byte[] GetEmbeddedResourceBytes(string resourceName)
         {
             using (Stream s = _assembly.GetManifestResourceStream(resourceName))
             {
@@ -409,7 +409,7 @@ namespace Veldrid
         /// Sets per-frame data based on the associated window.
         /// This is called by Update(float).
         /// </summary>
-        private unsafe void SetPerFrameImGuiData(float deltaSeconds)
+        public unsafe void SetPerFrameImGuiData(float deltaSeconds)
         {
             ImGuiIOPtr io = ImGui.GetIO();
             io.DisplaySize = new Vector2(
@@ -419,7 +419,7 @@ namespace Veldrid
             io.DeltaTime = deltaSeconds; // DeltaTime is in seconds.
         }
 
-        private bool TryMapKey(Key key, out ImGuiKey result)
+        public bool TryMapKey(Key key, out ImGuiKey result)
         {
             ImGuiKey keyToImGuiKeyShortcut(Key keyToConvert, Key startKey1, ImGuiKey startKey2)
             {
@@ -587,7 +587,7 @@ namespace Veldrid
             }
         }
 
-        private unsafe void UpdateImGuiInput(InputSnapshot snapshot)
+        public unsafe void UpdateImGuiInput(InputSnapshot snapshot)
         {
             ImGuiIOPtr io = ImGui.GetIO();
             io.AddMousePosEvent(snapshot.MousePosition.X, snapshot.MousePosition.Y);
@@ -613,7 +613,7 @@ namespace Veldrid
             }
         }
 
-        private unsafe void RenderImDrawData(ImDrawDataPtr draw_data, GraphicsDevice gd, CommandList cl)
+        public unsafe void RenderImDrawData(ImDrawDataPtr draw_data, GraphicsDevice gd, CommandList cl)
         {
             uint vertexOffsetInVertices = 0;
             uint indexOffsetInElements = 0;
@@ -747,7 +747,7 @@ namespace Veldrid
             }
         }
 
-        private struct ResourceSetInfo
+        public struct ResourceSetInfo
         {
             public readonly IntPtr ImGuiBinding;
             public readonly ResourceSet ResourceSet;

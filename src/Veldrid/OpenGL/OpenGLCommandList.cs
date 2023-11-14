@@ -5,18 +5,18 @@ using Veldrid.OpenGL.NoAllocEntryList;
 
 namespace Veldrid.OpenGL
 {
-    internal class OpenGLCommandList : CommandList
+    public class OpenGLCommandList : CommandList
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private OpenGLCommandEntryList _currentCommands;
-        private bool _disposed;
+        public readonly OpenGLGraphicsDevice _gd;
+        public OpenGLCommandEntryList _currentCommands;
+        public bool _disposed;
 
-        internal OpenGLCommandEntryList CurrentCommands => _currentCommands;
-        internal OpenGLGraphicsDevice Device => _gd;
+        public OpenGLCommandEntryList CurrentCommands => _currentCommands;
+        public OpenGLGraphicsDevice Device => _gd;
 
-        private readonly object _lock = new object();
-        private readonly List<OpenGLCommandEntryList> _availableLists = new List<OpenGLCommandEntryList>();
-        private readonly List<OpenGLCommandEntryList> _submittedLists = new List<OpenGLCommandEntryList>();
+        public readonly object _lock = new object();
+        public readonly List<OpenGLCommandEntryList> _availableLists = new List<OpenGLCommandEntryList>();
+        public readonly List<OpenGLCommandEntryList> _submittedLists = new List<OpenGLCommandEntryList>();
 
         public override string Name { get; set; }
 
@@ -40,7 +40,7 @@ namespace Veldrid.OpenGL
             _currentCommands.Begin();
         }
 
-        private OpenGLCommandEntryList GetFreeCommandList()
+        public OpenGLCommandEntryList GetFreeCommandList()
         {
             lock (_lock)
             {
@@ -147,7 +147,7 @@ namespace Veldrid.OpenGL
             _currentCommands.SetViewport(index, ref viewport);
         }
 
-        internal void Reset()
+        public void Reset()
         {
             _currentCommands.Reset();
         }

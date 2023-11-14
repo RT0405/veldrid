@@ -32,13 +32,13 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setFrontFaceStencil, value.NativePtr);
         }
 
-        private static readonly Selector sel_depthCompareFunction = "depthCompareFunction";
-        private static readonly Selector sel_setDepthCompareFunction = "setDepthCompareFunction:";
-        private static readonly Selector sel_isDepthWriteEnabled = "isDepthWriteEnabled";
-        private static readonly Selector sel_setDepthWriteEnabled = "setDepthWriteEnabled:";
-        private static readonly Selector sel_backFaceStencil = "backFaceStencil";
-        private static readonly Selector sel_setBackFaceStencil = "setBackFaceStencil:";
-        private static readonly Selector sel_frontFaceStencil = "frontFaceStencil";
-        private static readonly Selector sel_setFrontFaceStencil = "setFrontFaceStencil:";
+        public static readonly Selector sel_depthCompareFunction = "depthCompareFunction";
+        public static readonly Selector sel_setDepthCompareFunction = "setDepthCompareFunction:";
+        public static readonly Selector sel_isDepthWriteEnabled = "isDepthWriteEnabled";
+        public static readonly Selector sel_setDepthWriteEnabled = "setDepthWriteEnabled:";
+        public static readonly Selector sel_backFaceStencil = "backFaceStencil";
+        public static readonly Selector sel_setBackFaceStencil = "setBackFaceStencil:";
+        public static readonly Selector sel_frontFaceStencil = "frontFaceStencil";
+        public static readonly Selector sel_setFrontFaceStencil = "setFrontFaceStencil:";
     }
 }

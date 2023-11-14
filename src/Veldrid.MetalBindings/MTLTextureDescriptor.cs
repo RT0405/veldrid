@@ -5,7 +5,7 @@ namespace Veldrid.MetalBindings
 {
     public struct MTLTextureDescriptor
     {
-        private static readonly ObjCClass s_class = new ObjCClass(nameof(MTLTextureDescriptor));
+        public static readonly ObjCClass s_class = new ObjCClass(nameof(MTLTextureDescriptor));
         public readonly IntPtr NativePtr;
         public static MTLTextureDescriptor New() => s_class.AllocInit<MTLTextureDescriptor>();
 
@@ -81,27 +81,27 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setTextureUsage, (uint)value);
         }
 
-        private static readonly Selector sel_textureType = "textureType";
-        private static readonly Selector sel_setTextureType = "setTextureType:";
-        private static readonly Selector sel_width = "width";
-        private static readonly Selector sel_setWidth = "setWidth:";
-        private static readonly Selector sel_height = "height";
-        private static readonly Selector sel_setHeight = "setHeight:";
-        private static readonly Selector sel_depth = "depth";
-        private static readonly Selector sel_setDepth = "setDepth:";
-        private static readonly Selector sel_mipmapLevelCount = "mipmapLevelCount";
-        private static readonly Selector sel_setMipmapLevelCount = "setMipmapLevelCount:";
-        private static readonly Selector sel_sampleCount = "sampleCount";
-        private static readonly Selector sel_setSampleCount = "setSampleCount:";
-        private static readonly Selector sel_arrayLength = "arrayLength";
-        private static readonly Selector sel_setArrayLength = "setArrayLength:";
-        private static readonly Selector sel_resourceOptions = "resourceOptions";
-        private static readonly Selector sel_setResourceOptions = "setResourceOptions:";
-        private static readonly Selector sel_cpuCacheMode = "cpuCacheMode";
-        private static readonly Selector sel_setCpuCacheMode = "setCpuCacheMode:";
-        private static readonly Selector sel_storageMode = "storageMode";
-        private static readonly Selector sel_setStorageMode = "setStorageMode:";
-        private static readonly Selector sel_textureUsage = "textureUsage";
-        private static readonly Selector sel_setTextureUsage = "setTextureUsage:";
+        public static readonly Selector sel_textureType = "textureType";
+        public static readonly Selector sel_setTextureType = "setTextureType:";
+        public static readonly Selector sel_width = "width";
+        public static readonly Selector sel_setWidth = "setWidth:";
+        public static readonly Selector sel_height = "height";
+        public static readonly Selector sel_setHeight = "setHeight:";
+        public static readonly Selector sel_depth = "depth";
+        public static readonly Selector sel_setDepth = "setDepth:";
+        public static readonly Selector sel_mipmapLevelCount = "mipmapLevelCount";
+        public static readonly Selector sel_setMipmapLevelCount = "setMipmapLevelCount:";
+        public static readonly Selector sel_sampleCount = "sampleCount";
+        public static readonly Selector sel_setSampleCount = "setSampleCount:";
+        public static readonly Selector sel_arrayLength = "arrayLength";
+        public static readonly Selector sel_setArrayLength = "setArrayLength:";
+        public static readonly Selector sel_resourceOptions = "resourceOptions";
+        public static readonly Selector sel_setResourceOptions = "setResourceOptions:";
+        public static readonly Selector sel_cpuCacheMode = "cpuCacheMode";
+        public static readonly Selector sel_setCpuCacheMode = "setCpuCacheMode:";
+        public static readonly Selector sel_storageMode = "storageMode";
+        public static readonly Selector sel_setStorageMode = "setStorageMode:";
+        public static readonly Selector sel_textureUsage = "textureUsage";
+        public static readonly Selector sel_setTextureUsage = "setTextureUsage:";
     }
 }

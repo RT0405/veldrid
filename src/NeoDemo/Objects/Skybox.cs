@@ -8,20 +8,20 @@ namespace Veldrid.NeoDemo.Objects
 {
     public class Skybox : Renderable
     {
-        private readonly Image<Rgba32> _front;
-        private readonly Image<Rgba32> _back;
-        private readonly Image<Rgba32> _left;
-        private readonly Image<Rgba32> _right;
-        private readonly Image<Rgba32> _top;
-        private readonly Image<Rgba32> _bottom;
+        public readonly Image<Rgba32> _front;
+        public readonly Image<Rgba32> _back;
+        public readonly Image<Rgba32> _left;
+        public readonly Image<Rgba32> _right;
+        public readonly Image<Rgba32> _top;
+        public readonly Image<Rgba32> _bottom;
 
         // Context objects
-        private DeviceBuffer _vb;
-        private DeviceBuffer _ib;
-        private Pipeline _pipeline;
-        private Pipeline _reflectionPipeline;
-        private ResourceSet _resourceSet;
-        private readonly DisposeCollector _disposeCollector = new DisposeCollector();
+        public DeviceBuffer _vb;
+        public DeviceBuffer _ib;
+        public Pipeline _pipeline;
+        public Pipeline _reflectionPipeline;
+        public ResourceSet _resourceSet;
+        public readonly DisposeCollector _disposeCollector = new DisposeCollector();
 
         public Skybox(
             Image<Rgba32> front, Image<Rgba32> back, Image<Rgba32> left,
@@ -127,7 +127,7 @@ namespace Veldrid.NeoDemo.Objects
             return new RenderOrderKey(ulong.MaxValue);
         }
 
-        private static readonly VertexPosition[] s_vertices = new VertexPosition[]
+        public static readonly VertexPosition[] s_vertices = new VertexPosition[]
         {
             // Top
             new VertexPosition(new Vector3(-20.0f,20.0f,-20.0f)),
@@ -161,7 +161,7 @@ namespace Veldrid.NeoDemo.Objects
             new VertexPosition(new Vector3(-20.0f,-20.0f,20.0f)),
         };
 
-        private static readonly ushort[] s_indices = new ushort[]
+        public static readonly ushort[] s_indices = new ushort[]
         {
             0,1,2, 0,2,3,
             4,5,6, 4,6,7,
@@ -170,6 +170,6 @@ namespace Veldrid.NeoDemo.Objects
             16,17,18, 16,18,19,
             20,21,22, 20,22,23,
         };
-        private ResourceLayout _layout;
+        public ResourceLayout _layout;
     }
 }

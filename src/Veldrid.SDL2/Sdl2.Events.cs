@@ -8,28 +8,28 @@ namespace Veldrid.Sdl2
     public static unsafe partial class Sdl2Native
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_PumpEvents_t();
-        private static SDL_PumpEvents_t s_sdl_pumpEvents = LoadFunction<SDL_PumpEvents_t>("SDL_PumpEvents");
+        public delegate void SDL_PumpEvents_t();
+        public static SDL_PumpEvents_t s_sdl_pumpEvents = LoadFunction<SDL_PumpEvents_t>("SDL_PumpEvents");
         public static void SDL_PumpEvents() => s_sdl_pumpEvents();
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_PollEvent_t(SDL_Event* @event);
-        private static SDL_PollEvent_t s_sdl_pollEvent = LoadFunction<SDL_PollEvent_t>("SDL_PollEvent");
+        public delegate int SDL_PollEvent_t(SDL_Event* @event);
+        public static SDL_PollEvent_t s_sdl_pollEvent = LoadFunction<SDL_PollEvent_t>("SDL_PollEvent");
         public static int SDL_PollEvent(SDL_Event* @event) => s_sdl_pollEvent(@event);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_AddEventWatch_t(SDL_EventFilter filter, void* userdata);
-        private static SDL_AddEventWatch_t s_sdl_addEventWatch = LoadFunction<SDL_AddEventWatch_t>("SDL_AddEventWatch");
+        public delegate void SDL_AddEventWatch_t(SDL_EventFilter filter, void* userdata);
+        public static SDL_AddEventWatch_t s_sdl_addEventWatch = LoadFunction<SDL_AddEventWatch_t>("SDL_AddEventWatch");
         public static void SDL_AddEventWatch(SDL_EventFilter filter, void* userdata) => s_sdl_addEventWatch(filter, userdata);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_SetEventFilter_t(SDL_EventFilter filter, void* userdata);
-        private static SDL_SetEventFilter_t s_sdl_setEventFilter = LoadFunction<SDL_SetEventFilter_t>("SDL_SetEventFilter");
+        public delegate void SDL_SetEventFilter_t(SDL_EventFilter filter, void* userdata);
+        public static SDL_SetEventFilter_t s_sdl_setEventFilter = LoadFunction<SDL_SetEventFilter_t>("SDL_SetEventFilter");
         public static void SDL_SetEventFilter(SDL_EventFilter filter, void* userdata) => s_sdl_setEventFilter(filter, userdata);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_FilterEvents_t(SDL_EventFilter filter, void* userdata);
-        private static SDL_FilterEvents_t s_sdl_filterEvents = LoadFunction<SDL_FilterEvents_t>("SDL_FilterEvents");
+        public delegate void SDL_FilterEvents_t(SDL_EventFilter filter, void* userdata);
+        public static SDL_FilterEvents_t s_sdl_filterEvents = LoadFunction<SDL_FilterEvents_t>("SDL_FilterEvents");
         public static void SDL_FilterEvents(SDL_EventFilter filter, void* userdata) => s_sdl_filterEvents(filter, userdata);
     }
 
@@ -46,8 +46,8 @@ namespace Veldrid.Sdl2
         [FieldOffset(8)]
         public uint windowID;
         [FieldOffset(0)]
-        private Bytex56 __padding;
-        private unsafe struct Bytex56 { private fixed byte bytes[56]; }
+        public Bytex56 __padding;
+        public unsafe struct Bytex56 { public fixed byte bytes[56]; }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -66,9 +66,9 @@ namespace Veldrid.Sdl2
         /// SDL_WindowEventID
         /// </summary>
         public SDL_WindowEventID @event;
-        private byte padding1;
-        private byte padding2;
-        private byte padding3;
+        public byte padding1;
+        public byte padding2;
+        public byte padding3;
         /// <summary>
         /// event dependent data
         /// </summary>
@@ -541,7 +541,7 @@ namespace Veldrid.Sdl2
         /// current key modifiers.
         /// </summary>
         public SDL_Keymod mod;
-        private uint __unused;
+        public uint __unused;
     }
 
     public enum SDL_MouseButton : byte

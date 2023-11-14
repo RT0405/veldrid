@@ -11,47 +11,47 @@ using static Vulkan.RawConstants;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkCommandList : CommandList
+    public unsafe class VkCommandList : CommandList
     {
-        private readonly VkGraphicsDevice _gd;
-        private VkCommandPool _pool;
-        private VkCommandBuffer _cb;
-        private bool _destroyed;
+        public readonly VkGraphicsDevice _gd;
+        public VkCommandPool _pool;
+        public VkCommandBuffer _cb;
+        public bool _destroyed;
 
-        private bool _commandBufferBegun;
-        private bool _commandBufferEnded;
-        private VkRect2D[] _scissorRects = Array.Empty<VkRect2D>();
+        public bool _commandBufferBegun;
+        public bool _commandBufferEnded;
+        public VkRect2D[] _scissorRects = Array.Empty<VkRect2D>();
 
-        private VkClearValue[] _clearValues = Array.Empty<VkClearValue>();
-        private bool[] _validColorClearValues = Array.Empty<bool>();
-        private VkClearValue? _depthClearValue;
-        private readonly List<VkTexture> _preDrawSampledImages = new List<VkTexture>();
+        public VkClearValue[] _clearValues = Array.Empty<VkClearValue>();
+        public bool[] _validColorClearValues = Array.Empty<bool>();
+        public VkClearValue? _depthClearValue;
+        public readonly List<VkTexture> _preDrawSampledImages = new List<VkTexture>();
 
         // Graphics State
-        private VkFramebufferBase _currentFramebuffer;
-        private bool _currentFramebufferEverActive;
-        private VkRenderPass _activeRenderPass;
-        private VkPipeline _currentGraphicsPipeline;
-        private BoundResourceSetInfo[] _currentGraphicsResourceSets = Array.Empty<BoundResourceSetInfo>();
-        private bool[] _graphicsResourceSetsChanged;
+        public VkFramebufferBase _currentFramebuffer;
+        public bool _currentFramebufferEverActive;
+        public VkRenderPass _activeRenderPass;
+        public VkPipeline _currentGraphicsPipeline;
+        public BoundResourceSetInfo[] _currentGraphicsResourceSets = Array.Empty<BoundResourceSetInfo>();
+        public bool[] _graphicsResourceSetsChanged;
 
-        private bool _newFramebuffer; // Render pass cycle state
+        public bool _newFramebuffer; // Render pass cycle state
 
         // Compute State
-        private VkPipeline _currentComputePipeline;
-        private BoundResourceSetInfo[] _currentComputeResourceSets = Array.Empty<BoundResourceSetInfo>();
-        private bool[] _computeResourceSetsChanged;
-        private string _name;
+        public VkPipeline _currentComputePipeline;
+        public BoundResourceSetInfo[] _currentComputeResourceSets = Array.Empty<BoundResourceSetInfo>();
+        public bool[] _computeResourceSetsChanged;
+        public string _name;
 
-        private readonly object _commandBufferListLock = new object();
-        private readonly Queue<VkCommandBuffer> _availableCommandBuffers = new Queue<VkCommandBuffer>();
-        private readonly List<VkCommandBuffer> _submittedCommandBuffers = new List<VkCommandBuffer>();
+        public readonly object _commandBufferListLock = new object();
+        public readonly Queue<VkCommandBuffer> _availableCommandBuffers = new Queue<VkCommandBuffer>();
+        public readonly List<VkCommandBuffer> _submittedCommandBuffers = new List<VkCommandBuffer>();
 
-        private StagingResourceInfo _currentStagingInfo;
-        private readonly object _stagingLock = new object();
-        private readonly Dictionary<VkCommandBuffer, StagingResourceInfo> _submittedStagingInfos = new Dictionary<VkCommandBuffer, StagingResourceInfo>();
-        private readonly List<StagingResourceInfo> _availableStagingInfos = new List<StagingResourceInfo>();
-        private readonly List<VkBuffer> _availableStagingBuffers = new List<VkBuffer>();
+        public StagingResourceInfo _currentStagingInfo;
+        public readonly object _stagingLock = new object();
+        public readonly Dictionary<VkCommandBuffer, StagingResourceInfo> _submittedStagingInfos = new Dictionary<VkCommandBuffer, StagingResourceInfo>();
+        public readonly List<StagingResourceInfo> _availableStagingInfos = new List<StagingResourceInfo>();
+        public readonly List<VkBuffer> _availableStagingBuffers = new List<VkBuffer>();
 
         public VkCommandPool CommandPool => _pool;
         public VkCommandBuffer CommandBuffer => _cb;
@@ -74,7 +74,7 @@ namespace Veldrid.Vk
             RefCount = new ResourceRefCount(DisposeCore);
         }
 
-        private VkCommandBuffer GetNextCommandBuffer()
+        public VkCommandBuffer GetNextCommandBuffer()
         {
             lock (_commandBufferListLock)
             {
@@ -269,7 +269,7 @@ namespace Veldrid.Vk
             vkCmdDrawIndexedIndirect(_cb, vkBuffer.DeviceBuffer, offset, drawCount, stride);
         }
 
-        private void PreDrawCommand()
+        public void PreDrawCommand()
         {
             TransitionImages(_preDrawSampledImages, VkImageLayout.ShaderReadOnlyOptimal);
             _preDrawSampledImages.Clear();
@@ -284,7 +284,7 @@ namespace Veldrid.Vk
                 _currentGraphicsPipeline.PipelineLayout);
         }
 
-        private void FlushNewResourceSets(
+        public void FlushNewResourceSets(
             BoundResourceSetInfo[] resourceSets,
             bool[] resourceSetsChanged,
             uint resourceSetCount,
@@ -347,7 +347,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void TransitionImages(List<VkTexture> sampledTextures, VkImageLayout layout)
+        public void TransitionImages(List<VkTexture> sampledTextures, VkImageLayout layout)
         {
             for (int i = 0; i < sampledTextures.Count; i++)
             {
@@ -363,7 +363,7 @@ namespace Veldrid.Vk
             vkCmdDispatch(_cb, groupCountX, groupCountY, groupCountZ);
         }
 
-        private void PreDispatchCommand()
+        public void PreDispatchCommand()
         {
             EnsureNoRenderPass();
 
@@ -499,7 +499,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void EnsureRenderPassActive()
+        public void EnsureRenderPassActive()
         {
             if (_activeRenderPass == VkRenderPass.Null)
             {
@@ -507,7 +507,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void EnsureNoRenderPass()
+        public void EnsureNoRenderPass()
         {
             if (_activeRenderPass != VkRenderPass.Null)
             {
@@ -515,7 +515,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void BeginCurrentRenderPass()
+        public void BeginCurrentRenderPass()
         {
             Debug.Assert(_activeRenderPass == VkRenderPass.Null);
             Debug.Assert(_currentFramebuffer != null);
@@ -595,7 +595,7 @@ namespace Veldrid.Vk
             _newFramebuffer = false;
         }
 
-        private void EndCurrentRenderPass()
+        public void EndCurrentRenderPass()
         {
             Debug.Assert(_activeRenderPass != VkRenderPass.Null);
             vkCmdEndRenderPass(_cb);
@@ -656,7 +656,7 @@ namespace Veldrid.Vk
             _currentStagingInfo.Resources.Add(vkPipeline.RefCount);
         }
 
-        private void ClearSets(BoundResourceSetInfo[] boundSets)
+        public void ClearSets(BoundResourceSetInfo[] boundSets)
         {
             foreach (BoundResourceSetInfo boundSetInfo in boundSets)
             {
@@ -794,7 +794,7 @@ namespace Veldrid.Vk
             _currentStagingInfo.Resources.Add(dstVkTexture.RefCount);
         }
 
-        internal static void CopyTextureCore_VkCommandBuffer(
+        public static void CopyTextureCore_VkCommandBuffer(
             VkCommandBuffer cb,
             Texture source,
             uint srcX, uint srcY, uint srcZ,
@@ -1158,7 +1158,7 @@ namespace Veldrid.Vk
         }
 
         [Conditional("DEBUG")]
-        private void DebugFullPipelineBarrier()
+        public void DebugFullPipelineBarrier()
         {
             VkMemoryBarrier memoryBarrier = VkMemoryBarrier.New();
             memoryBarrier.srcAccessMask = VK_ACCESS_INDIRECT_COMMAND_READ_BIT |
@@ -1213,7 +1213,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private VkBuffer GetStagingBuffer(uint size)
+        public VkBuffer GetStagingBuffer(uint size)
         {
             lock (_stagingLock)
             {
@@ -1291,7 +1291,7 @@ namespace Veldrid.Vk
             RefCount.Decrement();
         }
 
-        private void DisposeCore()
+        public void DisposeCore()
         {
             if (!_destroyed)
             {
@@ -1307,7 +1307,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private class StagingResourceInfo
+        public class StagingResourceInfo
         {
             public List<VkBuffer> BuffersUsed { get; } = new List<VkBuffer>();
             public HashSet<ResourceRefCount> Resources { get; } = new HashSet<ResourceRefCount>();
@@ -1318,7 +1318,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private StagingResourceInfo GetStagingResourceInfo()
+        public StagingResourceInfo GetStagingResourceInfo()
         {
             lock (_stagingLock)
             {
@@ -1338,7 +1338,7 @@ namespace Veldrid.Vk
             }
         }
 
-        private void RecycleStagingInfo(StagingResourceInfo info)
+        public void RecycleStagingInfo(StagingResourceInfo info)
         {
             lock (_stagingLock)
             {

@@ -6,7 +6,7 @@ using static Veldrid.MetalBindings.ObjectiveCRuntime;
 namespace Veldrid.OpenGL.EAGL
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct CAEAGLLayer
+    public struct CAEAGLLayer
     {
         public readonly IntPtr NativePtr;
 

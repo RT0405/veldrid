@@ -3,9 +3,9 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal static class MTLFormats
+    public static class MTLFormats
     {
-        internal static MTLPixelFormat VdToMTLPixelFormat(PixelFormat format, bool depthFormat)
+        public static MTLPixelFormat VdToMTLPixelFormat(PixelFormat format, bool depthFormat)
         {
             switch (format)
             {
@@ -147,7 +147,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static bool IsFormatSupported(PixelFormat format, TextureUsage usage, MTLFeatureSupport metalFeatures)
+        public static bool IsFormatSupported(PixelFormat format, TextureUsage usage, MTLFeatureSupport metalFeatures)
         {
             switch (format)
             {
@@ -187,7 +187,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLTriangleFillMode VdToMTLFillMode(PolygonFillMode fillMode)
+        public static MTLTriangleFillMode VdToMTLFillMode(PolygonFillMode fillMode)
         {
             switch (fillMode)
             {
@@ -200,12 +200,12 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLWinding VdVoMTLFrontFace(FrontFace frontFace)
+        public static MTLWinding VdVoMTLFrontFace(FrontFace frontFace)
         {
             return frontFace == FrontFace.CounterClockwise ? MTLWinding.CounterClockwise : MTLWinding.Clockwise;
         }
 
-        internal static void GetMinMagMipFilter(
+        public static void GetMinMagMipFilter(
             SamplerFilter filter,
             out MTLSamplerMinMagFilter min,
             out MTLSamplerMinMagFilter mag,
@@ -262,7 +262,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLTextureType VdToMTLTextureType(
+        public static MTLTextureType VdToMTLTextureType(
             TextureType type,
             uint arrayLayers,
             bool multiSampled,
@@ -292,7 +292,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLBlendFactor VdToMTLBlendFactor(BlendFactor vdFactor)
+        public static MTLBlendFactor VdToMTLBlendFactor(BlendFactor vdFactor)
         {
             switch (vdFactor)
             {
@@ -325,7 +325,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLBlendOperation VdToMTLBlendOp(BlendFunction vdFunction)
+        public static MTLBlendOperation VdToMTLBlendOp(BlendFunction vdFunction)
         {
             switch (vdFunction)
             {
@@ -344,7 +344,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLColorWriteMask VdToMTLColorWriteMask(ColorWriteMask vdMask)
+        public static MTLColorWriteMask VdToMTLColorWriteMask(ColorWriteMask vdMask)
         {
             MTLColorWriteMask mask = MTLColorWriteMask.None;
 
@@ -360,7 +360,7 @@ namespace Veldrid.MTL
             return mask;
         }
 
-        internal static MTLDataType VdVoMTLShaderConstantType(ShaderConstantType type)
+        public static MTLDataType VdVoMTLShaderConstantType(ShaderConstantType type)
         {
             switch (type)
             {
@@ -385,7 +385,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLCompareFunction VdToMTLCompareFunction(ComparisonKind comparisonKind)
+        public static MTLCompareFunction VdToMTLCompareFunction(ComparisonKind comparisonKind)
         {
             switch (comparisonKind)
             {
@@ -410,7 +410,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLCullMode VdToMTLCullMode(FaceCullMode cullMode)
+        public static MTLCullMode VdToMTLCullMode(FaceCullMode cullMode)
         {
             switch (cullMode)
             {
@@ -425,7 +425,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLSamplerBorderColor VdToMTLBorderColor(SamplerBorderColor borderColor)
+        public static MTLSamplerBorderColor VdToMTLBorderColor(SamplerBorderColor borderColor)
         {
             switch (borderColor)
             {
@@ -440,7 +440,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLSamplerAddressMode VdToMTLAddressMode(SamplerAddressMode mode)
+        public static MTLSamplerAddressMode VdToMTLAddressMode(SamplerAddressMode mode)
         {
             switch (mode)
             {
@@ -457,7 +457,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLPrimitiveType VdToMTLPrimitiveTopology(PrimitiveTopology primitiveTopology)
+        public static MTLPrimitiveType VdToMTLPrimitiveTopology(PrimitiveTopology primitiveTopology)
         {
             switch (primitiveTopology)
             {
@@ -476,7 +476,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLTextureUsage VdToMTLTextureUsage(TextureUsage usage)
+        public static MTLTextureUsage VdToMTLTextureUsage(TextureUsage usage)
         {
             MTLTextureUsage ret = MTLTextureUsage.Unknown;
 
@@ -497,7 +497,7 @@ namespace Veldrid.MTL
             return ret;
         }
 
-        internal static MTLVertexFormat VdToMTLVertexFormat(VertexElementFormat format)
+        public static MTLVertexFormat VdToMTLVertexFormat(VertexElementFormat format)
         {
             switch (format)
             {
@@ -568,12 +568,12 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static MTLIndexType VdToMTLIndexFormat(IndexFormat format)
+        public static MTLIndexType VdToMTLIndexFormat(IndexFormat format)
         {
             return format == IndexFormat.UInt16 ? MTLIndexType.UInt16 : MTLIndexType.UInt32;
         }
 
-        internal static MTLStencilOperation VdToMTLStencilOperation(StencilOperation op)
+        public static MTLStencilOperation VdToMTLStencilOperation(StencilOperation op)
         {
             switch (op)
             {
@@ -599,7 +599,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static uint GetMaxTexture1DWidth(MTLFeatureSet fs)
+        public static uint GetMaxTexture1DWidth(MTLFeatureSet fs)
         {
             switch (fs)
             {
@@ -630,7 +630,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static uint GetMaxTexture2DDimensions(MTLFeatureSet fs)
+        public static uint GetMaxTexture2DDimensions(MTLFeatureSet fs)
         {
             switch (fs)
             {
@@ -661,7 +661,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static uint GetMaxTextureCubeDimensions(MTLFeatureSet fs)
+        public static uint GetMaxTextureCubeDimensions(MTLFeatureSet fs)
         {
             switch (fs)
             {
@@ -692,7 +692,7 @@ namespace Veldrid.MTL
             }
         }
 
-        internal static uint GetMaxTextureVolume(MTLFeatureSet fs)
+        public static uint GetMaxTextureVolume(MTLFeatureSet fs)
         {
             return 2048;
         }

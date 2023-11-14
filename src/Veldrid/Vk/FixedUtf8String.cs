@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class FixedUtf8String : IDisposable
+    public unsafe class FixedUtf8String : IDisposable
     {
-        private GCHandle _handle;
-        private uint _numBytes;
+        public GCHandle _handle;
+        public uint _numBytes;
 
         public byte* StringPtr => (byte*)_handle.AddrOfPinnedObject().ToPointer();
 
@@ -27,7 +27,7 @@ namespace Veldrid.Vk
             Debug.Assert(encodedCount == byteCount);
         }
 
-        private string GetString()
+        public string GetString()
         {
             return Encoding.UTF8.GetString(StringPtr, (int)_numBytes);
         }

@@ -3,9 +3,9 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLSampler : Sampler
+    public class MTLSampler : Sampler
     {
-        private bool _disposed;
+        public bool _disposed;
 
         public MTLSamplerState DeviceSampler { get; }
 

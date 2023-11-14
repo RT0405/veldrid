@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class DispatchEntry : OpenGLCommandEntry
+    public class DispatchEntry : OpenGLCommandEntry
     {
         public uint GroupCountX;
         public uint GroupCountY;

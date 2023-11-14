@@ -6,18 +6,18 @@ using Vortice.Direct3D;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11Buffer : DeviceBuffer
+    public class D3D11Buffer : DeviceBuffer
     {
-        private readonly ID3D11Device _device;
-        private readonly ID3D11Buffer _buffer;
-        private readonly object _accessViewLock = new object();
-        private readonly Dictionary<OffsetSizePair, ID3D11ShaderResourceView> _srvs
+        public readonly ID3D11Device _device;
+        public readonly ID3D11Buffer _buffer;
+        public readonly object _accessViewLock = new object();
+        public readonly Dictionary<OffsetSizePair, ID3D11ShaderResourceView> _srvs
             = new Dictionary<OffsetSizePair, ID3D11ShaderResourceView>();
-        private readonly Dictionary<OffsetSizePair, ID3D11UnorderedAccessView> _uavs
+        public readonly Dictionary<OffsetSizePair, ID3D11UnorderedAccessView> _uavs
             = new Dictionary<OffsetSizePair, ID3D11UnorderedAccessView>();
-        private readonly uint _structureByteStride;
-        private readonly bool _rawBuffer;
-        private string _name;
+        public readonly uint _structureByteStride;
+        public readonly bool _rawBuffer;
+        public string _name;
 
         public override uint SizeInBytes { get; }
 
@@ -102,7 +102,7 @@ namespace Veldrid.D3D11
             _buffer.Dispose();
         }
 
-        internal ID3D11ShaderResourceView GetShaderResourceView(uint offset, uint size)
+        public ID3D11ShaderResourceView GetShaderResourceView(uint offset, uint size)
         {
             lock (_accessViewLock)
             {
@@ -117,7 +117,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        internal ID3D11UnorderedAccessView GetUnorderedAccessView(uint offset, uint size)
+        public ID3D11UnorderedAccessView GetUnorderedAccessView(uint offset, uint size)
         {
             lock (_accessViewLock)
             {
@@ -132,7 +132,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private ID3D11ShaderResourceView CreateShaderResourceView(uint offset, uint size)
+        public ID3D11ShaderResourceView CreateShaderResourceView(uint offset, uint size)
         {
             if (_rawBuffer)
             {
@@ -156,7 +156,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private ID3D11UnorderedAccessView CreateUnorderedAccessView(uint offset, uint size)
+        public ID3D11UnorderedAccessView CreateUnorderedAccessView(uint offset, uint size)
         {
             if (_rawBuffer)
             {
@@ -180,7 +180,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private struct OffsetSizePair : IEquatable<OffsetSizePair>
+        public struct OffsetSizePair : IEquatable<OffsetSizePair>
         {
             public readonly uint Offset;
             public readonly uint Size;

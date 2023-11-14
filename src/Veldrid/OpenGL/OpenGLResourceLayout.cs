@@ -1,8 +1,8 @@
 ﻿namespace Veldrid.OpenGL
 {
-    internal class OpenGLResourceLayout : ResourceLayout
+    public class OpenGLResourceLayout : ResourceLayout
     {
-        private bool _disposed;
+        public bool _disposed;
 
         public ResourceLayoutElementDescription[] Elements { get; }
 

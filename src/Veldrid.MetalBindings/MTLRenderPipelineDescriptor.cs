@@ -59,19 +59,19 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setAlphaToCoverageEnabled, value);
         }
 
-        private static readonly Selector sel_vertexFunction = "vertexFunction";
-        private static readonly Selector sel_setVertexFunction = "setVertexFunction:";
-        private static readonly Selector sel_fragmentFunction = "fragmentFunction";
-        private static readonly Selector sel_setFragmentFunction = "setFragmentFunction:";
-        private static readonly Selector sel_colorAttachments = "colorAttachments";
-        private static readonly Selector sel_depthAttachmentPixelFormat = "depthAttachmentPixelFormat";
-        private static readonly Selector sel_setDepthAttachmentPixelFormat = "setDepthAttachmentPixelFormat:";
-        private static readonly Selector sel_stencilAttachmentPixelFormat = "stencilAttachmentPixelFormat";
-        private static readonly Selector sel_setStencilAttachmentPixelFormat = "setStencilAttachmentPixelFormat:";
-        private static readonly Selector sel_sampleCount = "sampleCount";
-        private static readonly Selector sel_setSampleCount = "setSampleCount:";
-        private static readonly Selector sel_vertexDescriptor = "vertexDescriptor";
-        private static readonly Selector sel_isAlphaToCoverageEnabled = "isAlphaToCoverageEnabled";
-        private static readonly Selector sel_setAlphaToCoverageEnabled = "setAlphaToCoverageEnabled:";
+        public static readonly Selector sel_vertexFunction = "vertexFunction";
+        public static readonly Selector sel_setVertexFunction = "setVertexFunction:";
+        public static readonly Selector sel_fragmentFunction = "fragmentFunction";
+        public static readonly Selector sel_setFragmentFunction = "setFragmentFunction:";
+        public static readonly Selector sel_colorAttachments = "colorAttachments";
+        public static readonly Selector sel_depthAttachmentPixelFormat = "depthAttachmentPixelFormat";
+        public static readonly Selector sel_setDepthAttachmentPixelFormat = "setDepthAttachmentPixelFormat:";
+        public static readonly Selector sel_stencilAttachmentPixelFormat = "stencilAttachmentPixelFormat";
+        public static readonly Selector sel_setStencilAttachmentPixelFormat = "setStencilAttachmentPixelFormat:";
+        public static readonly Selector sel_sampleCount = "sampleCount";
+        public static readonly Selector sel_setSampleCount = "setSampleCount:";
+        public static readonly Selector sel_vertexDescriptor = "vertexDescriptor";
+        public static readonly Selector sel_isAlphaToCoverageEnabled = "isAlphaToCoverageEnabled";
+        public static readonly Selector sel_setAlphaToCoverageEnabled = "setAlphaToCoverageEnabled:";
     }
 }

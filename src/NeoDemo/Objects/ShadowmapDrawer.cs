@@ -8,28 +8,28 @@ namespace Veldrid.NeoDemo.Objects
 {
     public class ShadowmapDrawer : Renderable
     {
-        private readonly Func<Sdl2Window> _windowGetter;
-        private readonly DisposeCollector _disposeCollector = new DisposeCollector();
+        public readonly Func<Sdl2Window> _windowGetter;
+        public readonly DisposeCollector _disposeCollector = new DisposeCollector();
 
-        private DeviceBuffer _vb;
-        private DeviceBuffer _ib;
-        private DeviceBuffer _orthographicBuffer;
-        private DeviceBuffer _sizeInfoBuffer;
-        private Pipeline _pipeline;
-        private ResourceSet _resourceSet;
+        public DeviceBuffer _vb;
+        public DeviceBuffer _ib;
+        public DeviceBuffer _orthographicBuffer;
+        public DeviceBuffer _sizeInfoBuffer;
+        public Pipeline _pipeline;
+        public ResourceSet _resourceSet;
 
-        private Vector2 _position;
-        private Vector2 _size = new Vector2(100, 100);
+        public Vector2 _position;
+        public Vector2 _size = new Vector2(100, 100);
 
-        private readonly Func<TextureView> _bindingGetter;
-        private SizeInfo? _si;
-        private Matrix4x4? _ortho;
+        public readonly Func<TextureView> _bindingGetter;
+        public SizeInfo? _si;
+        public Matrix4x4? _ortho;
 
         public Vector2 Position { get => _position; set { _position = value; UpdateSizeInfoBuffer(); } }
 
         public Vector2 Size { get => _size; set { _size = value; UpdateSizeInfoBuffer(); } }
 
-        private void UpdateSizeInfoBuffer()
+        public void UpdateSizeInfoBuffer()
         {
             _si = new SizeInfo { Size = _size, Position = _position };
         }
@@ -135,7 +135,7 @@ namespace Veldrid.NeoDemo.Objects
             cl.DrawIndexed((uint)s_quadIndices.Length, 1, 0, 0, 0);
         }
 
-        private static float[] s_quadVerts = new float[]
+        public static float[] s_quadVerts = new float[]
         {
             0, 0, 0, 0,
             1, 0, 1, 0,
@@ -143,7 +143,7 @@ namespace Veldrid.NeoDemo.Objects
             0, 1, 0, 1
         };
 
-        private static ushort[] s_quadIndices = new ushort[] { 0, 1, 2, 0, 2, 3 };
+        public static ushort[] s_quadIndices = new ushort[] { 0, 1, 2, 0, 2, 3 };
 
         public struct SizeInfo
         {

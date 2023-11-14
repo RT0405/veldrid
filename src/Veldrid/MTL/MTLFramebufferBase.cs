@@ -2,7 +2,7 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal abstract class MTLFramebufferBase : Framebuffer
+    public abstract class MTLFramebufferBase : Framebuffer
     {
         public abstract MTLRenderPassDescriptor CreateRenderPassDescriptor();
         public abstract bool IsRenderable { get; }

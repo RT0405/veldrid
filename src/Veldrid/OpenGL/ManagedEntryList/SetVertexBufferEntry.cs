@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class SetVertexBufferEntry : OpenGLCommandEntry
+    public class SetVertexBufferEntry : OpenGLCommandEntry
     {
         public uint Index;
         public DeviceBuffer Buffer;

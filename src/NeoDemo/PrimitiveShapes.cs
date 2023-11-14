@@ -29,7 +29,7 @@ namespace Veldrid.NeoDemo
             return new SimpleMeshDataProvider(vertices, indices);
         }
 
-        internal static MeshData Box(float width, float height, float depth, float uvUnit)
+        public static MeshData Box(float width, float height, float depth, float uvUnit)
         {
             float halfWidth = width / 2;
             float halfHeight = height / 2;

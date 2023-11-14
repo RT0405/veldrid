@@ -2,7 +2,7 @@
 
 namespace Veldrid.VirtualReality.Oculus
 {
-    internal static class OculusUtil
+    public static class OculusUtil
     {
         public static TextureDescription GetVeldridTextureDescription(ovrTextureSwapChainDesc desc)
         {

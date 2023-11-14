@@ -28,10 +28,10 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setLanguageVersion, (uint)value);
         }
 
-        private static readonly ObjCClass s_class = new ObjCClass(nameof(MTLCompileOptions));
-        private static readonly Selector sel_fastMathEnabled = "fastMathEnabled";
-        private static readonly Selector sel_setFastMathEnabled = "setFastMathEnabled:";
-        private static readonly Selector sel_languageVersion = "languageVersion";
-        private static readonly Selector sel_setLanguageVersion = "setLanguageVersion:";
+        public static readonly ObjCClass s_class = new ObjCClass(nameof(MTLCompileOptions));
+        public static readonly Selector sel_fastMathEnabled = "fastMathEnabled";
+        public static readonly Selector sel_setFastMathEnabled = "setFastMathEnabled:";
+        public static readonly Selector sel_languageVersion = "languageVersion";
+        public static readonly Selector sel_setLanguageVersion = "setLanguageVersion:";
     }
 }

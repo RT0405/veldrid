@@ -5,9 +5,9 @@ using Vulkan;
 
 namespace Veldrid.Vk
 {
-    internal static partial class VkFormats
+    public static partial class VkFormats
     {
-        internal static VkFormat VdToVkPixelFormat(PixelFormat format, bool toDepthFormat = false)
+        public static VkFormat VdToVkPixelFormat(PixelFormat format, bool toDepthFormat = false)
         {
             switch (format)
             {

@@ -8,17 +8,17 @@ namespace Veldrid.NeoDemo
 {
     public class SceneContext
     {
-        public DeviceBuffer ProjectionMatrixBuffer { get; private set; }
-        public DeviceBuffer ViewMatrixBuffer { get; private set; }
-        public DeviceBuffer LightInfoBuffer { get; private set; }
-        public DeviceBuffer LightViewProjectionBuffer0 { get; internal set; }
-        public DeviceBuffer LightViewProjectionBuffer1 { get; internal set; }
-        public DeviceBuffer LightViewProjectionBuffer2 { get; internal set; }
-        public DeviceBuffer DepthLimitsBuffer { get; internal set; }
-        public DeviceBuffer CameraInfoBuffer { get; private set; }
-        public DeviceBuffer PointLightsBuffer { get; private set; }
+        public DeviceBuffer ProjectionMatrixBuffer { get; set; }
+        public DeviceBuffer ViewMatrixBuffer { get; set; }
+        public DeviceBuffer LightInfoBuffer { get; set; }
+        public DeviceBuffer LightViewProjectionBuffer0 { get; set; }
+        public DeviceBuffer LightViewProjectionBuffer1 { get; set; }
+        public DeviceBuffer LightViewProjectionBuffer2 { get; set; }
+        public DeviceBuffer DepthLimitsBuffer { get; set; }
+        public DeviceBuffer CameraInfoBuffer { get; set; }
+        public DeviceBuffer PointLightsBuffer { get; set; }
 
-        public CascadedShadowMaps ShadowMaps { get; private set; } = new CascadedShadowMaps();
+        public CascadedShadowMaps ShadowMaps { get; set; } = new CascadedShadowMaps();
         public TextureView NearShadowMapView => ShadowMaps.NearShadowMapView;
         public TextureView MidShadowMapView => ShadowMaps.MidShadowMapView;
         public TextureView FarShadowMapView => ShadowMaps.FarShadowMapView;
@@ -27,36 +27,36 @@ namespace Veldrid.NeoDemo
         public Framebuffer FarShadowMapFramebuffer => ShadowMaps.FarShadowMapFramebuffer;
         public Texture ShadowMapTexture => ShadowMaps.NearShadowMap; // Only used for size.
 
-        public Texture ReflectionColorTexture { get; private set; }
-        public Texture ReflectionDepthTexture { get; private set; }
-        public TextureView ReflectionColorView { get; private set; }
-        public Framebuffer ReflectionFramebuffer { get; private set; }
-        public DeviceBuffer ReflectionViewProjBuffer { get; private set; }
+        public Texture ReflectionColorTexture { get; set; }
+        public Texture ReflectionDepthTexture { get; set; }
+        public TextureView ReflectionColorView { get; set; }
+        public Framebuffer ReflectionFramebuffer { get; set; }
+        public DeviceBuffer ReflectionViewProjBuffer { get; set; }
 
         // MainSceneView and Duplicator resource sets both use this.
-        public ResourceLayout TextureSamplerResourceLayout { get; private set; }
+        public ResourceLayout TextureSamplerResourceLayout { get; set; }
 
-        public Texture MainSceneColorTexture { get; private set; }
-        public Texture MainSceneDepthTexture { get; private set; }
-        public Framebuffer MainSceneFramebuffer { get; private set; }
-        public Texture MainSceneResolvedColorTexture { get; private set; }
-        public TextureView MainSceneResolvedColorView { get; private set; }
-        public ResourceSet MainSceneViewResourceSet { get; private set; }
+        public Texture MainSceneColorTexture { get; set; }
+        public Texture MainSceneDepthTexture { get; set; }
+        public Framebuffer MainSceneFramebuffer { get; set; }
+        public Texture MainSceneResolvedColorTexture { get; set; }
+        public TextureView MainSceneResolvedColorView { get; set; }
+        public ResourceSet MainSceneViewResourceSet { get; set; }
 
-        public Texture DuplicatorTarget0 { get; private set; }
-        public TextureView DuplicatorTargetView0 { get; private set; }
-        public ResourceSet DuplicatorTargetSet0 { get; internal set; }
-        public Texture DuplicatorTarget1 { get; private set; }
-        public TextureView DuplicatorTargetView1 { get; private set; }
-        public ResourceSet DuplicatorTargetSet1 { get; internal set; }
-        public Framebuffer DuplicatorFramebuffer { get; private set; }
+        public Texture DuplicatorTarget0 { get; set; }
+        public TextureView DuplicatorTargetView0 { get; set; }
+        public ResourceSet DuplicatorTargetSet0 { get; set; }
+        public Texture DuplicatorTarget1 { get; set; }
+        public TextureView DuplicatorTargetView1 { get; set; }
+        public ResourceSet DuplicatorTargetSet1 { get; set; }
+        public Framebuffer DuplicatorFramebuffer { get; set; }
 
         public Camera Camera { get; set; }
         public DirectionalLight DirectionalLight { get; } = new DirectionalLight();
-        public TextureSampleCount MainSceneSampleCount { get; internal set; }
-        public ColorWriteMask MainSceneMask { get; internal set; } = ColorWriteMask.All;
-        public DeviceBuffer MirrorClipPlaneBuffer { get; private set; }
-        public DeviceBuffer NoClipPlaneBuffer { get; private set; }
+        public TextureSampleCount MainSceneSampleCount { get; set; }
+        public ColorWriteMask MainSceneMask { get; set; } = ColorWriteMask.All;
+        public DeviceBuffer MirrorClipPlaneBuffer { get; set; }
+        public DeviceBuffer NoClipPlaneBuffer { get; set; }
 
         public virtual void CreateDeviceObjects(GraphicsDevice gd, CommandList cl, SceneContext sc)
         {
@@ -159,7 +159,7 @@ namespace Veldrid.NeoDemo
             cl.UpdateBuffer(CameraInfoBuffer, 0, Camera.GetCameraInfo());
         }
 
-        internal void RecreateWindowSizedResources(GraphicsDevice gd, CommandList cl)
+        public void RecreateWindowSizedResources(GraphicsDevice gd, CommandList cl)
         {
             MainSceneColorTexture?.Dispose();
             MainSceneDepthTexture?.Dispose();
@@ -241,17 +241,17 @@ namespace Veldrid.NeoDemo
 
     public class CascadedShadowMaps
     {
-        public Texture NearShadowMap { get; private set; }
-        public TextureView NearShadowMapView { get; private set; }
-        public Framebuffer NearShadowMapFramebuffer { get; private set; }
+        public Texture NearShadowMap { get; set; }
+        public TextureView NearShadowMapView { get; set; }
+        public Framebuffer NearShadowMapFramebuffer { get; set; }
 
-        public Texture MidShadowMap { get; private set; }
-        public TextureView MidShadowMapView { get; private set; }
-        public Framebuffer MidShadowMapFramebuffer { get; private set; }
+        public Texture MidShadowMap { get; set; }
+        public TextureView MidShadowMapView { get; set; }
+        public Framebuffer MidShadowMapFramebuffer { get; set; }
 
-        public Texture FarShadowMap { get; private set; }
-        public TextureView FarShadowMapView { get; private set; }
-        public Framebuffer FarShadowMapFramebuffer { get; private set; }
+        public Texture FarShadowMap { get; set; }
+        public TextureView FarShadowMapView { get; set; }
+        public Framebuffer FarShadowMapFramebuffer { get; set; }
 
         public void CreateDeviceResources(GraphicsDevice gd)
         {

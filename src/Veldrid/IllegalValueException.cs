@@ -2,14 +2,14 @@
 
 namespace Veldrid
 {
-    internal static class Illegal
+    public static class Illegal
     {
-        internal static Exception Value<T>()
+        public static Exception Value<T>()
         {
             return new IllegalValueException<T>();
         }
 
-        internal class IllegalValueException<T> : VeldridException
+        public class IllegalValueException<T> : VeldridException
         {
         }
     }

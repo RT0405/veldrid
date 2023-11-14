@@ -3,12 +3,12 @@ using static Vulkan.VulkanNative;
 
 namespace Veldrid.Vk
 {
-    internal unsafe class VkFence : Fence
+    public unsafe class VkFence : Fence
     {
-        private readonly VkGraphicsDevice _gd;
-        private Vulkan.VkFence _fence;
-        private string _name;
-        private bool _destroyed;
+        public readonly VkGraphicsDevice _gd;
+        public Vulkan.VkFence _fence;
+        public string _name;
+        public bool _destroyed;
 
         public Vulkan.VkFence DeviceFence => _fence;
 

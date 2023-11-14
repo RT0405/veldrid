@@ -14,10 +14,10 @@ namespace Veldrid
     /// </summary>
     public class BackendInfoOpenGL
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private readonly ReadOnlyCollection<string> _extensions;
+        public readonly OpenGLGraphicsDevice _gd;
+        public readonly ReadOnlyCollection<string> _extensions;
 
-        internal BackendInfoOpenGL(OpenGLGraphicsDevice gd)
+        public BackendInfoOpenGL(OpenGLGraphicsDevice gd)
         {
             _gd = gd;
             _extensions = new ReadOnlyCollection<string>(gd.Extensions.ToArray());

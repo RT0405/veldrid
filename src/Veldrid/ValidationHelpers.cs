@@ -2,10 +2,10 @@
 
 namespace Veldrid
 {
-    internal static class ValidationHelpers
+    public static class ValidationHelpers
     {
         [Conditional("VALIDATE_USAGE")]
-        internal static void ValidateResourceSet(GraphicsDevice gd, ref ResourceSetDescription description)
+        public static void ValidateResourceSet(GraphicsDevice gd, ref ResourceSetDescription description)
         {
 #if VALIDATE_USAGE
             ResourceLayoutElementDescription[] elements = description.Layout.Description.Elements;
@@ -52,7 +52,7 @@ namespace Veldrid
         }
 
         [Conditional("VALIDATE_USAGE")]
-        private static void ValidateResourceKind(ResourceKind kind, BindableResource resource, uint slot)
+        public static void ValidateResourceKind(ResourceKind kind, BindableResource resource, uint slot)
         {
             switch (kind)
             {

@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocDispatchIndirectEntry
+    public struct NoAllocDispatchIndirectEntry
     {
         public Tracked<DeviceBuffer> IndirectBuffer;
         public uint Offset;

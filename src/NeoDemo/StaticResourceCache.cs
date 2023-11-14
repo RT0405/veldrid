@@ -5,26 +5,26 @@ using Veldrid.ImageSharp;
 namespace Veldrid.NeoDemo
 {
     // Non-thread-safe cache for resources.
-    internal static class StaticResourceCache
+    public static class StaticResourceCache
     {
-        private static readonly Dictionary<GraphicsPipelineDescription, Pipeline> s_pipelines
+        public static readonly Dictionary<GraphicsPipelineDescription, Pipeline> s_pipelines
             = new Dictionary<GraphicsPipelineDescription, Pipeline>();
 
-        private static readonly Dictionary<ResourceLayoutDescription, ResourceLayout> s_layouts
+        public static readonly Dictionary<ResourceLayoutDescription, ResourceLayout> s_layouts
             = new Dictionary<ResourceLayoutDescription, ResourceLayout>();
 
-        private static readonly Dictionary<ShaderSetCacheKey, (Shader, Shader)> s_shaderSets
+        public static readonly Dictionary<ShaderSetCacheKey, (Shader, Shader)> s_shaderSets
             = new Dictionary<ShaderSetCacheKey, (Shader, Shader)>();
 
-        private static readonly Dictionary<ImageSharpTexture, Texture> s_textures
+        public static readonly Dictionary<ImageSharpTexture, Texture> s_textures
             = new Dictionary<ImageSharpTexture, Texture>();
 
-        private static readonly Dictionary<Texture, TextureView> s_textureViews = new Dictionary<Texture, TextureView>();
+        public static readonly Dictionary<Texture, TextureView> s_textureViews = new Dictionary<Texture, TextureView>();
 
-        private static readonly Dictionary<ResourceSetDescription, ResourceSet> s_resourceSets
+        public static readonly Dictionary<ResourceSetDescription, ResourceSet> s_resourceSets
             = new Dictionary<ResourceSetDescription, ResourceSet>();
 
-        private static Texture _pinkTex;
+        public static Texture _pinkTex;
 
         public static readonly ResourceLayoutDescription ProjViewLayoutDescription = new ResourceLayoutDescription(
             new ResourceLayoutElementDescription("Projection", ResourceKind.UniformBuffer, ShaderStages.Vertex),
@@ -111,7 +111,7 @@ namespace Veldrid.NeoDemo
             s_resourceSets.Clear();
         }
 
-        internal static Texture GetTexture2D(GraphicsDevice gd, ResourceFactory factory, ImageSharpTexture textureData)
+        public static Texture GetTexture2D(GraphicsDevice gd, ResourceFactory factory, ImageSharpTexture textureData)
         {
             if (!s_textures.TryGetValue(textureData, out Texture tex))
             {
@@ -122,7 +122,7 @@ namespace Veldrid.NeoDemo
             return tex;
         }
 
-        internal static TextureView GetTextureView(ResourceFactory factory, Texture texture)
+        public static TextureView GetTextureView(ResourceFactory factory, Texture texture)
         {
             if (!s_textureViews.TryGetValue(texture, out TextureView view))
             {
@@ -133,7 +133,7 @@ namespace Veldrid.NeoDemo
             return view;
         }
 
-        internal static unsafe Texture GetPinkTexture(GraphicsDevice gd, ResourceFactory factory)
+        public static unsafe Texture GetPinkTexture(GraphicsDevice gd, ResourceFactory factory)
         {
             if (_pinkTex == null)
             {
@@ -145,7 +145,7 @@ namespace Veldrid.NeoDemo
             return _pinkTex;
         }
 
-        internal static ResourceSet GetResourceSet(ResourceFactory factory, ResourceSetDescription description)
+        public static ResourceSet GetResourceSet(ResourceFactory factory, ResourceSetDescription description)
         {
             if (!s_resourceSets.TryGetValue(description, out ResourceSet ret))
             {

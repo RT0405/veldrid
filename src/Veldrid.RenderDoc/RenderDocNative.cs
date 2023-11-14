@@ -21,9 +21,9 @@ namespace Veldrid
     ///   1 - if the outAPIPointers has been filled with a pointer to the API struct requested
     ///   0 - if the requested version is not supported or the arguments are invalid.
     /// </returns>
-    internal unsafe delegate int pRENDERDOC_GetAPI(RENDERDOC_Version version, void** outAPIPointers);
+    public unsafe delegate int pRENDERDOC_GetAPI(RENDERDOC_Version version, void** outAPIPointers);
 
-    internal enum RENDERDOC_Version
+    public enum RENDERDOC_Version
     {
         API_Version_1_0_0 = 10000,    // RENDERDOC_API_1_0_0 = 1 00 00
         API_Version_1_0_1 = 10001,    // RENDERDOC_API_1_0_1 = 1 00 01
@@ -42,9 +42,9 @@ namespace Veldrid
     /// this function returns the actual version returned. If a parameter is NULL, it will be
     /// ignored and the others will be filled out.
     /// /// </summary>
-    internal unsafe delegate void pRENDERDOC_GetAPIVersion(int* major, int* minor, int* patch);
+    public unsafe delegate void pRENDERDOC_GetAPIVersion(int* major, int* minor, int* patch);
 
-    internal enum RENDERDOC_CaptureOption
+    public enum RENDERDOC_CaptureOption
     {
         // Allow the application to enable vsync
         //
@@ -192,20 +192,20 @@ namespace Veldrid
     //
     // Returns 1 if the option and value are valid
     // Returns 0 if either is invalid and the option is unchanged
-    internal unsafe delegate int pRENDERDOC_SetCaptureOptionU32(RENDERDOC_CaptureOption opt, uint val);
-    internal unsafe delegate int pRENDERDOC_SetCaptureOptionF32(RENDERDOC_CaptureOption opt, float val);
+    public unsafe delegate int pRENDERDOC_SetCaptureOptionU32(RENDERDOC_CaptureOption opt, uint val);
+    public unsafe delegate int pRENDERDOC_SetCaptureOptionF32(RENDERDOC_CaptureOption opt, float val);
 
     // Gets the current value of an option as a uint
     //
     // If the option is invalid, 0xffffffff is returned
-    internal unsafe delegate uint pRENDERDOC_GetCaptureOptionU32(RENDERDOC_CaptureOption opt);
+    public unsafe delegate uint pRENDERDOC_GetCaptureOptionU32(RENDERDOC_CaptureOption opt);
 
     // Gets the current value of an option as a float
     //
     // If the option is invalid, -FLT_MAX is returned
-    internal unsafe delegate float pRENDERDOC_GetCaptureOptionF32(RENDERDOC_CaptureOption opt);
+    public unsafe delegate float pRENDERDOC_GetCaptureOptionF32(RENDERDOC_CaptureOption opt);
 
-    internal enum RENDERDOC_InputButton
+    public enum RENDERDOC_InputButton
     {
         // '0' - '9' matches ASCII values
         eRENDERDOC_Key_0 = 0x30,
@@ -287,14 +287,14 @@ namespace Veldrid
     // Sets which key or keys can be used to toggle focus between multiple windows
     //
     // If keys is NULL or num is 0, toggle keys will be disabled
-    internal unsafe delegate void pRENDERDOC_SetFocusToggleKeys(RENDERDOC_InputButton* keys, int num);
+    public unsafe delegate void pRENDERDOC_SetFocusToggleKeys(RENDERDOC_InputButton* keys, int num);
 
     // Sets which key or keys can be used to capture the next frame
     //
     // If keys is NULL or num is 0, captures keys will be disabled
-    internal unsafe delegate void pRENDERDOC_SetCaptureKeys(RENDERDOC_InputButton* keys, int num);
+    public unsafe delegate void pRENDERDOC_SetCaptureKeys(RENDERDOC_InputButton* keys, int num);
 
-    internal enum RENDERDOC_OverlayBits : uint
+    public enum RENDERDOC_OverlayBits : uint
     {
         // This single bit controls whether the overlay is enabled or disabled globally
         Enabled = 0x1,
@@ -319,9 +319,9 @@ namespace Veldrid
     }
 
     // returns the overlay bits that have been set
-    internal unsafe delegate uint pRENDERDOC_GetOverlayBits();
+    public unsafe delegate uint pRENDERDOC_GetOverlayBits();
     // sets the overlay bits with an and & or mask
-    internal unsafe delegate void pRENDERDOC_MaskOverlayBits(uint And, uint Or);
+    public unsafe delegate void pRENDERDOC_MaskOverlayBits(uint And, uint Or);
 
     // this function will attempt to shut down RenderDoc.
     //
@@ -329,14 +329,14 @@ namespace Veldrid
     // the dll is loaded, before any API work happens. RenderDoc will remove its
     // injected hooks and shut down. Behaviour is undefined if this is called
     // after any API functions have been called.
-    internal unsafe delegate void pRENDERDOC_Shutdown();
+    public unsafe delegate void pRENDERDOC_Shutdown();
 
     // This function will unload RenderDoc's crash handler.
     //
     // If you use your own crash handler and don't want RenderDoc's handler to
     // intercede, you can call this function to unload it and any unhandled
     // exceptions will pass to the next handler.
-    internal unsafe delegate void pRENDERDOC_UnloadCrashHandler();
+    public unsafe delegate void pRENDERDOC_UnloadCrashHandler();
 
     // Sets the capture file path template
     //
@@ -355,13 +355,13 @@ namespace Veldrid
     //
     // Capture #1 -> my_captures/example_frame123.rdc
     // Capture #2 -> my_captures/example_frame456.rdc
-    internal unsafe delegate void pRENDERDOC_SetCaptureFilePathTemplate(byte* pathtemplate);
+    public unsafe delegate void pRENDERDOC_SetCaptureFilePathTemplate(byte* pathtemplate);
 
     // returns the current capture path template, see SetCaptureFileTemplate above, as a UTF-8 string
-    internal unsafe delegate byte* pRENDERDOC_GetCaptureFilePathTemplate();
+    public unsafe delegate byte* pRENDERDOC_GetCaptureFilePathTemplate();
 
     // returns the number of captures that have been made
-    internal unsafe delegate uint pRENDERDOC_GetNumCaptures();
+    public unsafe delegate uint pRENDERDOC_GetNumCaptures();
 
     // This function returns the details of a capture, by index. New captures are added
     // to the end of the list.
@@ -377,7 +377,7 @@ namespace Veldrid
     //
     // Note: when captures are deleted in the UI they will remain in this list, so the
     // capture path may not exist anymore.
-    internal unsafe delegate uint pRENDERDOC_GetCapture(uint idx, char* filename, uint* pathlength, ulong* timestamp);
+    public unsafe delegate uint pRENDERDOC_GetCapture(uint idx, char* filename, uint* pathlength, ulong* timestamp);
 
     // Sets the comments associated with a capture file. These comments are displayed in the
     // UI program when opening.
@@ -387,10 +387,10 @@ namespace Veldrid
     // comments should be a NULL-terminated UTF-8 string to add as comments.
     //
     // Any existing comments will be overwritten.
-    internal unsafe delegate void pRENDERDOC_SetCaptureFileComments(byte* filePath, byte* comments);
+    public unsafe delegate void pRENDERDOC_SetCaptureFileComments(byte* filePath, byte* comments);
 
     // returns 1 if the RenderDoc UI is connected to this application, 0 otherwise
-    internal unsafe delegate uint pRENDERDOC_IsTargetControlConnected();
+    public unsafe delegate uint pRENDERDOC_IsTargetControlConnected();
 
     // This function will launch the Replay UI associated with the RenderDoc library injected
     // into the running application.
@@ -401,7 +401,7 @@ namespace Veldrid
     // if cmdline is NULL, the command line will be empty.
     //
     // returns the PID of the replay UI if successful, 0 if not successful.
-    internal unsafe delegate uint pRENDERDOC_LaunchReplayUI(uint connectTargetControl, byte* cmdline);
+    public unsafe delegate uint pRENDERDOC_LaunchReplayUI(uint connectTargetControl, byte* cmdline);
 
     //////////////////////////////////////////////////////////////////////////
     // Capturing functions
@@ -409,13 +409,13 @@ namespace Veldrid
 
     // This sets the RenderDoc in-app overlay in the API/window pair as 'active' and it will
     // respond to keypresses. Neither parameter can be NULL
-    internal unsafe delegate void pRENDERDOC_SetActiveWindow(void* device, void* wndHandle);
+    public unsafe delegate void pRENDERDOC_SetActiveWindow(void* device, void* wndHandle);
 
     // capture the next frame on whichever window and API is currently considered active
-    internal unsafe delegate void pRENDERDOC_TriggerCapture();
+    public unsafe delegate void pRENDERDOC_TriggerCapture();
 
     // capture the next N frames on whichever window and API is currently considered active
-    internal unsafe delegate void pRENDERDOC_TriggerMultiFrameCapture(uint numFrames);
+    public unsafe delegate void pRENDERDOC_TriggerMultiFrameCapture(uint numFrames);
 
     // When choosing either a device pointer or a window handle to capture, you can pass NULL.
     // Passing NULL specifies a 'wildcard' match against anything. This allows you to specify
@@ -435,30 +435,30 @@ namespace Veldrid
     //
     // The results are undefined (including crashes) if two captures are started overlapping,
     // even on separate devices and/oror windows.
-    internal unsafe delegate void pRENDERDOC_StartFrameCapture(void* device, void* wndHandle);
+    public unsafe delegate void pRENDERDOC_StartFrameCapture(void* device, void* wndHandle);
 
     // Returns whether or not a frame capture is currently ongoing anywhere.
     //
     // This will return 1 if a capture is ongoing, and 0 if there is no capture running
-    internal unsafe delegate uint pRENDERDOC_IsFrameCapturing();
+    public unsafe delegate uint pRENDERDOC_IsFrameCapturing();
 
     // Ends capturing immediately.
     //
     // This will return 1 if the capture succeeded, and 0 if there was an error capturing.
-    internal unsafe delegate uint pRENDERDOC_EndFrameCapture(void* device, void* wndHandle);
+    public unsafe delegate uint pRENDERDOC_EndFrameCapture(void* device, void* wndHandle);
 
     // Ends capturing immediately and discard any data stored without saving to disk.
     //
     // This will return 1 if the capture was discarded, and 0 if there was an error or no capture
     // was in progress
-    internal unsafe delegate uint pRENDERDOC_DiscardFrameCapture(void* device, void* wndHandle);
+    public unsafe delegate uint pRENDERDOC_DiscardFrameCapture(void* device, void* wndHandle);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // RenderDoc API versions
     //
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct RENDERDOC_API_1_4_0
+    public struct RENDERDOC_API_1_4_0
     {
         public pRENDERDOC_GetAPIVersion GetAPIVersion;
 

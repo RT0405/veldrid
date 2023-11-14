@@ -6,90 +6,90 @@ using System.Runtime.InteropServices;
 
 namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal unsafe class OpenGLNoAllocCommandEntryList : OpenGLCommandEntryList, IDisposable
+    public unsafe class OpenGLNoAllocCommandEntryList : OpenGLCommandEntryList, IDisposable
     {
-        private readonly StagingMemoryPool _memoryPool;
-        private readonly List<EntryStorageBlock> _blocks = new List<EntryStorageBlock>();
-        private EntryStorageBlock _currentBlock;
-        private uint _totalEntries;
-        private readonly List<object> _resourceList = new List<object>();
-        private readonly List<StagingBlock> _stagingBlocks = new List<StagingBlock>();
+        public readonly StagingMemoryPool _memoryPool;
+        public readonly List<EntryStorageBlock> _blocks = new List<EntryStorageBlock>();
+        public EntryStorageBlock _currentBlock;
+        public uint _totalEntries;
+        public readonly List<object> _resourceList = new List<object>();
+        public readonly List<StagingBlock> _stagingBlocks = new List<StagingBlock>();
 
         // Entry IDs
-        private const byte BeginEntryID = 1;
-        private static readonly uint BeginEntrySize = Util.USizeOf<NoAllocBeginEntry>();
+        public const byte BeginEntryID = 1;
+        public static readonly uint BeginEntrySize = Util.USizeOf<NoAllocBeginEntry>();
 
-        private const byte ClearColorTargetID = 2;
-        private static readonly uint ClearColorTargetEntrySize = Util.USizeOf<NoAllocClearColorTargetEntry>();
+        public const byte ClearColorTargetID = 2;
+        public static readonly uint ClearColorTargetEntrySize = Util.USizeOf<NoAllocClearColorTargetEntry>();
 
-        private const byte ClearDepthTargetID = 3;
-        private static readonly uint ClearDepthTargetEntrySize = Util.USizeOf<NoAllocClearDepthTargetEntry>();
+        public const byte ClearDepthTargetID = 3;
+        public static readonly uint ClearDepthTargetEntrySize = Util.USizeOf<NoAllocClearDepthTargetEntry>();
 
-        private const byte DrawIndexedEntryID = 4;
-        private static readonly uint DrawIndexedEntrySize = Util.USizeOf<NoAllocDrawIndexedEntry>();
+        public const byte DrawIndexedEntryID = 4;
+        public static readonly uint DrawIndexedEntrySize = Util.USizeOf<NoAllocDrawIndexedEntry>();
 
-        private const byte EndEntryID = 5;
-        private static readonly uint EndEntrySize = Util.USizeOf<NoAllocEndEntry>();
+        public const byte EndEntryID = 5;
+        public static readonly uint EndEntrySize = Util.USizeOf<NoAllocEndEntry>();
 
-        private const byte SetFramebufferEntryID = 6;
-        private static readonly uint SetFramebufferEntrySize = Util.USizeOf<NoAllocSetFramebufferEntry>();
+        public const byte SetFramebufferEntryID = 6;
+        public static readonly uint SetFramebufferEntrySize = Util.USizeOf<NoAllocSetFramebufferEntry>();
 
-        private const byte SetIndexBufferEntryID = 7;
-        private static readonly uint SetIndexBufferEntrySize = Util.USizeOf<NoAllocSetIndexBufferEntry>();
+        public const byte SetIndexBufferEntryID = 7;
+        public static readonly uint SetIndexBufferEntrySize = Util.USizeOf<NoAllocSetIndexBufferEntry>();
 
-        private const byte SetPipelineEntryID = 8;
-        private static readonly uint SetPipelineEntrySize = Util.USizeOf<NoAllocSetPipelineEntry>();
+        public const byte SetPipelineEntryID = 8;
+        public static readonly uint SetPipelineEntrySize = Util.USizeOf<NoAllocSetPipelineEntry>();
 
-        private const byte SetResourceSetEntryID = 9;
-        private static readonly uint SetResourceSetEntrySize = Util.USizeOf<NoAllocSetResourceSetEntry>();
+        public const byte SetResourceSetEntryID = 9;
+        public static readonly uint SetResourceSetEntrySize = Util.USizeOf<NoAllocSetResourceSetEntry>();
 
-        private const byte SetScissorRectEntryID = 10;
-        private static readonly uint SetScissorRectEntrySize = Util.USizeOf<NoAllocSetScissorRectEntry>();
+        public const byte SetScissorRectEntryID = 10;
+        public static readonly uint SetScissorRectEntrySize = Util.USizeOf<NoAllocSetScissorRectEntry>();
 
-        private const byte SetVertexBufferEntryID = 11;
-        private static readonly uint SetVertexBufferEntrySize = Util.USizeOf<NoAllocSetVertexBufferEntry>();
+        public const byte SetVertexBufferEntryID = 11;
+        public static readonly uint SetVertexBufferEntrySize = Util.USizeOf<NoAllocSetVertexBufferEntry>();
 
-        private const byte SetViewportEntryID = 12;
-        private static readonly uint SetViewportEntrySize = Util.USizeOf<NoAllocSetViewportEntry>();
+        public const byte SetViewportEntryID = 12;
+        public static readonly uint SetViewportEntrySize = Util.USizeOf<NoAllocSetViewportEntry>();
 
-        private const byte UpdateBufferEntryID = 13;
-        private static readonly uint UpdateBufferEntrySize = Util.USizeOf<NoAllocUpdateBufferEntry>();
+        public const byte UpdateBufferEntryID = 13;
+        public static readonly uint UpdateBufferEntrySize = Util.USizeOf<NoAllocUpdateBufferEntry>();
 
-        private const byte CopyBufferEntryID = 14;
-        private static readonly uint CopyBufferEntrySize = Util.USizeOf<NoAllocCopyBufferEntry>();
+        public const byte CopyBufferEntryID = 14;
+        public static readonly uint CopyBufferEntrySize = Util.USizeOf<NoAllocCopyBufferEntry>();
 
-        private const byte CopyTextureEntryID = 15;
-        private static readonly uint CopyTextureEntrySize = Util.USizeOf<NoAllocCopyTextureEntry>();
+        public const byte CopyTextureEntryID = 15;
+        public static readonly uint CopyTextureEntrySize = Util.USizeOf<NoAllocCopyTextureEntry>();
 
-        private const byte ResolveTextureEntryID = 16;
-        private static readonly uint ResolveTextureEntrySize = Util.USizeOf<NoAllocResolveTextureEntry>();
+        public const byte ResolveTextureEntryID = 16;
+        public static readonly uint ResolveTextureEntrySize = Util.USizeOf<NoAllocResolveTextureEntry>();
 
-        private const byte DrawEntryID = 17;
-        private static readonly uint DrawEntrySize = Util.USizeOf<NoAllocDrawEntry>();
+        public const byte DrawEntryID = 17;
+        public static readonly uint DrawEntrySize = Util.USizeOf<NoAllocDrawEntry>();
 
-        private const byte DispatchEntryID = 18;
-        private static readonly uint DispatchEntrySize = Util.USizeOf<NoAllocDispatchEntry>();
+        public const byte DispatchEntryID = 18;
+        public static readonly uint DispatchEntrySize = Util.USizeOf<NoAllocDispatchEntry>();
 
-        private const byte DrawIndirectEntryID = 20;
-        private static readonly uint DrawIndirectEntrySize = Util.USizeOf<NoAllocDrawIndirectEntry>();
+        public const byte DrawIndirectEntryID = 20;
+        public static readonly uint DrawIndirectEntrySize = Util.USizeOf<NoAllocDrawIndirectEntry>();
 
-        private const byte DrawIndexedIndirectEntryID = 21;
-        private static readonly uint DrawIndexedIndirectEntrySize = Util.USizeOf<NoAllocDrawIndexedIndirectEntry>();
+        public const byte DrawIndexedIndirectEntryID = 21;
+        public static readonly uint DrawIndexedIndirectEntrySize = Util.USizeOf<NoAllocDrawIndexedIndirectEntry>();
 
-        private const byte DispatchIndirectEntryID = 22;
-        private static readonly uint DispatchIndirectEntrySize = Util.USizeOf<NoAllocDispatchIndirectEntry>();
+        public const byte DispatchIndirectEntryID = 22;
+        public static readonly uint DispatchIndirectEntrySize = Util.USizeOf<NoAllocDispatchIndirectEntry>();
 
-        private const byte GenerateMipmapsEntryID = 23;
-        private static readonly uint GenerateMipmapsEntrySize = Util.USizeOf<NoAllocGenerateMipmapsEntry>();
+        public const byte GenerateMipmapsEntryID = 23;
+        public static readonly uint GenerateMipmapsEntrySize = Util.USizeOf<NoAllocGenerateMipmapsEntry>();
 
-        private const byte PushDebugGroupEntryID = 24;
-        private static readonly uint PushDebugGroupEntrySize = Util.USizeOf<NoAllocPushDebugGroupEntry>();
+        public const byte PushDebugGroupEntryID = 24;
+        public static readonly uint PushDebugGroupEntrySize = Util.USizeOf<NoAllocPushDebugGroupEntry>();
 
-        private const byte PopDebugGroupEntryID = 25;
-        private static readonly uint PopDebugGroupEntrySize = Util.USizeOf<NoAllocPopDebugGroupEntry>();
+        public const byte PopDebugGroupEntryID = 25;
+        public static readonly uint PopDebugGroupEntrySize = Util.USizeOf<NoAllocPopDebugGroupEntry>();
 
-        private const byte InsertDebugMarkerEntryID = 26;
-        private static readonly uint InsertDebugMarkerEntrySize = Util.USizeOf<NoAllocInsertDebugMarkerEntry>();
+        public const byte InsertDebugMarkerEntryID = 26;
+        public static readonly uint InsertDebugMarkerEntrySize = Util.USizeOf<NoAllocInsertDebugMarkerEntry>();
 
         public OpenGLCommandList Parent { get; }
 
@@ -126,7 +126,7 @@ namespace Veldrid.OpenGL.NoAllocEntryList
             }
         }
 
-        private void FlushStagingBlocks()
+        public void FlushStagingBlocks()
         {
             StagingMemoryPool pool = _memoryPool;
             foreach (StagingBlock block in _stagingBlocks)
@@ -472,7 +472,7 @@ namespace Veldrid.OpenGL.NoAllocEntryList
             SetResourceSet(slot, rs, dynamicOffsetCount, ref dynamicOffsets, isGraphics: true);
         }
 
-        private void SetResourceSet(uint slot, ResourceSet rs, uint dynamicOffsetCount, ref uint dynamicOffsets, bool isGraphics)
+        public void SetResourceSet(uint slot, ResourceSet rs, uint dynamicOffsetCount, ref uint dynamicOffsets, bool isGraphics)
         {
             NoAllocSetResourceSetEntry entry;
 
@@ -593,19 +593,19 @@ namespace Veldrid.OpenGL.NoAllocEntryList
             AddEntry(InsertDebugMarkerEntryID, ref entry);
         }
 
-        private Tracked<T> Track<T>(T item) where T : class
+        public Tracked<T> Track<T>(T item) where T : class
         {
             return new Tracked<T>(_resourceList, item);
         }
 
-        private struct EntryStorageBlock : IEquatable<EntryStorageBlock>
+        public struct EntryStorageBlock : IEquatable<EntryStorageBlock>
         {
-            private const int DefaultStorageBlockSize = 40000;
-            private readonly byte[] _bytes;
-            private readonly GCHandle _gcHandle;
+            public const int DefaultStorageBlockSize = 40000;
+            public readonly byte[] _bytes;
+            public readonly GCHandle _gcHandle;
             public readonly byte* BasePtr;
 
-            private uint _unusedStart;
+            public uint _unusedStart;
             public uint RemainingSize => (uint)_bytes.Length - _unusedStart;
 
             public uint TotalSize => (uint)_bytes.Length;
@@ -625,7 +625,7 @@ namespace Veldrid.OpenGL.NoAllocEntryList
                 }
             }
 
-            private EntryStorageBlock(int storageBlockSize)
+            public EntryStorageBlock(int storageBlockSize)
             {
                 _bytes = new byte[storageBlockSize];
                 _gcHandle = GCHandle.Alloc(_bytes, GCHandleType.Pinned);
@@ -643,7 +643,7 @@ namespace Veldrid.OpenGL.NoAllocEntryList
                 _gcHandle.Free();
             }
 
-            internal void Clear()
+            public void Clear()
             {
                 _unusedStart = 0;
                 Util.ClearArray(_bytes);
@@ -660,9 +660,9 @@ namespace Veldrid.OpenGL.NoAllocEntryList
     /// A handle for an object stored in some List.
     /// </summary>
     /// <typeparam name="T">The type of object to track.</typeparam>
-    internal struct Tracked<T> where T : class
+    public struct Tracked<T> where T : class
     {
-        private readonly int _index;
+        public readonly int _index;
 
         public T Get(List<object> list) => (T)list[_index];
 

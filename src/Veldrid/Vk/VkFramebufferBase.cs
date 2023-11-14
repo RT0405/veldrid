@@ -3,7 +3,7 @@ using Vulkan;
 
 namespace Veldrid.Vk
 {
-    internal abstract class VkFramebufferBase : Framebuffer
+    public abstract class VkFramebufferBase : Framebuffer
     {
         public VkFramebufferBase(
             FramebufferAttachmentDescription? depthTexture,

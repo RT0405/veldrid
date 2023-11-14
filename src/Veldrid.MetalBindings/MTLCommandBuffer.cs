@@ -34,13 +34,13 @@ namespace Veldrid.MetalBindings
 
         public MTLCommandBufferStatus status => (MTLCommandBufferStatus)uint_objc_msgSend(NativePtr, sel_status);
 
-        private static readonly Selector sel_renderCommandEncoderWithDescriptor = "renderCommandEncoderWithDescriptor:";
-        private static readonly Selector sel_presentDrawable = "presentDrawable:";
-        private static readonly Selector sel_commit = "commit";
-        private static readonly Selector sel_blitCommandEncoder = "blitCommandEncoder";
-        private static readonly Selector sel_computeCommandEncoder = "computeCommandEncoder";
-        private static readonly Selector sel_waitUntilCompleted = "waitUntilCompleted";
-        private static readonly Selector sel_addCompletedHandler = "addCompletedHandler:";
-        private static readonly Selector sel_status = "status";
+        public static readonly Selector sel_renderCommandEncoderWithDescriptor = "renderCommandEncoderWithDescriptor:";
+        public static readonly Selector sel_presentDrawable = "presentDrawable:";
+        public static readonly Selector sel_commit = "commit";
+        public static readonly Selector sel_blitCommandEncoder = "blitCommandEncoder";
+        public static readonly Selector sel_computeCommandEncoder = "computeCommandEncoder";
+        public static readonly Selector sel_waitUntilCompleted = "waitUntilCompleted";
+        public static readonly Selector sel_addCompletedHandler = "addCompletedHandler:";
+        public static readonly Selector sel_status = "status";
     }
 }

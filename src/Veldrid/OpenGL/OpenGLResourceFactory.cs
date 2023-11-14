@@ -5,10 +5,10 @@ using System;
 
 namespace Veldrid.OpenGL
 {
-    internal class OpenGLResourceFactory : ResourceFactory
+    public class OpenGLResourceFactory : ResourceFactory
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private readonly StagingMemoryPool _pool;
+        public readonly OpenGLGraphicsDevice _gd;
+        public readonly StagingMemoryPool _pool;
 
         public override GraphicsBackend BackendType => _gd.BackendType;
 

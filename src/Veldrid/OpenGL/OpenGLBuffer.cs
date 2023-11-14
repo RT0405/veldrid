@@ -6,15 +6,15 @@ using System.Diagnostics;
 
 namespace Veldrid.OpenGL
 {
-    internal unsafe class OpenGLBuffer : DeviceBuffer, OpenGLDeferredResource
+    public unsafe class OpenGLBuffer : DeviceBuffer, OpenGLDeferredResource
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private uint _buffer;
-        private bool _dynamic;
-        private bool _disposeRequested;
+        public readonly OpenGLGraphicsDevice _gd;
+        public uint _buffer;
+        public bool _dynamic;
+        public bool _disposeRequested;
 
-        private string _name;
-        private bool _nameChanged;
+        public string _name;
+        public bool _nameChanged;
 
         public override string Name { get => _name; set { _name = value; _nameChanged = true; } }
 
@@ -23,7 +23,7 @@ namespace Veldrid.OpenGL
 
         public uint Buffer => _buffer;
 
-        public bool Created { get; private set; }
+        public bool Created { get; set; }
 
         public override bool IsDisposed => _disposeRequested;
 

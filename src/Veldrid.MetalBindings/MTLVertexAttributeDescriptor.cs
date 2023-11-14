@@ -27,11 +27,11 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setBufferIndex, value);
         }
 
-        private static readonly Selector sel_format = "format";
-        private static readonly Selector sel_setFormat = "setFormat:";
-        private static readonly Selector sel_offset = "offset";
-        private static readonly Selector sel_setOffset = "setOffset:";
-        private static readonly Selector sel_bufferIndex = "bufferIndex";
-        private static readonly Selector sel_setBufferIndex = "setBufferIndex:";
+        public static readonly Selector sel_format = "format";
+        public static readonly Selector sel_setFormat = "setFormat:";
+        public static readonly Selector sel_offset = "offset";
+        public static readonly Selector sel_setOffset = "setOffset:";
+        public static readonly Selector sel_bufferIndex = "bufferIndex";
+        public static readonly Selector sel_setBufferIndex = "setBufferIndex:";
     }
 }

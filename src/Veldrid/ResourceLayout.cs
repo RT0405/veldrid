@@ -10,11 +10,11 @@ namespace Veldrid
     public abstract class ResourceLayout : DeviceResource, IDisposable
     {
 #if VALIDATE_USAGE
-        internal readonly ResourceLayoutDescription Description;
-        internal readonly uint DynamicBufferCount;
+        public readonly ResourceLayoutDescription Description;
+        public readonly uint DynamicBufferCount;
 #endif
 
-        internal ResourceLayout(ref ResourceLayoutDescription description)
+        public ResourceLayout(ref ResourceLayoutDescription description)
         {
 #if VALIDATE_USAGE
             Description = description;

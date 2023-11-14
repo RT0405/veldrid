@@ -5,21 +5,21 @@ using static Veldrid.OpenGLBinding.OpenGLNative;
 
 namespace Veldrid.OpenGL
 {
-    internal class OpenGLTextureView : TextureView, OpenGLDeferredResource
+    public class OpenGLTextureView : TextureView, OpenGLDeferredResource
     {
-        private readonly OpenGLGraphicsDevice _gd;
-        private bool _needsTextureView;
-        private uint _textureView;
-        private bool _disposeRequested;
-        private bool _disposed;
+        public readonly OpenGLGraphicsDevice _gd;
+        public bool _needsTextureView;
+        public uint _textureView;
+        public bool _disposeRequested;
+        public bool _disposed;
         public override bool IsDisposed => _disposeRequested;
 
-        private string _name;
-        private bool _nameChanged;
+        public string _name;
+        public bool _nameChanged;
         public override string Name { get => _name; set { _name = value; _nameChanged = true; } }
 
         public new OpenGLTexture Target { get; }
-        public TextureTarget TextureTarget { get; private set; }
+        public TextureTarget TextureTarget { get; set; }
 
         public uint GLTargetTexture
         {
@@ -38,7 +38,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        public bool Created { get; private set; }
+        public bool Created { get; set; }
 
         public OpenGLTextureView(OpenGLGraphicsDevice gd, ref TextureViewDescription description)
             : base(ref description)
@@ -198,7 +198,7 @@ namespace Veldrid.OpenGL
             }
         }
 
-        private void CreateGLResources()
+        public void CreateGLResources()
         {
             if (!_needsTextureView)
             {

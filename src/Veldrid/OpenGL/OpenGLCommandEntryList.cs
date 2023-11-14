@@ -2,7 +2,7 @@
 
 namespace Veldrid.OpenGL
 {
-    internal interface OpenGLCommandEntryList
+    public interface OpenGLCommandEntryList
     {
         OpenGLCommandList Parent { get; }
         void Begin();

@@ -1,9 +1,9 @@
 namespace Veldrid.MTL
 {
-    internal class MTLResourceLayout : ResourceLayout
+    public class MTLResourceLayout : ResourceLayout
     {
-        private readonly ResourceBindingInfo[] _bindingInfosByVdIndex;
-        private bool _disposed;
+        public readonly ResourceBindingInfo[] _bindingInfosByVdIndex;
+        public bool _disposed;
         public uint BufferCount { get; }
         public uint TextureCount { get; }
         public uint SamplerCount { get; }
@@ -85,7 +85,7 @@ namespace Veldrid.MTL
             _disposed = true;
         }
 
-        internal struct ResourceBindingInfo
+        public struct ResourceBindingInfo
         {
             public uint Slot;
             public ShaderStages Stages;

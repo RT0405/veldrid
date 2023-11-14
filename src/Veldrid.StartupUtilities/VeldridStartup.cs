@@ -67,7 +67,7 @@ namespace Veldrid.StartupUtilities
             return window;
         }
 
-        private static SDL_WindowFlags GetWindowFlags(WindowState state)
+        public static SDL_WindowFlags GetWindowFlags(WindowState state)
         {
             switch (state)
             {
@@ -165,9 +165,9 @@ namespace Veldrid.StartupUtilities
         }
 
 #if !EXCLUDE_METAL_BACKEND
-        private static unsafe GraphicsDevice CreateMetalGraphicsDevice(GraphicsDeviceOptions options, Sdl2Window window)
+        public static unsafe GraphicsDevice CreateMetalGraphicsDevice(GraphicsDeviceOptions options, Sdl2Window window)
             => CreateMetalGraphicsDevice(options, window, options.SwapchainSrgbFormat);
-        private static unsafe GraphicsDevice CreateMetalGraphicsDevice(
+        public static unsafe GraphicsDevice CreateMetalGraphicsDevice(
             GraphicsDeviceOptions options,
             Sdl2Window window,
             bool colorSrgb)
@@ -224,7 +224,7 @@ namespace Veldrid.StartupUtilities
             return gd;
         }
 
-        private static unsafe Veldrid.Vk.VkSurfaceSource GetSurfaceSource(SDL_SysWMinfo sysWmInfo)
+        public static unsafe Veldrid.Vk.VkSurfaceSource GetSurfaceSource(SDL_SysWMinfo sysWmInfo)
         {
             switch (sysWmInfo.subsystem)
             {
@@ -378,7 +378,7 @@ namespace Veldrid.StartupUtilities
         }
 #endif
 
-        private static unsafe string GetString(byte* stringStart)
+        public static unsafe string GetString(byte* stringStart)
         {
             int characters = 0;
             while (stringStart[characters] != 0)
@@ -390,11 +390,11 @@ namespace Veldrid.StartupUtilities
         }
 
 #if !EXCLUDE_OPENGL_BACKEND
-        private static readonly object s_glVersionLock = new object();
-        private static (int Major, int Minor)? s_maxSupportedGLVersion;
-        private static (int Major, int Minor)? s_maxSupportedGLESVersion;
+        public static readonly object s_glVersionLock = new object();
+        public static (int Major, int Minor)? s_maxSupportedGLVersion;
+        public static (int Major, int Minor)? s_maxSupportedGLESVersion;
 
-        private static (int Major, int Minor) GetMaxGLVersion(bool gles)
+        public static (int Major, int Minor) GetMaxGLVersion(bool gles)
         {
             lock (s_glVersionLock)
             {
@@ -410,7 +410,7 @@ namespace Veldrid.StartupUtilities
             }
         }
 
-        private static (int Major, int Minor) TestMaxVersion(bool gles)
+        public static (int Major, int Minor) TestMaxVersion(bool gles)
         {
             (int, int)[] testVersions = gles
                 ? new[] { (3, 2), (3, 0) }
@@ -424,7 +424,7 @@ namespace Veldrid.StartupUtilities
             return (0, 0);
         }
 
-        private static unsafe bool TestIndividualGLVersion(bool gles, int major, int minor)
+        public static unsafe bool TestIndividualGLVersion(bool gles, int major, int minor)
         {
             SDL_GLProfile profileMask = gles ? SDL_GLProfile.ES : SDL_GLProfile.Core;
 

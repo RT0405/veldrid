@@ -23,6 +23,6 @@ namespace Veldrid
         public static bool operator ==(Point left, Point right) => left.Equals(right);
         public static bool operator !=(Point left, Point right) => !left.Equals(right);
 
-        private string DebuggerDisplayString => ToString();
+        public string DebuggerDisplayString => ToString();
     }
 }

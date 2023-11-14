@@ -7,9 +7,9 @@ namespace Veldrid.Utilities
 {
     public unsafe struct StrideHelper<T>
     {
-        private readonly byte* _basePtr;
-        private readonly int _count;
-        private readonly int _stride;
+        public readonly byte* _basePtr;
+        public readonly int _count;
+        public readonly int _stride;
 
         public StrideHelper(void* ptr, int count, int stride)
         {
@@ -25,10 +25,10 @@ namespace Veldrid.Utilities
 
         public struct Enumerator : IEnumerator<T>
         {
-            private byte* _basePtr;
-            private int _count;
-            private int _stride;
-            private int _currentItemIndex;
+            public byte* _basePtr;
+            public int _count;
+            public int _stride;
+            public int _currentItemIndex;
 
             public Enumerator(byte* basePtr, int count, int stride)
             {

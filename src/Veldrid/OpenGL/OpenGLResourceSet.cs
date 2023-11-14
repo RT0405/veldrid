@@ -1,8 +1,8 @@
 ﻿namespace Veldrid.OpenGL
 {
-    internal class OpenGLResourceSet : ResourceSet
+    public class OpenGLResourceSet : ResourceSet
     {
-        private bool _disposed;
+        public bool _disposed;
 
         public new OpenGLResourceLayout Layout { get; }
         public new BindableResource[] Resources { get; }

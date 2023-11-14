@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocClearDepthTargetEntry
+    public struct NoAllocClearDepthTargetEntry
     {
         public readonly float Depth;
         public readonly byte Stencil;

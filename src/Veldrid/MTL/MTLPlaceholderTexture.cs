@@ -1,11 +1,11 @@
 namespace Veldrid.MTL
 {
     // A fake Texture object representing swapchain Textures.
-    internal class MTLPlaceholderTexture : Texture
+    public class MTLPlaceholderTexture : Texture
     {
-        private uint _width;
-        private uint _height;
-        private bool _disposed;
+        public uint _width;
+        public uint _height;
+        public bool _disposed;
 
         public override PixelFormat Format { get; }
 

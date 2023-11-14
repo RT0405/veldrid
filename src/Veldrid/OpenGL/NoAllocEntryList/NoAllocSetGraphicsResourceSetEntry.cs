@@ -2,7 +2,7 @@
 
 namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal unsafe struct NoAllocSetResourceSetEntry
+    public unsafe struct NoAllocSetResourceSetEntry
     {
         public const int MaxInlineDynamicOffsets = 10;
 

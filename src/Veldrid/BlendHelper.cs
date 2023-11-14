@@ -1,6 +1,6 @@
 namespace Veldrid
 {
-    internal static class BlendHelper
+    public static class BlendHelper
     {
         /// <summary>
         /// Given a nullable <see cref="ColorWriteMask"/>, returns the mask as non-null, or <see cref="ColorWriteMask.All"/> if null.

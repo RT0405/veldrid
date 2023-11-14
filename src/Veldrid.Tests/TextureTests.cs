@@ -1466,7 +1466,7 @@ namespace Veldrid.Tests
             Assert.Equal(1u, tex.Height);
         }
 
-        private static readonly FormatProps[] s_allFormatProps =
+        public static readonly FormatProps[] s_allFormatProps =
         {
             new FormatProps(PixelFormat.R8_UNorm, 8, 0, 0, 0),
             new FormatProps(PixelFormat.R8_SNorm, 8, 0, 0, 0),

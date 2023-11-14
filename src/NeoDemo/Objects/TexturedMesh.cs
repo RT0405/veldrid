@@ -10,40 +10,40 @@ namespace Veldrid.NeoDemo.Objects
     public class TexturedMesh : CullRenderable
     {
         // Useful for testing uniform bindings with an offset.
-        private static readonly bool s_useUniformOffset = false;
-        private uint _uniformOffset = 0;
+        public static readonly bool s_useUniformOffset = false;
+        public uint _uniformOffset = 0;
 
-        private readonly string _name;
-        private readonly MeshData _meshData;
-        private readonly ImageSharpTexture _textureData;
-        private readonly ImageSharpTexture _alphaTextureData;
-        private readonly Transform _transform = new Transform();
+        public readonly string _name;
+        public readonly MeshData _meshData;
+        public readonly ImageSharpTexture _textureData;
+        public readonly ImageSharpTexture _alphaTextureData;
+        public readonly Transform _transform = new Transform();
 
-        private BoundingBox _centeredBounds;
-        private DeviceBuffer _vb;
-        private DeviceBuffer _ib;
-        private int _indexCount;
-        private Texture _texture;
-        private Texture _alphamapTexture;
-        private TextureView _alphaMapView;
+        public BoundingBox _centeredBounds;
+        public DeviceBuffer _vb;
+        public DeviceBuffer _ib;
+        public int _indexCount;
+        public Texture _texture;
+        public Texture _alphamapTexture;
+        public TextureView _alphaMapView;
 
-        private Pipeline _pipeline;
-        private Pipeline _pipelineFrontCull;
-        private ResourceSet _mainProjViewRS;
-        private ResourceSet _mainSharedRS;
-        private ResourceSet _mainPerObjectRS;
-        private ResourceSet _reflectionRS;
-        private ResourceSet _noReflectionRS;
-        private Pipeline _shadowMapPipeline;
-        private ResourceSet[] _shadowMapResourceSets;
+        public Pipeline _pipeline;
+        public Pipeline _pipelineFrontCull;
+        public ResourceSet _mainProjViewRS;
+        public ResourceSet _mainSharedRS;
+        public ResourceSet _mainPerObjectRS;
+        public ResourceSet _reflectionRS;
+        public ResourceSet _noReflectionRS;
+        public Pipeline _shadowMapPipeline;
+        public ResourceSet[] _shadowMapResourceSets;
 
-        private DeviceBuffer _worldAndInverseBuffer;
+        public DeviceBuffer _worldAndInverseBuffer;
 
-        private readonly DisposeCollector _disposeCollector = new DisposeCollector();
+        public readonly DisposeCollector _disposeCollector = new DisposeCollector();
 
-        private readonly MaterialPropsAndBuffer _materialProps;
-        private readonly Vector3 _objectCenter;
-        private bool _materialPropsOwned = false;
+        public readonly MaterialPropsAndBuffer _materialProps;
+        public readonly Vector3 _objectCenter;
+        public bool _materialPropsOwned = false;
 
         public MaterialProperties MaterialProperties { get => _materialProps.Properties; set { _materialProps.Properties = value; } }
 
@@ -233,7 +233,7 @@ namespace Veldrid.NeoDemo.Objects
                 sc.NoClipPlaneBuffer));
         }
 
-        private ResourceSet[] CreateShadowMapResourceSets(
+        public ResourceSet[] CreateShadowMapResourceSets(
             ResourceFactory sharedFactory,
             ResourceFactory disposeFactory,
             CommandList cl,
@@ -320,7 +320,7 @@ namespace Veldrid.NeoDemo.Objects
             gd.UpdateBuffer(_worldAndInverseBuffer, _uniformOffset * 2, ref wai);
         }
 
-        private void RenderShadowMap(CommandList cl, SceneContext sc, int shadowMapIndex)
+        public void RenderShadowMap(CommandList cl, SceneContext sc, int shadowMapIndex)
         {
             cl.SetVertexBuffer(0, _vb);
             cl.SetIndexBuffer(_ib, IndexFormat.UInt16);
@@ -331,7 +331,7 @@ namespace Veldrid.NeoDemo.Objects
             cl.DrawIndexed((uint)_indexCount, 1, 0, 0, 0);
         }
 
-        private void RenderStandard(CommandList cl, SceneContext sc, bool reflectionPass)
+        public void RenderStandard(CommandList cl, SceneContext sc, bool reflectionPass)
         {
             cl.SetVertexBuffer(0, _vb);
             cl.SetIndexBuffer(_ib, IndexFormat.UInt16);

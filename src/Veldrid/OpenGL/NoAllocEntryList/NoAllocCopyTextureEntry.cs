@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocCopyTextureEntry
+    public struct NoAllocCopyTextureEntry
     {
         public readonly Tracked<Texture> Source;
         public readonly uint SrcX;

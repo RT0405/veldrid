@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocDrawEntry
+    public struct NoAllocDrawEntry
     {
         public uint VertexCount;
         public uint InstanceCount;

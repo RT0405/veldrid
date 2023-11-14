@@ -6,12 +6,12 @@ using Vortice.Direct3D11;
 
 namespace Veldrid.D3D11
 {
-    internal class D3D11Shader : Shader
+    public class D3D11Shader : Shader
     {
-        private string _name;
+        public string _name;
 
         public ID3D11DeviceChild DeviceShader { get; }
-        public byte[] Bytecode { get; internal set; }
+        public byte[] Bytecode { get; set; }
 
         public D3D11Shader(ID3D11Device device, ShaderDescription description)
             : base(description.Stage, description.EntryPoint)
@@ -54,7 +54,7 @@ namespace Veldrid.D3D11
             }
         }
 
-        private byte[] CompileCode(ShaderDescription description)
+        public byte[] CompileCode(ShaderDescription description)
         {
             string profile;
             switch (description.Stage)

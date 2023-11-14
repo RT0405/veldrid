@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class SetViewportEntry : OpenGLCommandEntry
+    public class SetViewportEntry : OpenGLCommandEntry
     {
         public uint Index;
         public Viewport Viewport;

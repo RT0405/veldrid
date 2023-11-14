@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Veldrid.Tests
 {
-    internal class RgbaFloatFuzzyComparer : IEqualityComparer<RgbaFloat>
+    public class RgbaFloatFuzzyComparer : IEqualityComparer<RgbaFloat>
     {
         public static RgbaFloatFuzzyComparer Instance = new RgbaFloatFuzzyComparer();
 
@@ -16,7 +16,7 @@ namespace Veldrid.Tests
                 && FuzzyEquals(x.A, y.A);
         }
 
-        private bool FuzzyEquals(float x, float y)
+        public bool FuzzyEquals(float x, float y)
         {
             return Math.Abs(x - y) < 1e-5;
         }

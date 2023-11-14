@@ -40,7 +40,7 @@ namespace Veldrid
         /// </summary>
         public readonly uint DepthPitch;
 
-        internal MappedResource(
+        public MappedResource(
             MappableResource resource,
             MapMode mode,
             IntPtr data,
@@ -58,7 +58,7 @@ namespace Veldrid
             DepthPitch = depthPitch;
         }
 
-        internal MappedResource(MappableResource resource, MapMode mode, IntPtr data, uint sizeInBytes)
+        public MappedResource(MappableResource resource, MapMode mode, IntPtr data, uint sizeInBytes)
         {
             Resource = resource;
             Mode = mode;
@@ -78,7 +78,7 @@ namespace Veldrid
     /// <typeparam name="T">The blittable value type which mapped data is viewed as.</typeparam>
     public unsafe struct MappedResourceView<T> where T : struct
     {
-        private static readonly int s_sizeofT = Unsafe.SizeOf<T>();
+        public static readonly int s_sizeofT = Unsafe.SizeOf<T>();
 
         /// <summary>
         /// The <see cref="MappedResource"/> that this instance views.

@@ -9,23 +9,23 @@ using Veldrid.SPIRV;
 
 namespace Veldrid.VirtualReality.Sample
 {
-    internal class Skybox
+    public class Skybox
     {
-        private readonly Image<Rgba32> _front;
-        private readonly Image<Rgba32> _back;
-        private readonly Image<Rgba32> _left;
-        private readonly Image<Rgba32> _right;
-        private readonly Image<Rgba32> _top;
-        private readonly Image<Rgba32> _bottom;
+        public readonly Image<Rgba32> _front;
+        public readonly Image<Rgba32> _back;
+        public readonly Image<Rgba32> _left;
+        public readonly Image<Rgba32> _right;
+        public readonly Image<Rgba32> _top;
+        public readonly Image<Rgba32> _bottom;
 
         // Context objects
-        private ResourceLayout _layout;
-        private DeviceBuffer _vb;
-        private DeviceBuffer _ib;
-        private Pipeline _pipeline;
-        private DeviceBuffer _ubo;
-        private ResourceSet _resourceSet;
-        private readonly List<IDisposable> _disposables = new List<IDisposable>();
+        public ResourceLayout _layout;
+        public DeviceBuffer _vb;
+        public DeviceBuffer _ib;
+        public Pipeline _pipeline;
+        public DeviceBuffer _ubo;
+        public ResourceSet _resourceSet;
+        public readonly List<IDisposable> _disposables = new List<IDisposable>();
 
         public Skybox(
             Image<Rgba32> front, Image<Rgba32> back, Image<Rgba32> left,
@@ -105,7 +105,7 @@ namespace Veldrid.VirtualReality.Sample
             cl.SetViewport(0, new Viewport(0, 0, fb.Width, fb.Height, 0, 1));
         }
 
-        private static readonly Vector3[] s_vertices = new Vector3[]
+        public static readonly Vector3[] s_vertices = new Vector3[]
         {
             // Top
             new Vector3(-20.0f,20.0f,-20.0f),
@@ -139,7 +139,7 @@ namespace Veldrid.VirtualReality.Sample
             new Vector3(-20.0f,-20.0f,20.0f),
         };
 
-        private static readonly ushort[] s_indices = new ushort[]
+        public static readonly ushort[] s_indices = new ushort[]
         {
             0,1,2, 0,2,3,
             4,5,6, 4,6,7,
@@ -149,7 +149,7 @@ namespace Veldrid.VirtualReality.Sample
             20,21,22, 20,22,23,
         };
 
-        internal const string VertexShader =
+        public const string VertexShader =
 @"
 #version 450
 
@@ -176,7 +176,7 @@ void main()
 }
 ";
 
-        internal const string FragmentShader =
+        public const string FragmentShader =
 @"
 #version 450
 

@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class SetScissorRectEntry : OpenGLCommandEntry
+    public class SetScissorRectEntry : OpenGLCommandEntry
     {
         public uint Index;
         public uint X;

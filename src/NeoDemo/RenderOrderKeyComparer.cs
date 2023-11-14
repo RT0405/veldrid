@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Veldrid.NeoDemo
 {
-    internal class RenderOrderKeyComparer : IComparer<Renderable>
+    public class RenderOrderKeyComparer : IComparer<Renderable>
     {
         public Vector3 CameraPosition { get; set; }
         public int Compare(Renderable x, Renderable y)

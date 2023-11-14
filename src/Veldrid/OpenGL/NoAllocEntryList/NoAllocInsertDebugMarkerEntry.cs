@@ -1,6 +1,6 @@
 namespace Veldrid.OpenGL.NoAllocEntryList
 {
-    internal struct NoAllocInsertDebugMarkerEntry
+    public struct NoAllocInsertDebugMarkerEntry
     {
         public Tracked<string> Name;
 

@@ -3,7 +3,7 @@
 namespace Veldrid.VirtualReality.Oculus
 {
     [Flags]
-    internal enum ovrInitFlags
+    public enum ovrInitFlags
     {
         /// <summary>
         /// When a debug library is requested, a slower debugging version of the library will

@@ -2,7 +2,7 @@
 
 namespace Veldrid.Tests
 {
-    internal unsafe class TextureDataReaderWriter
+    public unsafe class TextureDataReaderWriter
     {
         public int RedBits { get; }
         public int GreenBits { get; }
@@ -34,7 +34,7 @@ namespace Veldrid.Tests
             return new WidePixel(r, g, b, a);
         }
 
-        private ulong? ReadBits(byte* pixelPtr, int bitOffset, int numBits)
+        public ulong? ReadBits(byte* pixelPtr, int bitOffset, int numBits)
         {
             if (numBits == 0)
             {
@@ -62,7 +62,7 @@ namespace Veldrid.Tests
             WriteBits(pixel.A, pixelPtr, RedBits + GreenBits + BlueBits, AlphaBits);
         }
 
-        internal void WriteBits(ulong? value, byte* basePtr, int bitOffset, int numBits)
+        public void WriteBits(ulong? value, byte* basePtr, int bitOffset, int numBits)
         {
             if (value == null)
             {
@@ -80,12 +80,12 @@ namespace Veldrid.Tests
             }
         }
 
-        internal byte[] GetDataArray(uint srcWidth, uint srcHeight, uint srcDepth)
+        public byte[] GetDataArray(uint srcWidth, uint srcHeight, uint srcDepth)
         {
             return new byte[PixelBytes * srcWidth * srcHeight * srcDepth];
         }
 
-        internal WidePixel GetTestPixel(uint x, uint y, uint z)
+        public WidePixel GetTestPixel(uint x, uint y, uint z)
         {
             ulong? r = x % RMaxValue;
             ulong? g = GreenBits != 0 ? (y % GMaxValue) : (ulong?)null;
@@ -94,7 +94,7 @@ namespace Veldrid.Tests
             return new WidePixel(r, g, b, a);
         }
 
-        private bool IsBitSet(byte* basePtr, int bit)
+        public bool IsBitSet(byte* basePtr, int bit)
         {
             int index = Math.DivRem(bit, 8, out int remainder);
             byte val = basePtr[index];
@@ -102,7 +102,7 @@ namespace Veldrid.Tests
             return (val & mask) != 0;
         }
 
-        private void SetBit(byte* basePtr, int bit)
+        public void SetBit(byte* basePtr, int bit)
         {
             int index = Math.DivRem(bit, 8, out int remainder);
             byte val = basePtr[index];
@@ -112,7 +112,7 @@ namespace Veldrid.Tests
         }
     }
 
-    internal struct WidePixel : IEquatable<WidePixel>
+    public struct WidePixel : IEquatable<WidePixel>
     {
         public readonly ulong? R;
         public readonly ulong? G;

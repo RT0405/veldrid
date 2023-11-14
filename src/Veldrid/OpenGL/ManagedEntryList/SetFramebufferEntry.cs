@@ -1,6 +1,6 @@
 ﻿namespace Veldrid.OpenGL.ManagedEntryList
 {
-    internal class SetFramebufferEntry : OpenGLCommandEntry
+    public class SetFramebufferEntry : OpenGLCommandEntry
     {
         public Framebuffer Framebuffer;
 

@@ -3,10 +3,10 @@ using Veldrid.MetalBindings;
 
 namespace Veldrid.MTL
 {
-    internal class MTLBuffer : DeviceBuffer
+    public class MTLBuffer : DeviceBuffer
     {
-        private string _name;
-        private bool _disposed;
+        public string _name;
+        public bool _disposed;
 
         public override uint SizeInBytes { get; }
         public override BufferUsage Usage { get; }
@@ -27,7 +27,7 @@ namespace Veldrid.MTL
 
         public override bool IsDisposed => _disposed;
 
-        public MetalBindings.MTLBuffer DeviceBuffer { get; private set; }
+        public MetalBindings.MTLBuffer DeviceBuffer { get; set; }
 
         public MTLBuffer(ref BufferDescription bd, MTLGraphicsDevice gd)
         {

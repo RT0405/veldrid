@@ -40,7 +40,7 @@ namespace Veldrid.MetalBindings
             return new MTLTexture(ret);
         }
 
-        private static readonly Selector sel_replaceRegion = "replaceRegion:mipmapLevel:slice:withBytes:bytesPerRow:bytesPerImage:";
-        private static readonly Selector sel_newTextureView = "newTextureViewWithPixelFormat:textureType:levels:slices:";
+        public static readonly Selector sel_replaceRegion = "replaceRegion:mipmapLevel:slice:withBytes:bytesPerRow:bytesPerImage:";
+        public static readonly Selector sel_newTextureView = "newTextureViewWithPixelFormat:textureType:levels:slices:";
     }
 }

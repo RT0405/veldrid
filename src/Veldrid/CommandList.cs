@@ -23,20 +23,20 @@ namespace Veldrid
     /// </summary>
     public abstract class CommandList : DeviceResource, IDisposable
     {
-        private readonly GraphicsDeviceFeatures _features;
-        private readonly uint _uniformBufferAlignment;
-        private readonly uint _structuredBufferAlignment;
+        public readonly GraphicsDeviceFeatures _features;
+        public readonly uint _uniformBufferAlignment;
+        public readonly uint _structuredBufferAlignment;
 
         private protected Framebuffer _framebuffer;
         private protected Pipeline _graphicsPipeline;
         private protected Pipeline _computePipeline;
 
 #if VALIDATE_USAGE
-        private DeviceBuffer _indexBuffer;
-        private IndexFormat _indexFormat;
+        public DeviceBuffer _indexBuffer;
+        public IndexFormat _indexFormat;
 #endif
 
-        internal CommandList(
+        public CommandList(
             ref CommandListDescription description,
             GraphicsDeviceFeatures features,
             uint uniformAlignment,
@@ -47,7 +47,7 @@ namespace Veldrid
             _structuredBufferAlignment = structuredAlignment;
         }
 
-        internal void ClearCachedState()
+        public void ClearCachedState()
         {
             _framebuffer = null;
             _graphicsPipeline = null;
@@ -642,7 +642,7 @@ namespace Veldrid
         protected abstract void DrawIndexedIndirectCore(DeviceBuffer indirectBuffer, uint offset, uint drawCount, uint stride);
 
         [Conditional("VALIDATE_USAGE")]
-        private static void ValidateIndirectOffset(uint offset)
+        public static void ValidateIndirectOffset(uint offset)
         {
             if ((offset % 4) != 0)
             {
@@ -651,7 +651,7 @@ namespace Veldrid
         }
 
         [Conditional("VALIDATE_USAGE")]
-        private void ValidateDrawIndirectSupport()
+        public void ValidateDrawIndirectSupport()
         {
             if (!_features.DrawIndirect)
             {
@@ -660,7 +660,7 @@ namespace Veldrid
         }
 
         [Conditional("VALIDATE_USAGE")]
-        private static void ValidateIndirectBuffer(DeviceBuffer indirectBuffer)
+        public static void ValidateIndirectBuffer(DeviceBuffer indirectBuffer)
         {
             if ((indirectBuffer.Usage & BufferUsage.IndirectBuffer) != BufferUsage.IndirectBuffer)
             {
@@ -670,7 +670,7 @@ namespace Veldrid
         }
 
         [Conditional("VALIDATE_USAGE")]
-        private static void ValidateIndirectStride(uint stride, int argumentSize)
+        public static void ValidateIndirectStride(uint stride, int argumentSize)
         {
             if (stride < argumentSize || ((stride % 4) != 0))
             {
@@ -1197,7 +1197,7 @@ namespace Veldrid
         public abstract void Dispose();
 
         [Conditional("VALIDATE_USAGE")]
-        private void ValidateIndexBuffer(uint indexCount)
+        public void ValidateIndexBuffer(uint indexCount)
         {
 #if VALIDATE_USAGE
             if (_indexBuffer == null)
@@ -1216,7 +1216,7 @@ namespace Veldrid
         }
 
         [Conditional("VALIDATE_USAGE")]
-        private void PreDrawValidation()
+        public void PreDrawValidation()
         {
 #if VALIDATE_USAGE
 

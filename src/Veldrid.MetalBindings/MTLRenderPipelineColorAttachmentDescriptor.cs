@@ -65,21 +65,21 @@ namespace Veldrid.MetalBindings
             set => objc_msgSend(NativePtr, sel_setSourceRGBBlendFactor, (uint)value);
         }
 
-        private static readonly Selector sel_isBlendingEnabled = "isBlendingEnabled";
-        private static readonly Selector sel_setBlendingEnabled = "setBlendingEnabled:";
-        private static readonly Selector sel_writeMask = "writeMask";
-        private static readonly Selector sel_setWriteMask = "setWriteMask:";
-        private static readonly Selector sel_alphaBlendOperation = "alphaBlendOperation";
-        private static readonly Selector sel_setAlphaBlendOperation = "setAlphaBlendOperation:";
-        private static readonly Selector sel_rgbBlendOperation = "rgbBlendOperation";
-        private static readonly Selector sel_setRGBBlendOperation = "setRgbBlendOperation:";
-        private static readonly Selector sel_destinationAlphaBlendFactor = "destinationAlphaBlendFactor";
-        private static readonly Selector sel_setDestinationAlphaBlendFactor = "setDestinationAlphaBlendFactor:";
-        private static readonly Selector sel_destinationRGBBlendFactor = "destinationRGBBlendFactor";
-        private static readonly Selector sel_setDestinationRGBBlendFactor = "setDestinationRGBBlendFactor:";
-        private static readonly Selector sel_sourceAlphaBlendFactor = "sourceAlphaBlendFactor";
-        private static readonly Selector sel_setSourceAlphaBlendFactor = "setSourceAlphaBlendFactor:";
-        private static readonly Selector sel_sourceRGBBlendFactor = "sourceRGBBlendFactor";
-        private static readonly Selector sel_setSourceRGBBlendFactor = "setSourceRGBBlendFactor:";
+        public static readonly Selector sel_isBlendingEnabled = "isBlendingEnabled";
+        public static readonly Selector sel_setBlendingEnabled = "setBlendingEnabled:";
+        public static readonly Selector sel_writeMask = "writeMask";
+        public static readonly Selector sel_setWriteMask = "setWriteMask:";
+        public static readonly Selector sel_alphaBlendOperation = "alphaBlendOperation";
+        public static readonly Selector sel_setAlphaBlendOperation = "setAlphaBlendOperation:";
+        public static readonly Selector sel_rgbBlendOperation = "rgbBlendOperation";
+        public static readonly Selector sel_setRGBBlendOperation = "setRgbBlendOperation:";
+        public static readonly Selector sel_destinationAlphaBlendFactor = "destinationAlphaBlendFactor";
+        public static readonly Selector sel_setDestinationAlphaBlendFactor = "setDestinationAlphaBlendFactor:";
+        public static readonly Selector sel_destinationRGBBlendFactor = "destinationRGBBlendFactor";
+        public static readonly Selector sel_setDestinationRGBBlendFactor = "setDestinationRGBBlendFactor:";
+        public static readonly Selector sel_sourceAlphaBlendFactor = "sourceAlphaBlendFactor";
+        public static readonly Selector sel_setSourceAlphaBlendFactor = "setSourceAlphaBlendFactor:";
+        public static readonly Selector sel_sourceRGBBlendFactor = "sourceRGBBlendFactor";
+        public static readonly Selector sel_setSourceRGBBlendFactor = "setSourceRGBBlendFactor:";
     }
 }
